@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="/css/Registration.css" />
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="form_wrapper">
+        <div class="form_container">
+            <div class="title_container">
+                <h2>Login</h2>
+            </div>
+            <div class="row clearfix">
+                <div class="">
+                    <form th:action="@{'/auth/login'}" method="post">
+                        <div th:if="${param.error}">
+                            <p class="text-danger" style="color: darkred">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+                        </div>
+                        <div class="wrong_password" id="wrong_password" th:if="${param.verify_success != null}">
+                            <p style="color: green">Congratulations! Your account has been verified. Now you can login!</p>
+                        </div>
+                        <div class="wrong_password" id="wrong_password" th:if="${param.verify_fail != null}">
+                            <p style="color: darkred">Your account was already verified, or the verification code
+                                is invalid.</p>
+                        </div>
+                        <div class="wrong_password" id="wrong_password" th:if="${param.afterRegistration != null}">
+                            <p style="color: green">To complete registration, you should verify your account using your email.</p>
+                        </div>
+                        <div class="wrong_password" id="wrong_password" th:if="${param.error != null}">
+                            <p style="color: darkred">Incorrect email or password.</p>
+                        </div>
+                        <div class="wrong_password" id="wrong_password" th:if="${param.accountExist != null}">
+                            <p style="color: darkred">You have already registered or your email is used!</p>
+                        </div>
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                            <input type="email" name="email" placeholder="Email" required />
+                        </div>
+                        <div class="input_field">
+                            <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                            <input type="password" name="password" placeholder="Password" required />
+                        </div>
+                        <div class="input_field checkbox_option">
+                            <input type="checkbox" id="cb2">
+                            <label for="cb2">Remember me</label>
+                        </div>
+                        <div class="input_field">
+                            <a href="Forgot_password.html">Forgot password?</a>
+                        </div>
+                        <input class="button" type="submit" value="Login" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="credit">Not a member yet? <a th:href="@{'/auth/register'}">Register now</a></p>
+</body>
+
+</html>

@@ -38,7 +38,7 @@
                 <div class="box">
                     <th:block sec:authorize="!isAuthenticated()">
                         <img class="wrapper1" src="/img/c57eadf6ae997997f680beb6a90ca50d.png" alt="alt text" />
-                        <a th:href="@{'/auth/login'}" class="subtitle22" id="loginButton">Login</a>
+                        <a th:href="@{'/auth/login'}" class="subtitle22" id="loginButton" style="text-decoration: none;">Login</a>
                     </th:block>
 
                     <th:block sec:authorize="isAuthenticated()">

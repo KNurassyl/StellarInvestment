@@ -1,81 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
-    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
-    <link rel="stylesheet" type="text/css" href="/css/Registration.css" />
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css" href="/css/Registration.css"/>
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
     <title>Register</title>
 </head>
 <body>
-    <div class="form_wrapper">
-        <div class="form_container">
-          <div class="title_container">
+<div class="form_wrapper">
+    <div class="password_clauses">
+        <h3>Hint for Password:</h3>
+        <div class="clause" id="uppercase-clause">At least one uppercase letter</div>
+        <div class="clause" id="lowercase-clause">At least one lowercase letter</div>
+        <div class="clause" id="digit-clause">At least one digit</div>
+        <div class="clause" id="length-clause">Minimum length of 8 characters</div>
+    </div>
+    <div class="form_container">
+        <div class="title_container">
             <h2>Register</h2>
-          </div>
-          <div class="row clearfix">
+        </div>
+        <div class="row clearfix">
             <div class="">
-              <form th:action="@{'/auth/register'}" method="post">
-                <div class="input_field"> <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
-                  <input type="email" name="reg_email" placeholder="Email" required />
-                </div>
-                <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                  <input type="password" id="psw" name="reg_password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8" oninput="checkPasswordMatch(document.getElementById('confirmPassword'))" required />
-                </div>
-                <div class="input_field"> <span><i aria-hidden="true" class="fa fa-lock"></i></span>
-                  <input type="password" id="confirmPassword" name="reg_confPassword" placeholder="Re-type Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8"
-                         oninput="checkPasswordMatch(this)" required />
-                </div>
-                <div class="row clearfix">
-                  <div class="col_half">
-                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                      <input type="text" name="name" placeholder="First Name" />
+                <form th:action="@{'/auth/register'}" method="post">
+                    <div class="input_field"><span><i aria-hidden="true" class="fa fa-envelope"></i></span>
+                        <input type="email" name="reg_email" placeholder="Email" required/>
                     </div>
-                  </div>
-                  <div class="col_half">
-                    <div class="input_field"> <span><i aria-hidden="true" class="fa fa-user"></i></span>
-                      <input type="text" name="surname" placeholder="Last Name" required />
+                    <div class="input_field"><span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                        <input type="password" id="psw" name="reg_password" placeholder="Password"
+                               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" minlength="8"
+                               oninput="checkPasswordMatch(this, document.getElementById('confirmPassword'))" required/>
                     </div>
-                  </div>
-                </div>
+                    <div class="input_field"><span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                        <input type="password" id="confirmPassword" name="reg_confPassword"
+                               placeholder="Re-type Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                               minlength="8"
+                               oninput="checkPasswordMatch(this)" required/>
+                    </div>
+                    <div class="row clearfix">
+                        <div class="col_half">
+                            <div class="input_field"><span><i aria-hidden="true" class="fa fa-user"></i></span>
+                                <input type="text" name="name" placeholder="First Name"/>
+                            </div>
+                        </div>
+                        <div class="col_half">
+                            <div class="input_field"><span><i aria-hidden="true" class="fa fa-user"></i></span>
+                                <input type="text" name="surname" placeholder="Last Name" required/>
+                            </div>
+                        </div>
+                    </div>
                     <div class="input_field select_option">
                         <label>
                             <select id="role" name="role">
-                              <option>Select a positioning role</option>
-                              <option value="User">Client</option>
-                              <option value="Admin">Investor</option>
+                                <option>Select a positioning role</option>
+                                <option value="User">Client</option>
+                                <option value="Admin">Investor</option>
                             </select>
                         </label>
                         <div class="select_arrow"></div>
                     </div>
-                  <div class="input_field checkbox_option">
-                      <input type="checkbox" id="cb1" required>
-                      <label for="cb1">I agree with terms and conditions</label>
-                  </div>
-                  <div class="input_field checkbox_option">
-                      <input type="checkbox" id="cb2" required>
-                      <label for="cb2">I agree to the personal data processing</label>
-                  </div>
-                <input class="button" type="submit" value="Register" />
-              </form>
+                    <div class="input_field checkbox_option">
+                        <input type="checkbox" id="cb1" required>
+                        <label for="cb1">I agree with terms and conditions</label>
+                    </div>
+                    <div class="input_field checkbox_option">
+                        <input type="checkbox" id="cb2" required>
+                        <label for="cb2">I agree to the personal data processing</label>
+                    </div>
+                    <input class="button" type="submit" value="Register"/>
+                </form>
             </div>
-          </div>
         </div>
-      </div>
-      <p class="credit">Are you already a member? <a th:href="@{'/auth/login'}">Let's login</a></p>
+    </div>
+</div>
+<p class="credit">Are you already a member? <a th:href="@{'/auth/login'}">Let's login</a></p>
 
-    <script type="text/javascript">
-        function checkPasswordMatch(confirmPassword) {
-            const psw = document.getElementById('psw');
-            if (confirmPassword.value !== psw.value) {
-                confirmPassword.setCustomValidity("Passwords do not match!");
-            } else {
-                confirmPassword.setCustomValidity("");
-            }
+<script type="text/javascript">
+    function checkPasswordClauses(password) {
+        const uppercaseClause = document.getElementById('uppercase-clause');
+        const lowercaseClause = document.getElementById('lowercase-clause');
+        const digitClause = document.getElementById('digit-clause');
+        const lengthClause = document.getElementById('length-clause');
+
+        const uppercaseRegex = /[A-Z]/;
+        const lowercaseRegex = /[a-z]/;
+        const digitRegex = /\d/;
+
+
+        if (uppercaseRegex.test(password)) {
+            uppercaseClause.classList.add('correct');
+        } else {
+            uppercaseClause.classList.remove('correct');
         }
-    </script>
+
+
+        if (lowercaseRegex.test(password)) {
+            lowercaseClause.classList.add('correct');
+        } else {
+            lowercaseClause.classList.remove('correct');
+        }
+
+        if (digitRegex.test(password)) {
+            digitClause.classList.add('correct');
+        } else {
+            digitClause.classList.remove('correct');
+        }
+
+        if (password.length >= 8) {
+            lengthClause.classList.add('correct');
+        } else {
+            lengthClause.classList.remove('correct');
+        }
+    }
+
+    function initializePasswordClauses() {
+        const psw = document.getElementById('psw');
+        checkPasswordClauses(psw.value);
+    }
+
+
+    window.addEventListener('load', initializePasswordClauses);
+
+
+    function checkPasswordMatch(passwordField, confirmPassword) {
+        const psw = passwordField;
+        if (confirmPassword.value !== psw.value) {
+            confirmPassword.setCustomValidity("Passwords do not match!");
+        } else {
+            confirmPassword.setCustomValidity("");
+        }
+        checkPasswordClauses(psw.value);
+    }
+
+
+    document.getElementById('psw').addEventListener('input', function () {
+        checkPasswordClauses(this.value);
+    });
+</script>
 </body>
 </html>

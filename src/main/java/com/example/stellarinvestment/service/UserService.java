@@ -1,5 +1,6 @@
 package com.example.stellarinvestment.service;
 
+import com.example.stellarinvestment.exception.UserNotFoundException;
 import com.example.stellarinvestment.mail.Utility;
 import com.example.stellarinvestment.model.AuthenticationType;
 import com.example.stellarinvestment.model.User;
@@ -41,9 +42,27 @@ public class UserService {
             return true;
         }
     }
+
+    public User getByResetPasswordToken(String token) {
+        return userRepository.findByResetPasswordToken(token);
+    }
+
+    public void updatePassword(String token, String newPassword) throws UserNotFoundException {
+        User user = userRepository.findByResetPasswordToken(token);
+        if (user == null) {
+            throw new UserNotFoundException("No user found: invalid token");
+        }
+
+        user.setPassword(newPassword);
+        user.setResetPasswordToken(null);
+        encodePassword(user);
+
+        userRepository.save(user);
+    }
+
     public boolean registerUser(User user) {
         boolean check = false;
-        if(user != null) {
+        if (user != null) {
             if (userRepository.findByEmail(user.getEmail()) == null) {
                 encodePassword(user);
                 user.setEnabled(false);
@@ -100,27 +119,6 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public void updateAuthenticationType(User user, AuthenticationType type) {
-        if (!user.getAuthenticationType().equals(type)) {
-            userRepository.updateAuthenticationType(user.getId(), type);
-        }
-    }
-
-    public void addNewCustomerUponOAuthLogin(String name, String email,
-                                             AuthenticationType authenticationType) {
-        User user = new User();
-        user.setEmail(email);
-        setName(name, user);
-
-        user.setEnabled(true);
-        user.setCreatedTime(new Date());
-        user.setAuthenticationType(authenticationType);
-        user.setPassword("");
-
-
-        userRepository.save(user);
-    }
-
     private void setName(String name, User user) {
         String[] nameArray = name.split(" ");
         if (nameArray.length < 2) {
@@ -134,4 +132,18 @@ public class UserService {
             user.setLastName(lastName);
         }
     }
+
+
+    public String updateResetPasswordToken(String email) throws UserNotFoundException {
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            String token = RandomString.make(30);
+            user.setResetPasswordToken(token);
+            userRepository.save(user);
+            return token;
+        } else {
+            throw new UserNotFoundException("Could not find any user with the email " + email);
+        }
+    }
+
 }

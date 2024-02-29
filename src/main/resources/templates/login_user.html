@@ -19,6 +19,12 @@
             <div class="row clearfix">
                 <div class="">
                     <form th:action="@{'/auth/login'}" method="post">
+                        <div th:if="${message != null}">
+                            <p style="color: green">[[${message}]]</p>
+                        </div>
+                        <div th:if="${invalidToken != null}">
+                            <p style="color: darkred">[[${invalidToken}]]</p>
+                        </div>
                         <div th:if="${param.error}">
                             <p class="text-danger" style="color: darkred">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
                         </div>
@@ -47,11 +53,11 @@
                             <input type="password" name="password" placeholder="Password" required />
                         </div>
                         <div class="input_field checkbox_option">
-                            <input type="checkbox" id="cb2">
+                            <input type="checkbox" id="cb2" name="remember-me">
                             <label for="cb2">Remember me</label>
                         </div>
                         <div class="input_field">
-                            <a href="Forgot_password.html">Forgot password?</a>
+                            <a th:href="@{'/auth/forgotPassword'}">Forgot password?</a>
                         </div>
                         <input class="button" type="submit" value="Login" />
                     </form>

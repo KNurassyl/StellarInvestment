@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping(value = "/")
-    public String unAuthMainPage() {
-        return "Unauth_Main";
+    public String authMainPage() {
+        return "main";
     }
 }

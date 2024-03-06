@@ -26,13 +26,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.exceptionHandling().accessDeniedPage("/main/forbidden");
+
         http.authorizeRequests()
-                .antMatchers("/customer").authenticated()
+                .antMatchers("/main/**").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/auth/login")
-                .defaultSuccessUrl("/auth/main")
+                .defaultSuccessUrl("/main/")
                 .usernameParameter("email")
                 .permitAll()
                 .and()

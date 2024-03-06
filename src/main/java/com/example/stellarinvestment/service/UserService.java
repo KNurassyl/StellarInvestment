@@ -2,6 +2,7 @@ package com.example.stellarinvestment.service;
 
 import com.example.stellarinvestment.exception.UserNotFoundException;
 import com.example.stellarinvestment.mail.Utility;
+import com.example.stellarinvestment.model.AuthUserDetails;
 import com.example.stellarinvestment.model.AuthenticationType;
 import com.example.stellarinvestment.model.User;
 import com.example.stellarinvestment.repository.UserRepository;
@@ -11,6 +12,8 @@ import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.security.authentication.RememberMeAuthenticationToken;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -59,6 +62,24 @@ public class UserService {
 
         userRepository.save(user);
     }
+
+    public String updateAuthPassword(User user, String currentPassword, String newPassword) {
+        String message;
+
+        String userExistingPassword = user.getPassword();
+
+        if (passwordEncoder.matches(currentPassword, userExistingPassword)) {
+            user.setPassword(newPassword);
+            encodePassword(user);
+            userRepository.save(user);
+            message = "Successfully changed password.";
+        } else {
+            message = "Your current password is incorrect.";
+        }
+
+        return message;
+    }
+
 
     public boolean registerUser(User user) {
         boolean check = false;
@@ -119,18 +140,8 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    private void setName(String name, User user) {
-        String[] nameArray = name.split(" ");
-        if (nameArray.length < 2) {
-            user.setFirstName(name);
-            user.setLastName("");
-        } else {
-            String firstName = nameArray[0];
-            user.setFirstName(firstName);
-
-            String lastName = name.replaceFirst(firstName + " ", "");
-            user.setLastName(lastName);
-        }
+    public void update(User userInForm) {
+        userRepository.save(userInForm);
     }
 
 
@@ -145,5 +156,55 @@ public class UserService {
             throw new UserNotFoundException("Could not find any user with the email " + email);
         }
     }
+
+    public void updateNameForAuthenticatedCustomer(User user, HttpServletRequest request) {
+        Object principal = request.getUserPrincipal();
+
+        if (principal instanceof UsernamePasswordAuthenticationToken
+                || principal instanceof RememberMeAuthenticationToken) {
+            AuthUserDetails userDetails = getAuthUserDetailsObject(principal);
+            User authenticatedUser = userDetails.getUser();
+            authenticatedUser.setFirstName(user.getFirstName());
+            authenticatedUser.setLastName(user.getLastName());
+            if (user.getPhotos() != null) {
+                authenticatedUser.setPhotos(user.getPhotos());
+            }
+            update(authenticatedUser);
+        }
+    }
+
+    public AuthUserDetails getAuthUserDetailsObject(Object principal) {
+        AuthUserDetails userDetails = null;
+        if (principal instanceof UsernamePasswordAuthenticationToken) {
+            UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) principal;
+            userDetails = (AuthUserDetails) token.getPrincipal();
+        } else if (principal instanceof RememberMeAuthenticationToken) {
+            RememberMeAuthenticationToken token = (RememberMeAuthenticationToken) principal;
+            userDetails = (AuthUserDetails) token.getPrincipal();
+        }
+
+        return userDetails;
+    }
+
+
+    public String getEmailOfAuthenticatedCustomer(HttpServletRequest request) {
+        Object principal = request.getUserPrincipal();
+        String userEmail = null;
+
+        if (principal instanceof UsernamePasswordAuthenticationToken
+                || principal instanceof RememberMeAuthenticationToken) {
+            userEmail = request.getUserPrincipal().getName();
+        }
+
+        return userEmail;
+    }
+
+    public User getCurrentAuthUser(HttpServletRequest request) {
+        Object principal = request.getUserPrincipal();
+        AuthUserDetails userDetails = getAuthUserDetailsObject(principal);
+
+        return userDetails.getUser();
+    }
+
 
 }

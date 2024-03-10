@@ -161,14 +161,12 @@ public class User extends IdBasedEntity {
         return firstName + " " + lastName;
     }
 
-    public boolean hasRole(String roleName) {
-
-        for (Role role : roles) {
-            if (role.getName().equals(roleName)) {
-                return true;
-            }
+    @Transient
+    public String getPhotosImagePath() {
+        if (photos.isEmpty()) {
+            return "/profileImg/user-default.png";
+        } else {
+            return "/user-ava-photos/" + this.id + "/" + this.photos;
         }
-
-        return false;
     }
 }

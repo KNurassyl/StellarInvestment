@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -42,9 +42,10 @@
 
 
             <div class="dropdown" sec:authorize="isAuthenticated()">
-                <img class="box2" src="/img/sid.webp" alt="alt text" onclick="toggleDropdown()">
+                <img class="box2" th:src="@{${user.photosImagePath}}"
+                     alt="alt text" onclick="toggleDropdown()">
                 <div id="myDropdown" class="dropdown-content">
-                    <a href="#">My Profile</a>
+                    <a th:href="@{'/main/account_details'}">My Profile</a>
                     <a href="#">My Projects</a>
                     <a href="#">Create Projects</a>
                     <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out <form th:action="@{'/logout'}" method="post" id="singOutForm"></form></a>
@@ -103,58 +104,114 @@
     </section>
 
     <section class="section3">
-        <div class="rect2"></div>
-        <h2 class="medium_title">See more opportunities</h2>
-        <div class="content_box1">
-            <div class="rect4"></div>
-            <div class="text">MONEY PLEDGED</div>
-            <h3 class="subtitle3">₸210,908</h3>
-            <div class="text1">ACTIVE</div>
-            <h3 class="subtitle4">72 %</h3>
-            <div class="rect5"></div>
-            <div class="rect6"></div>
-            <img class="image5" src="/img/193071f60ea3468652fc823e01278e12.png" alt="alt text"/>
-            <h2 class="medium_title2_box1">
-                    <span class="medium_title2"
-                    ><span class="medium_title2_span0">Open Bionics<br/></span><span class="medium_title2_span1"
-                    >makes functional and empowering prosthestic limbs for people with upper limb loss and limb
-                difference.</span><span class="medium_title2_span2">  </span></span>
-            </h2>
-        </div>
-        <h1 class="hero_title1">Start investing</h1>
-        <div class="content_box11">
-            <div class="rect4"></div>
-            <div class="text">MONEY PLEDGED</div>
-            <h3 class="subtitle3">₸210,908</h3>
-            <div class="text1">ACTIVE</div>
-            <h3 class="subtitle4">72 %</h3>
-            <div class="rect5"></div>
-            <div class="rect6"></div>
-            <img class="image5" src="/img/193071f60ea3468652fc823e01278e12.png" alt="alt text"/>
-            <h2 class="medium_title2_box1">
-                    <span class="medium_title2"
-                    ><span class="medium_title2_span0">Open Bionics<br/></span><span class="medium_title2_span1"
-                    >makes functional and empowering prosthestic limbs for people with upper limb loss and limb
-                difference.</span><span class="medium_title2_span2">  </span></span>
-            </h2>
-        </div>
-        <div class="content_box12">
-            <div class="rect4"></div>
-            <div class="text">MONEY PLEDGED</div>
-            <h3 class="subtitle3">₸210,908</h3>
-            <div class="text1">ACTIVE</div>
-            <h3 class="subtitle4">72 %</h3>
-            <div class="rect5"></div>
-            <div class="rect6"></div>
-            <img class="image5" src="/img/193071f60ea3468652fc823e01278e12.png" alt="alt text"/>
-            <h2 class="medium_title2_box1">
-                    <span class="medium_title2"
-                    ><span class="medium_title2_span0">Open Bionics<br/></span><span class="medium_title2_span1"
-                    >makes functional and empowering prosthestic limbs for people with upper limb loss and limb
-                difference.</span><span class="medium_title2_span2">  </span></span>
-            </h2>
-        </div>
-        <img class="image6" src="/img/51293b2d220e0c15319d1874785ca4a5.png" alt="alt text"/>
+        <div class="container">
+            <div class="item-container">
+                <div class="img-container">
+                    <img src="/img/image-f66a46d2-80e9-4532-add9-d0ff98f05e5c.webp" alt="Event image">
+                </div>
+
+                <div class="body-container">
+                    <div class="overlay"></div>
+
+                    <div class="event-info">
+                        <p class="title">Open Bionics</p>
+                        <div class="separator">
+                            <div class="textP first">80%</div>
+                            <div class="textP second">20%</div>
+                        </div>
+                        <p class="info">Almaty</p>
+                        <p class="price">₸210,905</p>
+
+                        <div class="additional-info">
+                            <p class="info">
+                                <i class="fas fa-map-marker-alt"></i>
+                                microdistrict MC
+                            </p>
+                            <p class="info">
+                                <i class="far fa-calendar-alt"></i>
+                                Till Sat, Sep 19, 10:00 AM
+                            </p>
+
+                            <p class="info description">
+                                Welcome! Makes functional and empowering prosthetic limbs for people with upper limb loss and limb difference <span>more...</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button class="action">In detail</button>
+                </div>
+            </div>
+
+            <div class="item-container">
+                <div class="img-container">
+                    <img src="/img/image-f66a46d2-80e9-4532-add9-d0ff98f05e5c.webp" alt="Event image">
+                </div>
+
+                <div class="body-container">
+                    <div class="overlay"></div>
+
+                    <div class="event-info">
+                        <p class="title">Open Bionics</p>
+                        <div class="separator">
+                            <div class="textP first">80%</div>
+                            <div class="textP second">20%</div>
+                        </div>
+                        <p class="info">Almaty</p>
+                        <p class="price">₸210,905</p>
+
+                        <div class="additional-info">
+                            <p class="info">
+                                <i class="fas fa-map-marker-alt"></i>
+                                microdistrict MC
+                            </p>
+                            <p class="info">
+                                <i class="far fa-calendar-alt"></i>
+                                Till Sat, Sep 19, 10:00 AM
+                            </p>
+
+                            <p class="info description">
+                                Welcome! Makes functional and empowering prosthetic limbs for people with upper limb loss and limb difference <span>more...</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button class="action">In detail</button>
+                </div>
+            </div>
+
+            <div class="item-container">
+                <div class="img-container">
+                    <img src="/img/image-f66a46d2-80e9-4532-add9-d0ff98f05e5c.webp" alt="Event image">
+                </div>
+
+                <div class="body-container">
+                    <div class="overlay"></div>
+
+                    <div class="event-info">
+                        <p class="title">Open Bionics</p>
+                        <div class="separator">
+                            <div class="textP first">80%</div>
+                            <div class="textP second">20%</div>
+                        </div>
+                        <p class="info">Almaty</p>
+                        <p class="price">₸210,905</p>
+
+                        <div class="additional-info">
+                            <p class="info">
+                                <i class="fas fa-map-marker-alt"></i>
+                                microdistrict MC
+                            </p>
+                            <p class="info">
+                                <i class="far fa-calendar-alt"></i>
+                                Till Sat, Sep 19, 10:00 AM
+                            </p>
+
+                            <p class="info description">
+                                Welcome! Makes functional and empowering prosthetic limbs for people with upper limb loss and limb difference <span>more...</span>
+                            </p>
+                        </div>
+                    </div>
+                    <button class="action">In detail</button>
+                </div>
+            </div>
     </section>
 
     <section class="section4">
@@ -163,7 +220,7 @@
                 <div class="group8">
                     <div class="group8">
                         <img class="cover1" src="/img/f382a0424ec2f491d1112855b123c78c.png" alt="alt text"/><img
-                            class="image" src="./assets/3986b59ae26dc40534b518ecfc5bae77.png" alt="alt text"/>
+                            class="image" src="/img/3986b59ae26dc40534b518ecfc5bae77.png" alt="alt text"/>
                     </div>
                     <img class="image1" src="/img/3986b59ae26dc40534b518ecfc5bae77.png" alt="alt text"/>
                 </div>
@@ -447,7 +504,6 @@
     const dropdownContent = document.querySelector('.dropdown-content');
 
     dropdown.addEventListener('click', function (event) {
-        event.preventDefault(); // prevent the default behavior of the click event
         dropdownContent.classList.toggle('show');
     });
 </script>

@@ -19,31 +19,36 @@
             <div class="row clearfix">
                 <div class="">
                     <form th:action="@{'/auth/login'}" method="post">
-                        <div th:if="${message != null}">
-                            <p style="color: green">[[${message}]]</p>
+                        <div class="login-warning" th:if="${message != null}" style="border: 1px solid green">
+                            <p class="warning-warning" id="warning" style="color: green">[[${message}]]</p>
+                            <span class="close" id="close" style="color: green">×</span>
                         </div>
-                        <div th:if="${invalidToken != null}">
-                            <p style="color: darkred">[[${invalidToken}]]</p>
+                        <div class="login-warning" th:if="${param.error != null}">
+                            <p class="warning-warning" id="warning">Incorrect email or password.</p>
+                            <span class="close" id="close">×</span>
                         </div>
-                        <div th:if="${param.error}">
-                            <p class="text-danger" style="color: darkred">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+                        <div class="login-warning" th:if="${invalidToken != null}">
+                            <p class="warning-warning" id="warning">[[${invalidToken}]]</p>
+                            <span class="close" id="close">×</span>
                         </div>
-                        <div class="wrong_password" id="wrong_password" th:if="${param.verify_success != null}">
-                            <p style="color: green">Congratulations! Your account has been verified. Now you can login!</p>
+                        <div class="login-warning" th:if="${param.verify_success != null}" style="border: 1px solid green">
+                            <p class="warning-warning" id="warning" style="color: green">Congratulations! Your account has been verified. Now you can login!</p>
+                            <span class="close" id="close" style="color: green">×</span>
                         </div>
-                        <div class="wrong_password" id="wrong_password" th:if="${param.verify_fail != null}">
-                            <p style="color: darkred">Your account was already verified, or the verification code
+                        <div class="login-warning" th:if="${param.verify_fail != null}">
+                            <p class="warning-warning" id="warning">Your account was already verified, or the verification code
                                 is invalid.</p>
+                            <span class="close" id="close">×</span>
                         </div>
-                        <div class="wrong_password" id="wrong_password" th:if="${param.afterRegistration != null}">
-                            <p style="color: green">To complete registration, you should verify your account using your email.</p>
+                        <div class="login-warning" th:if="${param.afterRegistration != null}" style="border: 1px solid green">
+                            <p class="warning-warning" id="warning" style="color: green">To complete registration, you should verify your account using your email.</p>
+                            <span class="close" id="close" style="color: green">×</span>
                         </div>
-                        <div class="wrong_password" id="wrong_password" th:if="${param.error != null}">
-                            <p style="color: darkred">Incorrect email or password.</p>
+                        <div class="login-warning" th:if="${param.accountExist != null}">
+                            <p class="warning-warning" id="warning">You have already registered or your email is used!</p>
+                            <span class="close" id="close">×</span>
                         </div>
-                        <div class="wrong_password" id="wrong_password" th:if="${param.accountExist != null}">
-                            <p style="color: darkred">You have already registered or your email is used!</p>
-                        </div>
+
                         <div class="input_field">
                             <span><i aria-hidden="true" class="fa fa-envelope"></i></span>
                             <input type="email" name="email" placeholder="Email" required />
@@ -66,6 +71,12 @@
         </div>
     </div>
     <p class="credit">Not a member yet? <a th:href="@{'/auth/register'}">Register now</a></p>
+
+    <script>
+        document.getElementById('close').addEventListener('click', function() {
+            document.querySelector('.login-warning').style.display = 'none';
+        });
+    </script>
 </body>
 
 </html>

@@ -163,7 +163,7 @@ public class User extends IdBasedEntity {
 
     @Transient
     public String getPhotosImagePath() {
-        if (photos.isEmpty()) {
+        if (photos == null || photos.isEmpty()) {
             return "/profileImg/user-default.png";
         } else {
             return "/user-ava-photos/" + this.id + "/" + this.photos;

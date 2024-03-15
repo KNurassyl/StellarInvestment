@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-fvVGrO69KYlz0tjRGrOpRsdZIb6HemjSzExD9qQCeTtF8Zq4p21F5V32vlQ+8bXC7ZZIgAEbaHOcyEg6UeVs8A=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/fonts.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/Create_event_start.css"/>
+
+    <title>Create Event Page</title>
+</head>
+<body onload="showBasicDataTab()">
+<header class="custom-header">
+    <section class="section1" style="--src:url(/img/0502f0f63cc56790c6952133ae2b1481.png)">
+        <div class="content_box">
+
+            <div class="searchBox">
+                <input class="searchInput" type="text" name="" placeholder="Search">
+                <button class="searchButton" href="#">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+            <a class="subtitle1" th:href="@{'/main/'}"><h3>STELLAR<br/>INVESTMENT</h3></a>
+
+            <a class="subtitle2" href="#"><h3>Projects</h3></a>
+            <a class="subtitle21" th:href="@{'/main/'}"><h3>Home</h3></a>
+
+            <img class="image4" src="/img/ace06293b0d4076285adfa86c63156ab.png" alt=""/>
+            <div class="custom-dropdown">
+                <img class="custom-box" th:src="@{${user.photosImagePath}}" alt="alt text"
+                     onclick="toggleCustomDropdown()">
+                <div id="myCustomDropdown" class="custom-dropdown-content">
+                    <a th:href="@{'/main/account_details'}">My Profile</a>
+                    <a href="#">My Projects</a>
+                    <a th:href="@{'/project/'}">Create Projects</a>
+                    <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
+                        <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
+                    </a>
+                </div>
+            </div>
+
+            <div class="wrapper5" style="--src:url(/img/3ac1d66869db66b7a9f0857bf70db63a.png)"></div>
+
+        </div>
+    </section>
+</header>
+
+<main class="create-page-start main">
+
+
+    <div class="section21">
+        <div class="tabs">
+            <div id="basicDataTab" class="tab content_box2" onclick="showTab('basicData')">
+                <h3 class="subtitle1">Basic data</h3>
+            </div>
+            <div id="detailsTab" class="tab content_box3" onclick="showTab('details')">
+                <h3 class="subtitle11">Details</h3>
+            </div>
+            <div id="tariffsTab" class="tab content_box31" onclick="showTab('tariffs')">
+                <h3 class="subtitle1">Tariffs</h3>
+            </div>
+            <div id="singleTeamTab" class="tab content_box32" onclick="showTab('singleTeam')">
+                <h3 class="subtitle12">Single/Team</h3>
+            </div>
+
+
+            <button id="previousStep" class="tab content_box1" onclick="showPreviousStep()">
+                <h3 class="subtitle13">Previous Step</h3>
+            </button>
+            <button id="continueTab" class="tab content_box" onclick="continueToNextTab()">
+                <h3 class="subtitle">Next</h3>
+            </button>
+
+        </div>
+
+        <form action="">
+            <div id="basicDataContent" class="tab-content">
+                <table class="table">
+                    <tr>
+                        <td colspan="2">
+                            <div class="wrapper" style="--src:url(/img/d18269311afd6b2d8e99fa1b4e6eddd8.png)"></div>
+                            <img class="image" src="/img/ff6cc32e20f34b587e17aeb18b5c6944.png" alt="alt text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <hr class="line" size="1"/>
+                            <hr class="line1" size="1"/>
+                            <hr class="line2" size="1"/>
+                            <hr class="line3" size="1"/>
+                            <hr class="line4" size="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="wrapper1" style="--src:url(/img/29ba3e501615cc5c6da44567089eec18.png)"
+                                 onclick="showCalendar()"></div>
+                            <div class="text" id="selected-date-text">Time limits don't selected</div>
+
+                            <div id="calendar-container">
+                                <input type="date" id="calendar" onchange="updateSelectedDate()">
+                            </div>
+
+                            <h3 class="subtitle2">
+                                <input type="number" id="numberInput" placeholder="0" min="0"
+                                       oninput="validateNumberInput()">
+                            </h3>
+
+                        </td>
+                        <td>
+                            <div class="text2">
+                                <input type="text" id="briefInfo" placeholder="Brief info">
+                            </div>
+                            <!--                            <img class="image1" src="/img/15282363b91130c7de2632cf83c82412.png" alt="alt text" />-->
+                            <img class="image11" src="/img/704fb994a95115eac452c12fd365a797.png" alt="alt text"/>
+                            <!--                            <div class="text11" onclick="openModal('photoUrlModal')">PHOTO URL</div>-->
+                            <div class="text12" onclick="openModal('imageUploadModal')">UPLOAD AN IMAGE</div>
+                        </td>
+<!--                        <div id="photoUrlModal" class="modal">-->
+<!--                            <label for="photoUrlInput">Enter Photo URL:</label>-->
+<!--                            <input type="text" id="photoUrlInput">-->
+<!--                            <button onclick="closeModal('photoUrlModal')">Submit</button>-->
+<!--                        </div>-->
+
+                        <!-- Modal for UPLOAD AN IMAGE -->
+                        <div id="imageUploadModal" class="modal">
+                            <input type="file" id="imageUploadInput">
+                            <button onclick="closeModal('imageUploadModal')">Submit</button>
+                        </div>
+
+                        <div class="overlay" onclick="closeAllModals()"></div>
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="text3">
+                                <input type="text" name="title" id="titleInput" placeholder="Title can consist up to 45 characters" required>
+
+                            </div>
+                            <hr class="line" size="1"/>
+                            <hr class="line1" size="1"/>
+                            <hr class="line2" size="1"/>
+                            <hr class="line3" size="1"/>
+                            <hr class="line4" size="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3 class="subtitle21">Time limits</h3>
+                            <h3 class="subtitle22">Financial goal, ₸</h3>
+                            <h3 class="subtitle23">Brief info</h3>
+                        </td>
+                        <td>
+                            <div class="text4">Image size 640x390</div>
+                            <h3 class="subtitle25">Image</h3>
+                            <h3 class="subtitle26">Title</h3>
+                            <div class="rect41"></div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div id="detailsContent" class="tab-content">
+                <table class="table">
+                    <tr>
+                        <td colspan="2">
+                            <div class="wrapper" style="--src:url(/img/d18269311afd6b2d8e99fa1b4e6eddd8.png)"></div>
+                            <img class="image" src="/img/ff6cc32e20f34b587e17aeb18b5c6944.png" alt="alt text"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <hr class="line" size="1"/>
+                            <hr class="line1" size="1"/>
+                            <hr class="line2" size="1"/>
+                            <hr class="line3" size="1"/>
+                            <hr class="line4" size="1"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="rect4"></div>
+                            <div class="rect5"></div>
+
+                            <button onclick="showDatePicker()">Show Date Picker</button>
+
+                            <div id="datePicker">
+                                <label for="startTime">Start Time:</label>
+                                <input type="datetime-local" id="startTime" onchange="updateTimeLimitsText()">
+
+                                <label for="endTime">End Time:</label>
+                                <input type="datetime-local" id="endTime" onchange="updateTimeLimitsText()">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+
+                        <td>
+                            <div class="text2">
+                                <input type="text" id="fullDescript"
+                                       placeholder="You should start with the introduction of campaign’s team and history.">
+                            </div>
+                            <div class="text2">
+                                <input type="text" id="briefInfo" placeholder="Brief info">
+                            </div>
+                            <img class="image1" src="/img/15282363b91130c7de2632cf83c82412.png" alt="alt text"/>
+                            <img class="image11" src="/img/704fb994a95115eac452c12fd365a797.png" alt="alt text"/>
+                            <img class="image12" src="/img/orange_bat_silhouette.png" alt="alt text"/>
+                            <div class="text11" onclick="openModal('UrlModal')">PHOTO URL</div>
+                            <div class="text12" onclick="openModal('UploadModal')">UPLOAD AN IMAGE</div>
+                            <div class="text13" onclick="openModal('VideoModal')">LINK TO YOUTUBE VIDEO</div>
+                        </td>
+                        <div id="UrlModal" class="modal">
+                            <label for="UrlModal">Enter Photo URL:</label>
+                            <input type="text" id="UrlModal">
+                            <button onclick="closeModal('UrlModal')">Submit</button>
+                        </div>
+
+
+                        <div id="UploadModal" class="modal">
+                            <input type="file" id="UploadModal">
+                            <button onclick="closeModal('UploadModal')">Submit</button>
+                        </div>
+
+                        <div id="VideoModal" class="modal">
+                            <label for="videoUrlInput">Enter Video URL:</label>
+                            <input type="text" id="videoUrlInput">
+                            <button onclick="closeModal('VideoModal')">Submit</button>
+                        </div>
+
+
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+
+                            <hr class="line" size="1"/>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+
+                            <h3 class="subtitle23">Full description</h3>
+
+                        </td>
+                        <td>
+                            <div class="text4">740 x 417px.<br/>This one of the most convincing and effective tools to
+                                attract audience.
+                            </div>
+
+                            <h3 class="subtitle26">Photo or Video</h3>
+                            <div class="rect41"></div>
+                        </td>
+                    </tr>
+                    <div class="overlay" onclick="closeAllModals()"></div>
+                </table>
+            </div>
+    </div>
+
+    <div id="tariffsContent" class="tab-content">
+        <div class="creat root">
+            <div class="content_box3">
+
+
+                <input type="number" class="customAmountInput" placeholder="Enter amount">
+
+
+                <div class="content_box2">
+                    <div class="rect2"></div>
+                    <hr class="line" size="1"/>
+                    <h3 class="subtitle1">Short description</h3>
+                    <h3 class="subtitle11">Main present</h3>
+                    <div class="rect3"></div>
+                    <div class="text3">
+                        <input type="text" id="titleInput" placeholder="Main Present">
+
+                    </div>
+
+                    <div class="text2">
+                        <input type="text" id="KAKInput" placeholder="Short Info about your Project">
+
+                    </div>
+
+                </div>
+                <div class="box" onclick="selectBox(this)"><h5 class="highlight">₸1,000</h5></div>
+                <div class="box1" onclick="selectBox(this)"><h5 class="highlight1">₸5,000</h5></div>
+                <div class="box11" onclick="selectBox(this)"><h5 class="highlight1">₸9,000</h5></div>
+                <div class="box2" onclick="selectBox(this)"><h5 class="highlight11">₸20,000</h5></div>
+                <div class="box3" onclick="selectBox(this)"><h5 class="highlight11">₸100,000</h5></div>
+            </div>
+            <button id="addTariffButton" onclick="addNewRoot()">Add Tariff</button>
+            <button id="temporaryButton" type="submit">Temporary Create</button>
+        </div>
+
+    </div>
+
+    </form>
+
+
+    <div id="singleTeamContent" class="tab-content">
+
+        <div class="options-container">
+            <label class="option-label">
+                <input type="radio" name="options" value="single" onclick="showSingleContent()"> Single
+            </label>
+            <label class="option-label">
+                <input type="radio" name="options" value="team" onclick="showTeamContent()"> Team
+            </label>
+        </div>
+
+
+        <div class="crea" id="singleContent">
+
+
+            <div class="content_box2">
+                <div class="rect2"></div>
+
+
+                <h3 class="subtitle11">About Yourself</h3>
+                <div class="rect3"></div>
+                <div class="text3">
+                    <input type="text" id="titleInput" placeholder="Just Do It">
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div class="aerc" id="teamContent">
+
+            <div class="section21">
+
+
+                <!-- <div class="content_box2">
+                    <h3 class="subtitle22">+ Add member</h3>
+                </div> -->
+                <div class="content_box5">
+                    <div class="rect9"></div>
+
+
+                    <div class="text" id="selectedQuantityText" onclick="toggleQuaOptions()">- Not selected -</div>
+                    <select class="select-quantity" id="quantitySelect" onchange="updateSelectedQuantity()">
+                        <option value="" selected disabled>Select a quantity</option>
+                        <option value="one">1</option>
+                        <option value="two">2</option>
+                        <option value="three">3</option>
+                        <option value="four">4</option>
+                        <option value="five">5</option>
+                        <option value="six">6</option>
+                        <option value="seven">7</option>
+                        <option value="eight">8</option>
+                        <option value="nine">9</option>
+                        <option value="ten">10</option>
+
+                        <!-- Add more positions as needed -->
+                    </select>
+                    <h3 class="subtitle32">Quantity</h3>
+                    <hr class="line" size="1"/>
+
+
+                    <div class="text1" id="selectedExperienceText" onclick="toggleExpOptions()">- Not selected -</div>
+                    <select class="select-experience" id="experienceSelect" onchange="updateSelectedExperience()">
+                        <option value="" selected disabled>Select a experience</option>
+                        <option value="noneed">no needed</option>
+                        <option value="half">half year</option>
+                        <option value="year">1 year</option>
+                        <option value="twoyear">2 years</option>
+                        <option value="more">more than 2 years</option>
+
+                        <!-- Add more positions as needed -->
+                    </select>
+
+                    <div class="text2" id="selectedPositionText" onclick="toggleOptions()">- Not selected -</div>
+                    <select class="select-position" id="positionSelect" onchange="updateSelectedPosition()">
+                        <option value="" selected disabled>Select a position</option>
+                        <option value="Backend">Backend Developer</option>
+                        <option value="Designer">UI/UX Designer</option>
+                        <option value="Painter">Painter</option>
+                        <option value="DevOps">DevOps</option>
+                        <option value="Architecture">Architecture</option>
+                        <option value="Coach">Coach</option>
+                        <option value="Full-stack">Full-stack Developer</option>
+                        <!-- Add more positions as needed -->
+                    </select>
+
+                    <h3 class="subtitle33">Additional info</h3>
+                    <div class="text4">
+                        <input type="text" id="titleInput" placeholder="Info">
+
+                    </div>
+                    <hr class="line1" size="1"/>
+                    <hr class="line2" size="1"/>
+                    <h3 class="subtitle34">Experience</h3>
+                    <h3 class="subtitle35">Position</h3>
+                    <div class="rect10"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</main>
+
+<section class="section3">
+    <h3 class="subtitle5">© 2024 Stellar Investment. All Rights Reserved.</h3>
+    <div class="group2">
+        <div class="group2">
+            <div class="group2">
+                <div class="group2">
+                    <div class="group2">
+                        <div class="group2">
+                            <img class="cover1" src="/img/bf14714a16ee134b1726c6434e792c99.png" alt="alt text"/>
+                            <div class="content_box7">
+                                <div class="rect10"></div>
+                                <h3 class="subtitle6">Would you like to join newsletters?</h3>
+                                <div class="rect7"></div>
+                                <div class="content_box6">
+                                    <h3 class="subtitle7">Join</h3>
+                                </div>
+                                <p class="desc">enter your email address...</p>
+                                <h3 class="subtitle8">Investing</h3>
+                                <h3 class="subtitle9">Help &amp; Guide</h3>
+                                <h3 class="subtitle91">About</h3>
+                                <h3 class="subtitle92">Social Media</h3>
+                                <h3 class="subtitle93">We accept</h3>
+                                <p class="paragraph">
+                                    Investment opportunities<br/>Fees<br/>Investor returns<br/>Tax relief<br/>Funded
+                                    companies
+                                </p>
+                                <p class="paragraph1">
+                                    Help Center<br/>How to  give<br/>Shipping &amp; Delivery <br/>Product Policy<br/>How
+                                    to
+                                    Return
+                                </p>
+                                <p class="paragraph2">MON<br/>Careers<br/>News<br/>Contact us</p>
+                                <div class="rect9"></div>
+                                <div class="rect91"></div>
+                                <div class="rect92"></div>
+                                <img class="image3" src="/img/7a39f00d34d9eb253b78883930095a82.png" alt="alt text"/><img
+                                    class="image4" src="/img/43ddc85fd5d45fd2a0953686d30322df.png" alt="alt text"/><img
+                                    class="image5" src="/img/5de47b8cb81c466e2e1b2b3e9e72b2f2.png" alt="alt text"/><img
+                                    class="decorator2" src="/img/121d5415873890d25a18dd9a49f38891.png"
+                                    alt="alt text"/><img class="image6" src="/img/a8dcc8aea20f758a7d9912e1526f1dac.png"
+                                                         alt="alt text"/>
+                            </div>
+                        </div>
+                        <div class="group3">
+                            <h3 class="subtitle10">+7 775 203 01 90</h3>
+                            <img class="image21" src="/img/399bf71dd023f1dc67ce0c39cc4d37d9.png" alt="alt text"/>
+                        </div>
+                    </div>
+                    <div class="group4">
+                        <div class="group5">
+                            <h3 class="subtitle101">contact@almightypush.com</h3>
+                            <img class="image22" src="/img/cd1d9907462f74cc57844c79ffd5b65a.png" alt="alt text"/>
+                        </div>
+                        <img class="image23" src="/img/38289c6e3617705c3e2d42820fe0b93a.png" alt="alt text"/>
+                    </div>
+                </div>
+                <h3 class="subtitle102">microdistrict Daraboz, home 123, Almaty, Kazakhstan</h3>
+            </div>
+            <h3 class="subtitle31">STELLAR<br/>INVESTMENT</h3>
+        </div>
+        <img class="image71" src="/img/3d_circular_chart_icon.png" alt="alt text"/>
+    </div>
+</section>
+
+<script src="/js/custom.js"></script>
+
+<script type="text/javascript">
+
+    function showCalendar() {
+        var calendarContainer = document.getElementById('calendar-container');
+        calendarContainer.style.display = 'block';
+    }
+
+    function updateSelectedDate() {
+        var selectedDateText = document.getElementById('selected-date-text');
+        var selectedDate = document.getElementById('calendar').value;
+
+        if (selectedDate) {
+            selectedDateText.innerHTML = 'Selected Date: ' + selectedDate;
+        } else {
+            selectedDateText.innerHTML = 'Time limits don\'t selected';
+        }
+
+        var calendarContainer = document.getElementById('calendar-container');
+        calendarContainer.style.display = 'none';
+    }
+
+    function updateSelectedDate() {
+        var selectedDateText = document.getElementById('selected-date-text');
+        var selectedDate = document.getElementById('calendar').value;
+
+        if (selectedDate) {
+            selectedDateText.innerHTML = 'Until the time: ' + selectedDate;
+        } else {
+            selectedDateText.innerHTML = 'Time limits don\'t selected';
+        }
+
+        var calendarContainer = document.getElementById('calendar-container');
+        calendarContainer.style.display = 'none';
+    }
+
+
+    function openModal(modalId) {
+        var modal = document.getElementById(modalId);
+        var overlay = document.querySelector('.overlay');
+        modal.style.display = "block";
+        overlay.style.display = "block";
+    }
+
+    function closeModal(modalId) {
+        var modal = document.getElementById(modalId);
+        var overlay = document.querySelector('.overlay');
+        modal.style.display = "none";
+        overlay.style.display = "none";
+    }
+
+    function closeAllModals() {
+        var modals = document.querySelectorAll('.modal');
+        var overlay = document.querySelector('.overlay');
+        modals.forEach(function (modal) {
+            modal.style.display = "none";
+        });
+        overlay.style.display = "none";
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        document.body.addEventListener('click', function (event) {
+            var modalTriggers = ['.text11', '.text12', '.text13'];
+            var isModalTrigger = modalTriggers.some(selector => event.target.closest(selector));
+
+            if (!event.target.closest('.modal') && !isModalTrigger) {
+                closeAllModals();
+            }
+        });
+    });
+
+
+    function validateNumberInput() {
+        var numberInput = document.getElementById('numberInput');
+        // Ensure it's a non-negative integer
+        numberInput.value = Math.max(0, parseInt(numberInput.value) || 0);
+    }
+
+
+    function selectBox(box) {
+        // Remove the 'selected' class from all boxes
+        document.querySelectorAll('.box, .box1, .box11, .box2, .box3').forEach(function (element) {
+            element.classList.remove('selected');
+        });
+
+        // Add the 'selected' class to the clicked box
+        box.classList.add('selected');
+
+        // Toggle the 'white-text' class for the text color
+        document.querySelectorAll('.highlight, .highlight1, .highlight11').forEach(function (element) {
+            element.classList.toggle('white-text', element.parentElement.classList.contains('selected'));
+        });
+    }
+
+
+    function addNewRoot() {
+        // Create a new root element
+        var newRoot = document.createElement("div");
+        newRoot.classList.add("creat", "root");
+
+        // Create the content for the new root (similar to the existing one)
+        newRoot.innerHTML = `
+    <div class="content_box3">
+      <input type="number" class="customAmountInput" placeholder="Enter amount">
+      <div class="content_box2">
+        <div class="rect2"></div>
+        <hr class="line" size="1" />
+        <h3 class="subtitle1">Short description</h3>
+        <h3 class="subtitle11">Main present</h3>
+        <div class="rect3"></div>
+        <div class="text3">
+          <input type="text" id="titleInput" placeholder="Main Present">
+        </div>
+        <div class="text2">
+          <input type="text" id="KAKInput" placeholder="Short Info about your Project">
+        </div>
+      </div>
+      <div class="box" onclick="selectBox(this)"><h5 class="highlight">₸1,000</h5></div>
+      <div class="box1" onclick="selectBox(this)"><h5 class="highlight1">₸5,000</h5></div>
+      <div class="box11" onclick="selectBox(this)"><h5 class="highlight1">₸9,000</h5></div>
+      <div class="box2" onclick="selectBox(this)"><h5 class="highlight11">₸20,000</h5></div>
+      <div class="box3" onclick="selectBox(this)"><h5 class="highlight11">₸100,000</h5></div>
+    </div>
+  `;
+
+        // Append the new root to the #tariffsContent container
+        document.getElementById("tariffsContent").appendChild(newRoot);
+    }
+
+    function selectBox(box) {
+
+        // Remove the 'selected' class from all boxes
+        document.querySelectorAll('.box, .box1, .box11, .box2, .box3').forEach(function (element) {
+            element.classList.remove('selected');
+        });
+
+        // Add the 'selected' class to the clicked box
+        box.classList.add('selected');
+
+        // Toggle the 'white-text' class for the text color
+        document.querySelectorAll('.highlight, .highlight1, .highlight11').forEach(function (element) {
+            element.classList.toggle('white-text', element.parentElement.classList.contains('selected'));
+        });
+    }
+
+    function addNewRoot() {
+        // Create a new root element
+        var newRoot = document.createElement('div');
+        newRoot.classList.add('creat', 'root');
+
+        // Create content for the new root element
+        var newContentBox3 = document.createElement('div');
+        newContentBox3.classList.add('content_box3');
+
+        // Generate a unique ID for the new elements
+        var uniqueId = 'newRoot_' + Date.now();
+
+        // Add content to the new root element
+        // You can customize this part based on your requirements
+        newContentBox3.innerHTML = `
+        <input type="number" class="customAmountInput" placeholder="Enter amount">
+        <div class="content_box2">
+            <div class="rect2"></div>
+            <hr class="line" size="1" />
+            <h3 class="subtitle1">Short description</h3>
+            <h3 class="subtitle11">Main present</h3>
+            <div class="rect3"></div>
+            <div class="text3">
+                <input type="text" id="${uniqueId}_newTitleInput" placeholder="Main Present">
+            </div>
+            <div class="text2">
+                <input type="text" id="${uniqueId}_newKAKInput" placeholder="Short Info about your Project">
+            </div>
+        </div>
+        <div class="box" onclick="selectBox(this)"><h5 class="highlight">₸1,000</h5></div>
+        <div class="box1" onclick="selectBox(this)"><h5 class="highlight1">₸5,000</h5></div>
+        <div class="box11" onclick="selectBox(this)"><h5 class="highlight1">₸9,000</h5></div>
+        <div class="box2" onclick="selectBox(this)"><h5 class="highlight11">₸20,000</h5></div>
+        <div class="box3" onclick="selectBox(this)"><h5 class="highlight11">₸100,000</h5></div>
+    `;
+
+        newRoot.appendChild(newContentBox3);
+
+        // Append the new root element below the existing button
+        document.getElementById('tariffsContent').appendChild(newRoot);
+    }
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+</body>
+
+</html>

@@ -39,7 +39,7 @@
                 <div id="myCustomDropdown" class="custom-dropdown-content">
                     <a th:href="@{'/main/account_details'}">My Profile</a>
                     <a href="#">My Projects</a>
-                    <a href="#">Create Projects</a>
+                    <a th:href="@{'/project/'}">Create Projects</a>
                     <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
                         <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
                     </a>
@@ -318,7 +318,7 @@
         document.getElementById('profileImage').src = '/profileImg/user-default.png';
 
 
-        document.querySelector('.account-settings-fileinput').value = '';
+        document.getElementsByClassName('profile_url').value = '';
     }
 
     function checkPasswordMatch(confirmPassword) {

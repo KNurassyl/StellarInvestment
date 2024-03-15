@@ -47,7 +47,7 @@
                 <div id="myDropdown" class="dropdown-content">
                     <a th:href="@{'/main/account_details'}">My Profile</a>
                     <a href="#">My Projects</a>
-                    <a href="#">Create Projects</a>
+                    <a th:href="@{'/project/'}">Create Projects</a>
                     <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out <form th:action="@{'/logout'}" method="post" id="singOutForm"></form></a>
                 </div>
             </div>

@@ -1,11 +1,15 @@
-package com.example.stellarinvestment.model;
+package com.example.stellarinvestment.model.project;
+
+import com.example.stellarinvestment.model.IdBasedEntity;
+import com.example.stellarinvestment.model.User;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "projects")
-public class Project extends IdBasedEntity{
+public class Project extends IdBasedEntity {
 
     @Column(length = 256, nullable = false)
     private String title;
@@ -16,7 +20,11 @@ public class Project extends IdBasedEntity{
     @Column(length = 4096, nullable = false, name = "long_description")
     private String longDescription;
 
-    private String status;
+    @Column(length = 512, nullable = false, name = "about_creator")
+    private String aboutCreator;
+
+    @Enumerated(EnumType.STRING)
+    private ProjectStatus status;
 
     @Column(name = "created_time")
     private Date createdTime;
@@ -32,6 +40,36 @@ public class Project extends IdBasedEntity{
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project", fetch = FetchType.LAZY)
+    private List<Tariff> tariffs;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project", fetch = FetchType.LAZY)
+    private List<Team> teams;
+
+    public List<Tariff> getTariffs() {
+        return tariffs;
+    }
+
+    public void setTariffs(List<Tariff> tariffs) {
+        this.tariffs = tariffs;
+    }
+
+    public List<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
+    }
+
+    public String getAboutCreator() {
+        return aboutCreator;
+    }
+
+    public void setAboutCreator(String aboutCreator) {
+        this.aboutCreator = aboutCreator;
+    }
 
     public String getTitle() {
         return title;
@@ -65,11 +103,11 @@ public class Project extends IdBasedEntity{
         this.longDescription = longDescription;
     }
 
-    public String getStatus() {
+    public ProjectStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ProjectStatus status) {
         this.status = status;
     }
 

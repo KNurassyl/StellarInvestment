@@ -34,7 +34,7 @@
             </div>
             <a class="subtitle1" th:href="@{'/main/'}"><h3>STELLAR<br/>INVESTMENT</h3></a> </p>
 
-            <a class="subtitle2" href="#"><h3>Projects</h3></a>
+            <a class="subtitle2" th:href="@{'/project/all/team/'}"><h3>Projects</h3></a>
             <a class="subtitle21" th:href="@{'/main/'}"><h3>Home</h3></a>
 
             <img class="image4" src="/img/ace06293b0d4076285adfa86c63156ab.png" alt=""/>
@@ -42,7 +42,7 @@
                 <img class="box" th:src="@{${user.photosImagePath}}" alt="alt text" onclick="toggleDropdown()">
                 <div id="myDropdown" class="dropdown-content">
                     <a th:href="@{'/main/account_details'}">My Profile</a>
-                    <a href="#">My Projects</a>
+                    <a th:href="@{'/project/my/'}">My Projects</a>
                     <a th:href="@{'/project/'}">Create Project</a>
                     <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
                         <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
@@ -58,7 +58,7 @@
 
 <main class="create-page-start main">
 
-    <form id="myForm" th:action="@{/project/create_new}" method="post">
+    <form id="myForm" th:action="@{/project/create_new}" method="post" enctype="multipart/form-data">
         <input type="hidden" name="userEmail" th:value="${user.email}">
         <div class="section21">
             <div class="tabs">
@@ -140,15 +140,12 @@
                             <img class="image11" src="/img/704fb994a95115eac452c12fd365a797.png" alt="alt text"/>
                             <div class="text12" onclick="openModal('imageUploadModal')">UPLOAD AN IMAGE</div>
                         </td>
-                        <div id="photoUrlModal" class="modal">
-                            <label for="photoUrlInput">Enter Photo URL:</label>
-                            <input type="text" id="photoUrlInput">
-                            <button type="button" onclick="closeModal('photoUrlModal')">Submit</button>
-                        </div>
 
                         <!-- Modal for UPLOAD AN IMAGE -->
                         <div id="imageUploadModal" class="modal">
-                            <input type="file" id="imageUploadInput">
+                            <img id="thumbnail" alt="Main image preview" class="img-fluid"
+                                 src="/projectImg/image-thumbnail.png" style="width: 200px"/>
+                            <input type="file" id="imageUploadInput" name="fileImage" accept="image/png, image/jpeg">
                             <button type="button" onclick="closeModal('imageUploadModal')">Submit</button>
                         </div>
 
@@ -521,11 +518,38 @@
 
 <script src="/js/custom.js?v=2"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/js/addTariffAndPerson.js?v=5"></script>
+<script src="/js/addTariffAndPerson.js?v=7"></script>
 <script type="text/javascript">
+
+    $(document).ready(function() {
+        $("#imageUploadInput").change(function() {
+            fileSize = this.files[0].size;
+
+            if (fileSize > 502400) {
+                this.setCustomValidity("You must choose an image less than 502400 bytes!");
+                this.reportValidity();
+            } else {
+                this.setCustomValidity("");
+                showImageThumbnail(this);
+            }
+
+        });
+    });
+
+    function showImageThumbnail(fileInput) {
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            $("#thumbnail").attr("src", e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+    }
+
     function validateForm() {
         var isValid = true;
         var inputs = document.querySelectorAll('#numberInput, #briefInfo, #titleInput, #fullDescript, #calendar');
+        var fileInput = document.getElementById('imageUploadInput');
 
         var emptyInputs = [];
 
@@ -573,6 +597,11 @@
 
         if (tariffsList.length === 0) {
             alert("Please add at least one item to the tariff table before submitting the form.");
+            isValid = false;
+        }
+
+        if (fileInput.files.length === 0) {
+            alert("Please select an image before submitting the form.");
             isValid = false;
         }
 
@@ -625,20 +654,8 @@
         }
     }
 
-    // Call toggleContent initially to set initial visibility
     toggleContent();
-    //
-    // temporary
-    //
 
-
-    // function toggleContent(option) {
-    //     if (option === 'single') {
-    //         document.getElementById('teamTable').style.display = 'none';
-    //     } else if (option === 'team') {
-    //         document.getElementById('teamTable').style.display = 'table';
-    //     }
-    // }
     function showCalendar() {
         var calendarContainer = document.getElementById('calendar-container');
         calendarContainer.style.display = 'block';
@@ -658,19 +675,6 @@
         calendarContainer.style.display = 'none';
     }
 
-    function updateSelectedDate() {
-        var selectedDateText = document.getElementById('selected-date-text');
-        var selectedDate = document.getElementById('calendar').value;
-
-        if (selectedDate) {
-            selectedDateText.innerHTML = 'Until the time: ' + selectedDate;
-        } else {
-            selectedDateText.innerHTML = 'Time limits don\'t selected';
-        }
-
-        var calendarContainer = document.getElementById('calendar-container');
-        calendarContainer.style.display = 'none';
-    }
 
     function openModal(modalId) {
         var modal = document.getElementById(modalId);

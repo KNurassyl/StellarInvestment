@@ -107,13 +107,15 @@ $(document).ready(function () {
         event.preventDefault();
 
         if (validateForm()) {
-            var formData = $("#myForm").serialize();
-            formData += '&tariffsList=' + JSON.stringify(tariffsList);
-            formData += '&personsList=' + JSON.stringify(personsList);
+            var formData = new FormData(this); // 'this' refers to the form element
+            formData.append('tariffsList', JSON.stringify(tariffsList));
+            formData.append('personsList', JSON.stringify(personsList));
             $.ajax({
-                url: $("#myForm").attr("action"),
+                url: $(this).attr("action"),
                 type: 'POST',
                 data: formData,
+                processData: false, // Important! Prevent jQuery from processing the data
+                contentType: false, // Important! Set content type to false
                 success: function (response) {
                     console.log(response);
                     clearTableRows();

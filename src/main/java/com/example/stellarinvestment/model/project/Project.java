@@ -5,7 +5,9 @@ import com.example.stellarinvestment.model.User;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "projects")
@@ -37,6 +39,9 @@ public class Project extends IdBasedEntity {
 
     private boolean enabled;
 
+    @Column(name = "main_image")
+    private String mainImage;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
@@ -46,6 +51,9 @@ public class Project extends IdBasedEntity {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project", fetch = FetchType.LAZY)
     private List<Team> teams;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private Set<ProjectImage> images = new HashSet<>();
 
     public List<Tariff> getTariffs() {
         return tariffs;
@@ -57,6 +65,22 @@ public class Project extends IdBasedEntity {
 
     public List<Team> getTeams() {
         return teams;
+    }
+
+    public Set<ProjectImage> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<ProjectImage> images) {
+        this.images = images;
+    }
+
+    public String getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String mainImage) {
+        this.mainImage = mainImage;
     }
 
     public void setTeams(List<Team> teams) {
@@ -141,5 +165,16 @@ public class Project extends IdBasedEntity {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public void addExtraImage(String imageName) {
+        this.images.add(new ProjectImage(imageName, this));
+    }
+
+    @Transient
+    public String getMainImagePath() {
+        if (id == null || mainImage == null) return "/projectImg/image-thumbnail.png";
+
+        return "/project-images/" + this.id + "/" + this.mainImage;
     }
 }

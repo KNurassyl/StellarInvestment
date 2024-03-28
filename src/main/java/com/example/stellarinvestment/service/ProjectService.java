@@ -27,7 +27,7 @@ public class ProjectService {
     private UserService userService;
 
     @Transactional
-    public void createNewProject(String tariffsListJson, String personsListJson,
+    public Project createNewProject(String tariffsListJson, String personsListJson,
                                  float amountNeeded, String shortDescription, String title,
                                  String longDescription, String aboutCreator, Date finishTime, String userEmail) throws JsonProcessingException {
 
@@ -46,6 +46,7 @@ public class ProjectService {
         project.setFinishTime(finishTime);
         project.setLongDescription(longDescription);
         project.setShortDescription(shortDescription);
+        project.setMainImage("");
         project.setTitle(title);
         if (aboutCreator.isEmpty()) {
             project.setStatus(ProjectStatus.TEAM_FORMATION);
@@ -69,6 +70,19 @@ public class ProjectService {
         project.setTeams(personsList);
 
         projectRepository.save(project);
+
+        return project;
     }
 
+    public void saveProject(Project project) {
+        projectRepository.save(project);
+    }
+
+    public List<Project> getProjectsInTeamFormationStatus() {
+        return projectRepository.findByStatus(ProjectStatus.TEAM_FORMATION);
+    }
+
+    public List<Project> getProjectsCreatedByUser(User user) {
+        return projectRepository.findByUser(user);
+    }
 }

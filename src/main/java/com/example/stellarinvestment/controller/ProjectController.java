@@ -71,7 +71,8 @@ public class ProjectController {
                                    @RequestParam("finishTime") @DateTimeFormat(pattern = "yyyy-MM-dd") Date finishTime,
                                    @RequestParam(name = "userEmail") String userEmail,
                                    @RequestParam("fileImage") MultipartFile multipartFile) throws IOException {
-         Project project = projectService.createNewProject(tariffsListJson, personsListJson, amountNeeded, shortDescription, title, longDescription, aboutCreator, finishTime, userEmail);
+
+        Project project = projectService.createNewProject(tariffsListJson, personsListJson, amountNeeded, shortDescription, title, longDescription, aboutCreator, finishTime, userEmail);
 
         if (!multipartFile.isEmpty()) {
             String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));

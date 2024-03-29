@@ -33,6 +33,10 @@ function displayTariffs() {
     let tariffTableBody = document.getElementById('tariffTableBody');
     tariffTableBody.innerHTML = '';
 
+    if (tariffsList.length === 0) {
+        return; // If empty, exit the function
+    }
+
     tariffsList.forEach((tariff, index) => {
         let newRow = document.createElement('tr');
         newRow.innerHTML = `<td>${tariff.tariffAmount}</td>
@@ -86,6 +90,10 @@ function displayPersons() {
     let personTableBody = document.getElementById('teamBodyTable');
     personTableBody.innerHTML = '';
 
+    if (personsList.length === 0) {
+        return; // If empty, exit the function
+    }
+
     personsList.forEach((person, index) => {
         let newRow = document.createElement('tr');
         newRow.innerHTML = `<td>${person.position}</td>
@@ -119,6 +127,7 @@ $(document).ready(function () {
                 success: function (response) {
                     console.log(response);
                     clearTableRows();
+                    location.reload();
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
@@ -133,5 +142,7 @@ $(document).ready(function () {
 function clearTableRows() {
     tariffsList = [];
     personsList = [];
+    displayPersons(personsList);
+    displayTariffs(tariffsList);
 }
 

@@ -4,6 +4,7 @@ import com.example.stellarinvestment.exception.UserNotFoundException;
 import com.example.stellarinvestment.mail.Utility;
 import com.example.stellarinvestment.model.AuthUserDetails;
 import com.example.stellarinvestment.model.AuthenticationType;
+import com.example.stellarinvestment.model.Role;
 import com.example.stellarinvestment.model.User;
 import com.example.stellarinvestment.repository.UserRepository;
 import com.example.stellarinvestment.setting.EmailSettingBag;
@@ -22,6 +23,7 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.Set;
 
 @Service
 public class UserService {
@@ -206,5 +208,14 @@ public class UserService {
         return userDetails.getUser();
     }
 
+    public boolean hasRole(User user, String roleName) {
+        Set<Role> roles = user.getRoles();
+        for (Role role : roles) {
+            if (role.getName().equals(roleName)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

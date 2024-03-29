@@ -16,7 +16,7 @@
     <title>Create Event Page</title>
 </head>
 <body>
-  <header class="custom-header">
+<header class="header">
     <section class="section1" style="--src:url(/img/0502f0f63cc56790c6952133ae2b1481.png)">
         <div class="content_box">
 
@@ -26,21 +26,23 @@
                     <i class="fa fa-search"></i>
                 </button>
             </div>
-            <a class="subtitle1" th:href="@{'/main/'}"><h3>STELLAR<br/>INVESTMENT</h3></a>
+            <a class="subtitle1" th:href="@{'/main/'}"><h3>STELLAR<br/>INVESTMENT</h3></a> </p>
 
-            <a class="subtitle2" href="#"><h3>Projects</h3></a>
+            <a class="subtitle2" th:href="@{'/project/all/team/'}"><h3>Projects</h3></a>
             <a class="subtitle21" th:href="@{'/main/'}"><h3>Home</h3></a>
 
             <img class="image4" src="/img/ace06293b0d4076285adfa86c63156ab.png" alt=""/>
-            <div class="custom-dropdown">
-              <img class="custom-box" th:src="@{${user.photosImagePath}}" alt="alt text" onclick="toggleDropdown()">
-              <div id="myCustomDropdown" class="custom-dropdown-content">
-                  <a th:href="@{'/main/account_details'}">My Profile</a>
-                  <a href="#">My Projects</a>
-                  <a th:href="@{'/project/'}">Create Projects</a>
-                  <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out <form th:action="@{'/logout'}" method="post" id="singOutForm"></form></a>
-              </div>
-          </div>
+            <div class="dropdown">
+                <img class="box" th:src="@{${user.photosImagePath}}" alt="alt text" onclick="toggleDropdown()">
+                <div id="myDropdown" class="dropdown-content">
+                    <a th:href="@{'/main/account_details'}">My Profile</a>
+                    <a th:href="@{'/project/my/'}">My Projects</a>
+                    <a th:href="@{'/project/'}">Create Project</a>
+                    <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
+                        <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
+                    </a>
+                </div>
+            </div>
 
             <div class="wrapper5" style="--src:url(/img/3ac1d66869db66b7a9f0857bf70db63a.png)"></div>
 
@@ -212,14 +214,12 @@
 
 </main>
 <script type="text/javascript">
-    AOS.init();
-    new Sticky('.sticky-effect');
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownContent = document.querySelector('.dropdown-content');
 
-    const header = document.querySelector("#header");
-    if (header) {
-        const headroom = new Headroom(header);
-        headroom.init();
-    }
+    dropdown.addEventListener('click', function (event) {
+        dropdownContent.classList.toggle('show');
+    });
 
 
     function handleButtonClick() {
@@ -237,13 +237,6 @@
         window.location.href = "create/new/";
     }
 }
-
-    const dropdown = document.querySelector('.custom-dropdown');
-    const dropdownContent = document.querySelector('.custom-dropdown-content');
-
-    dropdown.addEventListener('click', function (event) {
-        dropdownContent.classList.toggle('show');
-    });
 
 </script>
 </body>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -35,29 +36,37 @@
             </div>
             <a class="subtitle1" href=""><h3>STELLAR<br/>INVESTMENT</h3></a>
 
-            <a class="subtitle2" href="#"><h3>Projects</h3></a>
+            <a class="subtitle2" th:href="@{'/project/all/team/'}"><h3>Projects</h3></a>
             <a class="subtitle21" href="#"><h3>Home</h3></a>
             <div class="rect1"></div>
             <img class="image4" src="/img/ace06293b0d4076285adfa86c63156ab.png" alt=""/>
 
 
             <div class="dropdown" sec:authorize="isAuthenticated()">
-                <img class="box2" th:src="@{${user.photosImagePath}}"
-                     alt="alt text" onclick="toggleDropdown()">
+                <th:block th:if="${user != null}">
+                    <img class="box2" th:src="@{${user.photosImagePath}}"
+                         alt="alt text" onclick="toggleDropdown()">
+                </th:block>
                 <div id="myDropdown" class="dropdown-content">
-                    <a th:href="@{'/main/account_details'}">My Profile</a>
-                    <a href="#">My Projects</a>
-                    <a th:href="@{'/project/'}">Create Projects</a>
-                    <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out <form th:action="@{'/logout'}" method="post" id="singOutForm"></form></a>
+                    <th:block th:if="${user != null}">
+                        <a th:href="@{'/main/account_details'}">My Profile</a>
+                        <a th:href="@{'/project/my/'}">My Projects</a>
+                        <a th:href="@{'/project/'}">Create Projects</a>
+                        <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
+                            <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
+                        </a>
+                    </th:block>
                 </div>
             </div>
 
 
-            <div class="wrapper5" style="--src:url(/img/3ac1d66869db66b7a9f0857bf70db63a.png)" sec:authorize="isAuthenticated()"></div>
+            <div class="wrapper5" style="--src:url(/img/3ac1d66869db66b7a9f0857bf70db63a.png)"
+                 sec:authorize="isAuthenticated()"></div>
 
             <div class="box" sec:authorize="!isAuthenticated()">
-                <img class="wrapper1" src="/img/c57eadf6ae997997f680beb6a90ca50d.png" alt="alt text" />
-                <a th:href="@{'/auth/login'}" class="subtitle22" id="loginButton" style="text-decoration: none;">Login</a>
+                <img class="wrapper1" src="/img/c57eadf6ae997997f680beb6a90ca50d.png" alt="alt text"/>
+                <a th:href="@{'/auth/login'}" class="subtitle22" id="loginButton"
+                   style="text-decoration: none;">Login</a>
             </div>
         </div>
     </section>
@@ -133,7 +142,8 @@
                             </p>
 
                             <p class="info description">
-                                Welcome! Makes functional and empowering prosthetic limbs for people with upper limb loss and limb difference <span>more...</span>
+                                Welcome! Makes functional and empowering prosthetic limbs for people with upper limb
+                                loss and limb difference <span>more...</span>
                             </p>
                         </div>
                     </div>
@@ -169,7 +179,8 @@
                             </p>
 
                             <p class="info description">
-                                Welcome! Makes functional and empowering prosthetic limbs for people with upper limb loss and limb difference <span>more...</span>
+                                Welcome! Makes functional and empowering prosthetic limbs for people with upper limb
+                                loss and limb difference <span>more...</span>
                             </p>
                         </div>
                     </div>
@@ -205,7 +216,8 @@
                             </p>
 
                             <p class="info description">
-                                Welcome! Makes functional and empowering prosthetic limbs for people with upper limb loss and limb difference <span>more...</span>
+                                Welcome! Makes functional and empowering prosthetic limbs for people with upper limb
+                                loss and limb difference <span>more...</span>
                             </p>
                         </div>
                     </div>

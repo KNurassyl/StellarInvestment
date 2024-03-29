@@ -2,25 +2,23 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-          integrity="sha512-fvVGrO69KYlz0tjRGrOpRsdZIb6HemjSzExD9qQCeTtF8Zq4p21F5V32vlQ+8bXC7ZZIgAEbaHOcyEg6UeVs8A=="
-          crossorigin="anonymous"/>
-    <link rel="stylesheet" type="text/css"
-          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-fvVGrO69KYlz0tjRGrOpRsdZIb6HemjSzExD9qQCeTtF8Zq4p21F5V32vlQ+8bXC7ZZIgAEbaHOcyEg6UeVs8A==" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
 
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/fonts.css"/>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link rel="stylesheet" type="text/css" href="/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/css/fonts.css" />
     <link rel="stylesheet" type="text/css" href="/css/Create_event_start.css"/>
 
-    <title>Create Event Page</title>
+    <title>Create Event Start Page</title>
 </head>
+
+
 <body onload="showBasicDataTab()">
-<header class="custom-header">
+<header class="header">
     <section class="section1" style="--src:url(/img/0502f0f63cc56790c6952133ae2b1481.png)">
         <div class="content_box">
 
@@ -30,19 +28,18 @@
                     <i class="fa fa-search"></i>
                 </button>
             </div>
-            <a class="subtitle1" th:href="@{'/main/'}"><h3>STELLAR<br/>INVESTMENT</h3></a>
+            <a class="subtitle1" th:href="@{'/main/'}"><h3>STELLAR<br/>INVESTMENT</h3></a> </p>
 
-            <a class="subtitle2" href="#"><h3>Projects</h3></a>
+            <a class="subtitle2" th:href="@{'/project/all/team/'}"><h3>Projects</h3></a>
             <a class="subtitle21" th:href="@{'/main/'}"><h3>Home</h3></a>
 
             <img class="image4" src="/img/ace06293b0d4076285adfa86c63156ab.png" alt=""/>
-            <div class="custom-dropdown">
-                <img class="custom-box" th:src="@{${user.photosImagePath}}" alt="alt text"
-                     onclick="toggleCustomDropdown()">
-                <div id="myCustomDropdown" class="custom-dropdown-content">
+            <div class="dropdown">
+                <img class="box" th:src="@{${user.photosImagePath}}" alt="alt text" onclick="toggleDropdown()">
+                <div id="myDropdown" class="dropdown-content">
                     <a th:href="@{'/main/account_details'}">My Profile</a>
-                    <a href="#">My Projects</a>
-                    <a th:href="@{'/project/'}">Create Projects</a>
+                    <a th:href="@{'/project/my/'}">My Projects</a>
+                    <a th:href="@{'/project/'}">Create Project</a>
                     <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
                         <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
                     </a>
@@ -57,33 +54,26 @@
 
 <main class="create-page-start main">
 
+    <form id="myForm" th:action="@{/project/create_new}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="userEmail" th:value="${user.email}">
+        <div class="section21">
+            <div class="tabs">
+                <div id="basicDataTab" class="tab content_box2" onclick="showTab('basicData')">
+                    <h3 class="subtitle1">Basic data</h3>
+                </div>
+                <div id="detailsTab" class="tab content_box3" onclick="showTab('details')">
+                    <h3 class="subtitle11">Details</h3>
+                </div>
+                <div id="tariffsTab" class="tab content_box31" onclick="showTab('tariffs')">
+                    <h3 class="subtitle1">Tariffs</h3>
+                </div>
+                <div id="singleTeamTab" class="tab content_box32" onclick="showTab('singleTeam')">
+                    <h3 class="subtitle12">Single/Team</h3>
+                </div>
 
-    <div class="section21">
-        <div class="tabs">
-            <div id="basicDataTab" class="tab content_box2" onclick="showTab('basicData')">
-                <h3 class="subtitle1">Basic data</h3>
+
             </div>
-            <div id="detailsTab" class="tab content_box3" onclick="showTab('details')">
-                <h3 class="subtitle11">Details</h3>
-            </div>
-            <div id="tariffsTab" class="tab content_box31" onclick="showTab('tariffs')">
-                <h3 class="subtitle1">Tariffs</h3>
-            </div>
-            <div id="singleTeamTab" class="tab content_box32" onclick="showTab('singleTeam')">
-                <h3 class="subtitle12">Single/Team</h3>
-            </div>
 
-
-            <button id="previousStep" class="tab content_box1" onclick="showPreviousStep()">
-                <h3 class="subtitle13">Previous Step</h3>
-            </button>
-            <button id="continueTab" class="tab content_box" onclick="continueToNextTab()">
-                <h3 class="subtitle">Next</h3>
-            </button>
-
-        </div>
-
-        <form action="">
             <div id="basicDataContent" class="tab-content">
                 <table class="table">
                     <tr>
@@ -105,6 +95,8 @@
                         <td colspan="2">
                             <div class="rect4"></div>
                             <div class="rect5"></div>
+                            <!-- <div class="text" id="timeLimitsText">Time limits don’t selected</div> -->
+
 
                         </td>
                     </tr>
@@ -115,34 +107,34 @@
                             <div class="text" id="selected-date-text">Time limits don't selected</div>
 
                             <div id="calendar-container">
-                                <input type="date" id="calendar" onchange="updateSelectedDate()">
+                                <!-- Include your calendar HTML code or use a third-party library -->
+                                <!-- Example: -->
+                                <input type="date" name="finishTime" id="calendar" onchange="updateSelectedDate()">
                             </div>
 
+
                             <h3 class="subtitle2">
-                                <input type="number" id="numberInput" placeholder="0" min="0"
+                                <input type="number" id="numberInput" name="amountNeeded" placeholder="0" min="0"
+                                       step="10000"
                                        oninput="validateNumberInput()">
                             </h3>
+
 
                         </td>
                         <td>
                             <div class="text2">
-                                <input type="text" id="briefInfo" placeholder="Brief info">
+                                <input type="text" id="briefInfo" name="shortDescription" placeholder="Brief info">
                             </div>
-                            <!--                            <img class="image1" src="/img/15282363b91130c7de2632cf83c82412.png" alt="alt text" />-->
                             <img class="image11" src="/img/704fb994a95115eac452c12fd365a797.png" alt="alt text"/>
-                            <!--                            <div class="text11" onclick="openModal('photoUrlModal')">PHOTO URL</div>-->
                             <div class="text12" onclick="openModal('imageUploadModal')">UPLOAD AN IMAGE</div>
                         </td>
-<!--                        <div id="photoUrlModal" class="modal">-->
-<!--                            <label for="photoUrlInput">Enter Photo URL:</label>-->
-<!--                            <input type="text" id="photoUrlInput">-->
-<!--                            <button onclick="closeModal('photoUrlModal')">Submit</button>-->
-<!--                        </div>-->
 
                         <!-- Modal for UPLOAD AN IMAGE -->
                         <div id="imageUploadModal" class="modal">
-                            <input type="file" id="imageUploadInput">
-                            <button onclick="closeModal('imageUploadModal')">Submit</button>
+                            <img id="thumbnail" alt="Main image preview" class="img-fluid"
+                                 src="/projectImg/image-thumbnail.png" style="width: 200px"/>
+                            <input type="file" id="imageUploadInput" name="fileImage" accept="image/png, image/jpeg">
+                            <button type="button" onclick="closeModal('imageUploadModal')">Submit</button>
                         </div>
 
                         <div class="overlay" onclick="closeAllModals()"></div>
@@ -151,14 +143,15 @@
                     <tr>
                         <td colspan="2">
                             <div class="text3">
-                                <input type="text" name="title" id="titleInput" placeholder="Title can consist up to 45 characters" required>
+                                <input type="text" name="title" id="titleInput"
+                                       placeholder="Title can consist up to 45 characters">
 
                             </div>
                             <hr class="line" size="1"/>
                             <hr class="line1" size="1"/>
                             <hr class="line2" size="1"/>
                             <hr class="line3" size="1"/>
-                            <hr class="line4" size="1"/>
+
                         </td>
                     </tr>
                     <tr>
@@ -166,6 +159,7 @@
                             <h3 class="subtitle21">Time limits</h3>
                             <h3 class="subtitle22">Financial goal, ₸</h3>
                             <h3 class="subtitle23">Brief info</h3>
+
                         </td>
                         <td>
                             <div class="text4">Image size 640x390</div>
@@ -191,7 +185,6 @@
                             <hr class="line1" size="1"/>
                             <hr class="line2" size="1"/>
                             <hr class="line3" size="1"/>
-                            <hr class="line4" size="1"/>
                         </td>
                     </tr>
                     <tr>
@@ -199,7 +192,6 @@
                             <div class="rect4"></div>
                             <div class="rect5"></div>
 
-                            <button onclick="showDatePicker()">Show Date Picker</button>
 
                             <div id="datePicker">
                                 <label for="startTime">Start Time:</label>
@@ -213,36 +205,34 @@
                     <tr>
 
                         <td>
-                            <div class="text2">
-                                <input type="text" id="fullDescript"
+                            <div class="text2_">
+                                <input type="text" name="longDescription" id="fullDescript"
                                        placeholder="You should start with the introduction of campaign’s team and history.">
                             </div>
-                            <div class="text2">
-                                <input type="text" id="briefInfo" placeholder="Brief info">
-                            </div>
-                            <img class="image1" src="/img/15282363b91130c7de2632cf83c82412.png" alt="alt text"/>
+
+
                             <img class="image11" src="/img/704fb994a95115eac452c12fd365a797.png" alt="alt text"/>
                             <img class="image12" src="/img/orange_bat_silhouette.png" alt="alt text"/>
-                            <div class="text11" onclick="openModal('UrlModal')">PHOTO URL</div>
+                            <!-- <div class="text11" onclick="openModal('UrlModal')">PHOTO URL</div> -->
                             <div class="text12" onclick="openModal('UploadModal')">UPLOAD AN IMAGE</div>
                             <div class="text13" onclick="openModal('VideoModal')">LINK TO YOUTUBE VIDEO</div>
                         </td>
-                        <div id="UrlModal" class="modal">
+                        <!-- <div id="UrlModal" class="modal">
                             <label for="UrlModal">Enter Photo URL:</label>
                             <input type="text" id="UrlModal">
                             <button onclick="closeModal('UrlModal')">Submit</button>
-                        </div>
+                        </div> -->
 
 
                         <div id="UploadModal" class="modal">
                             <input type="file" id="UploadModal">
-                            <button onclick="closeModal('UploadModal')">Submit</button>
+                            <button type="button" onclick="closeModal('UploadModal')">Submit</button>
                         </div>
 
                         <div id="VideoModal" class="modal">
                             <label for="videoUrlInput">Enter Video URL:</label>
                             <input type="text" id="videoUrlInput">
-                            <button onclick="closeModal('VideoModal')">Submit</button>
+                            <button type="button" onclick="closeModal('VideoModal')">Submit</button>
                         </div>
 
 
@@ -272,153 +262,198 @@
                     <div class="overlay" onclick="closeAllModals()"></div>
                 </table>
             </div>
-    </div>
+        </div>
 
-    <div id="tariffsContent" class="tab-content">
-        <div class="creat root">
-            <div class="content_box3">
+        <div id="tariffsContent" class="tab-content">
+            <div class="creat root">
+                <div class="content_box3">
 
 
-                <input type="number" class="customAmountInput" placeholder="Enter amount">
+                    <input type="number" class="customAmountInput" id="tariffAmount" min="0" step="1000"
+                           placeholder="Enter amount">
+
+
+                    <div class="content_box2">
+                        <div class="rect2"></div>
+                        <hr class="line" size="1"/>
+                        <h3 class="subtitle1">Short description</h3>
+                        <h3 class="subtitle11">Main present</h3>
+                        <div class="rect3"></div>
+                        <div class="text3">
+                            <input type="text" id="tariffTitleInput" placeholder="Main Present">
+
+                        </div>
+
+                        <div class="textu">
+                            <input type="text" id="KAKInput" placeholder="Short Info about your Project">
+                        </div>
+
+                    </div>
+                    <div class="box" onclick="selectBox(this)"><h5 class="highlight">₸1,000</h5></div>
+                    <div class="box1" onclick="selectBox(this)"><h5 class="highlight1">₸5,000</h5></div>
+                    <div class="box11" onclick="selectBox(this)"><h5 class="highlight1">₸9,000</h5></div>
+                    <div class="box2" onclick="selectBox(this)"><h5 class="highlight11">₸20,000</h5></div>
+                    <div class="box3" onclick="selectBox(this)"><h5 class="highlight11">₸100,000</h5></div>
+                </div>
+
+                <!-- Button to add a new table -->
+                <div id="tableWrapper_for_tariff" style="margin-top: 195px">
+                    <input type="button" id="addTariffButton" value="Add Tariff" onclick="addTariffAndPerson()"/><br>
+                    <!-- <div id="newTablePlaceholder"></div> -->
+                    <div class="table_for_tariff_section">
+                        <table id="tariffTable">
+                            <thead>
+                            <tr>
+                                <td>Amount</td>
+                                <td>Main present</td>
+                                <td>Short description</td>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tariffTableBody">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+<!--            <button type="submit" id="addTariffButton2"-->
+<!--                    style="background: bisque; padding: 10px; border: 1px solid; cursor: pointer">Submit-->
+<!--            </button>-->
+        </div>
+
+
+        <div id="singleTeamContent" class="tab-content">
+
+            <div class="options-container">
+                <label class="option-label">
+                    <input type="radio" id="singleRadio" name="options" value="single"
+                           onclick="toggleContent('single')" checked> Single
+                </label>
+                <label class="option-label">
+                    <input type="radio" id="teamRadio" name="options" value="team" onclick="toggleContent('team')"> Team
+                </label>
+
+
+            </div>
+
+
+            <div class="crea" id="singleContent">
 
 
                 <div class="content_box2">
                     <div class="rect2"></div>
-                    <hr class="line" size="1"/>
-                    <h3 class="subtitle1">Short description</h3>
-                    <h3 class="subtitle11">Main present</h3>
+
+
+                    <h3 class="subtitle11">About Yourself</h3>
                     <div class="rect3"></div>
                     <div class="text3">
-                        <input type="text" id="titleInput" placeholder="Main Present">
+                        <input type="text" id="titleInputYourself" name="aboutCreator"
+                               placeholder="About yourself or more about project">
 
                     </div>
 
-                    <div class="text2">
-                        <input type="text" id="KAKInput" placeholder="Short Info about your Project">
+
+                </div>
+
+            </div>
+
+            <div class="aerc" id="teamContent">
+
+                <div class="section21">
+
+
+                    <!-- <div class="content_box2">
+                        <h3 class="subtitle22">+ Add member</h3>
+                    </div> -->
+                    <div class="content_box5">
+
+                        <div class="rect9"></div>
+
+
+                        <h3 class="subtitleQuantity">
+                            <input type="number" id="QuantityInput" placeholder="0" min="0"
+                                   oninput="validateNumberInput()">
+                        </h3>
+
+
+                        <h3 class="subtitle32">Quantity</h3>
+                        <hr class="line" size="1"/>
+
+
+                        <div class="text1" id="selectedExperienceText" onclick="toggleExpOptions()">- Not selected -
+                        </div>
+                        <select class="select-experience" id="experienceSelect" onchange="updateSelectedExperience()">
+                            <option value="" selected disabled>Select a experience</option>
+                            <option value="no needed">no needed</option>
+                            <option value="half year">half year</option>
+                            <option value="1 year">1 year</option>
+                            <option value="2 year">2 year</option>
+                            <option value="3-5 years">3-5 years</option>
+                            <option value="5+ years">5+ years</option>
+                        </select>
+
+                        <div class="text2">
+                            <input type="text" id="PosInput" placeholder="Your Position">
+
+                        </div>
+                        <h3 class="subtitle33">Additional info</h3>
+                        <div class="text4">
+                            <input type="text" id="InfoInput" placeholder="Info">
+
+                        </div>
+                        <hr class="line1" size="1"/>
+                        <hr class="line2" size="1"/>
+                        <h3 class="subtitle34">Experience</h3>
+                        <h3 class="subtitle35">Position</h3>
+                        <div class="rect10"></div>
+
 
                     </div>
 
                 </div>
-                <div class="box" onclick="selectBox(this)"><h5 class="highlight">₸1,000</h5></div>
-                <div class="box1" onclick="selectBox(this)"><h5 class="highlight1">₸5,000</h5></div>
-                <div class="box11" onclick="selectBox(this)"><h5 class="highlight1">₸9,000</h5></div>
-                <div class="box2" onclick="selectBox(this)"><h5 class="highlight11">₸20,000</h5></div>
-                <div class="box3" onclick="selectBox(this)"><h5 class="highlight11">₸100,000</h5></div>
+
+                <div id="tableWrapper_for_person" style="margin-top: -200px;">
+                    <input type="button" id="addPersonButton" value="Add Person" onclick="addPerson()"/><br>
+                    <!-- <div id="newTablePlaceholder"></div> -->
+                    <div class="table_for_person_section">
+                        <table id="teamTable">
+                            <thead>
+                            <tr>
+                                <td>Position</td>
+                                <td>Experience</td>
+                                <td>Quantity</td>
+                                <td>Info</td>
+                                <td>Action</td>
+                            </tr>
+                            </thead>
+                            <tbody id="teamBodyTable">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <button id="addTariffButton" onclick="addNewRoot()">Add Tariff</button>
-            <button id="temporaryButton" type="submit">Temporary Create</button>
+
+
+
+
         </div>
 
-    </div>
+        <div id="buttonWrapper">
+            <button type="button" id="previousStep" class="tab content_box1"  onclick="showPreviousStep()" style="margin-top: 382px; margin-left: 172px;">
+                <h3 class="subtitle13">Previous Step</h3>
+            </button>
 
+            <button type="button" id="continueTab" class="tab content_box" style="display: flex; margin-top: 382px; margin-left: 172px;" onclick="continueToNextTab()">
+                <h3 class="subtitle">Next</h3>
+            </button>
+
+            <button type="submit" id="submitTabButton" class="tab content_box_submit" style="display: none; margin-top: 382px; margin-left: 172px;">
+                <h3 class="subtitle">Submit</h3>
+            </button>
+        </div>
     </form>
-
-
-    <div id="singleTeamContent" class="tab-content">
-
-        <div class="options-container">
-            <label class="option-label">
-                <input type="radio" name="options" value="single" onclick="showSingleContent()"> Single
-            </label>
-            <label class="option-label">
-                <input type="radio" name="options" value="team" onclick="showTeamContent()"> Team
-            </label>
-        </div>
-
-
-        <div class="crea" id="singleContent">
-
-
-            <div class="content_box2">
-                <div class="rect2"></div>
-
-
-                <h3 class="subtitle11">About Yourself</h3>
-                <div class="rect3"></div>
-                <div class="text3">
-                    <input type="text" id="titleInput" placeholder="Just Do It">
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-        <div class="aerc" id="teamContent">
-
-            <div class="section21">
-
-
-                <!-- <div class="content_box2">
-                    <h3 class="subtitle22">+ Add member</h3>
-                </div> -->
-                <div class="content_box5">
-                    <div class="rect9"></div>
-
-
-                    <div class="text" id="selectedQuantityText" onclick="toggleQuaOptions()">- Not selected -</div>
-                    <select class="select-quantity" id="quantitySelect" onchange="updateSelectedQuantity()">
-                        <option value="" selected disabled>Select a quantity</option>
-                        <option value="one">1</option>
-                        <option value="two">2</option>
-                        <option value="three">3</option>
-                        <option value="four">4</option>
-                        <option value="five">5</option>
-                        <option value="six">6</option>
-                        <option value="seven">7</option>
-                        <option value="eight">8</option>
-                        <option value="nine">9</option>
-                        <option value="ten">10</option>
-
-                        <!-- Add more positions as needed -->
-                    </select>
-                    <h3 class="subtitle32">Quantity</h3>
-                    <hr class="line" size="1"/>
-
-
-                    <div class="text1" id="selectedExperienceText" onclick="toggleExpOptions()">- Not selected -</div>
-                    <select class="select-experience" id="experienceSelect" onchange="updateSelectedExperience()">
-                        <option value="" selected disabled>Select a experience</option>
-                        <option value="noneed">no needed</option>
-                        <option value="half">half year</option>
-                        <option value="year">1 year</option>
-                        <option value="twoyear">2 years</option>
-                        <option value="more">more than 2 years</option>
-
-                        <!-- Add more positions as needed -->
-                    </select>
-
-                    <div class="text2" id="selectedPositionText" onclick="toggleOptions()">- Not selected -</div>
-                    <select class="select-position" id="positionSelect" onchange="updateSelectedPosition()">
-                        <option value="" selected disabled>Select a position</option>
-                        <option value="Backend">Backend Developer</option>
-                        <option value="Designer">UI/UX Designer</option>
-                        <option value="Painter">Painter</option>
-                        <option value="DevOps">DevOps</option>
-                        <option value="Architecture">Architecture</option>
-                        <option value="Coach">Coach</option>
-                        <option value="Full-stack">Full-stack Developer</option>
-                        <!-- Add more positions as needed -->
-                    </select>
-
-                    <h3 class="subtitle33">Additional info</h3>
-                    <div class="text4">
-                        <input type="text" id="titleInput" placeholder="Info">
-
-                    </div>
-                    <hr class="line1" size="1"/>
-                    <hr class="line2" size="1"/>
-                    <h3 class="subtitle34">Experience</h3>
-                    <h3 class="subtitle35">Position</h3>
-                    <div class="rect10"></div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-
 </main>
 
 <section class="section3">
@@ -485,9 +520,145 @@
     </div>
 </section>
 
-<script src="/js/custom.js"></script>
-
+<script src="/js/custom.js?v=3"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/js/addTariffAndPerson.js?v=7"></script>
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#imageUploadInput").change(function () {
+            fileSize = this.files[0].size;
+
+            if (fileSize > 502400) {
+                this.setCustomValidity("You must choose an image less than 502400 bytes!");
+                this.reportValidity();
+            } else {
+                this.setCustomValidity("");
+                showImageThumbnail(this);
+            }
+
+        });
+    });
+
+    function showImageThumbnail(fileInput) {
+        var file = fileInput.files[0];
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $("#thumbnail").attr("src", e.target.result);
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+    function validateForm() {
+        var isValid = true;
+        var inputs = document.querySelectorAll('#numberInput, #briefInfo, #titleInput, #fullDescript, #calendar');
+        var fileInput = document.getElementById('imageUploadInput');
+
+        var emptyInputs = [];
+
+        for (var i = 0; i < inputs.length; i++) {
+            if (inputs[i].value.trim() === "") {
+                emptyInputs.push(inputs[i]);
+            }
+        }
+
+        if (emptyInputs.length === inputs.length) {
+            alert("Please fill in all fields before submitting the form.");
+            return false;
+        } else if (emptyInputs.length > 0) {
+            var missingFields = emptyInputs.map(function (input) {
+                var inputId = input.id;
+                var inputName = "";
+                switch (inputId) {
+                    case 'numberInput':
+                        inputName = "Financial goal";
+                        break;
+                    case 'briefInfo':
+                        inputName = "Brief Info";
+                        break;
+                    case 'titleInput':
+                        inputName = "Title";
+                        break;
+                    case 'fullDescript':
+                        inputName = "Full Description";
+                        break;
+                    case 'calendar':
+                        inputName = "Time limits";
+                        break;
+                    default:
+                        inputName = "all";
+                }
+                return inputName;
+            });
+            alert("Please fill in the following fields before submitting the form: " + missingFields.join(", "));
+            return false;
+        }
+
+        if (!isValid) {
+            return isValid;
+        }
+
+        if (tariffsList.length === 0) {
+            alert("Please add at least one item to the tariff table before submitting the form.");
+            isValid = false;
+        }
+
+        if (fileInput.files.length === 0) {
+            alert("Please select an image before submitting the form.");
+            isValid = false;
+        }
+
+        if (document.getElementById('teamRadio').checked) {
+            if (personsList.length === 0) {
+                alert("Please add at least one item to the team before submitting the form.");
+                isValid = false;
+            }
+        }
+
+        if (document.getElementById('singleRadio').checked && document.getElementById('titleInputYourself').value.trim() === "") {
+            alert("Please fill in the 'About yourself' before submitting the form.");
+            isValid = false;
+        }
+
+        var radioButtons = document.querySelectorAll('input[type="radio"][name="options"]');
+        var isRadioButtonSelected = Array.from(radioButtons).some(function (radioButton) {
+            return radioButton.checked;
+        });
+
+        if (!isRadioButtonSelected) {
+            alert("Please select an one option (Single/Team) before submitting the form.");
+            return false;
+        }
+
+
+        return isValid;
+    }
+
+
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownContent = document.querySelector('.dropdown-content');
+
+    dropdown.addEventListener('click', function (event) {
+        dropdownContent.classList.toggle('show');
+    });
+
+    //
+    // temporary
+    //
+    function toggleContent(content) {
+        if (content === 'single') {
+            document.getElementById('singleContent').style.display = 'block';
+            document.getElementById('teamContent').style.display = 'none';
+            document.getElementById('teamTable').style.display = 'none'; // Hide teamTable
+        } else if (content === 'team') {
+            document.getElementById('singleContent').style.display = 'none';
+            document.getElementById('teamContent').style.display = 'block';
+            document.getElementById('teamTable').style.display = 'table'; // Show teamTable
+        }
+    }
+
+    toggleContent();
 
     function showCalendar() {
         var calendarContainer = document.getElementById('calendar-container');
@@ -500,20 +671,6 @@
 
         if (selectedDate) {
             selectedDateText.innerHTML = 'Selected Date: ' + selectedDate;
-        } else {
-            selectedDateText.innerHTML = 'Time limits don\'t selected';
-        }
-
-        var calendarContainer = document.getElementById('calendar-container');
-        calendarContainer.style.display = 'none';
-    }
-
-    function updateSelectedDate() {
-        var selectedDateText = document.getElementById('selected-date-text');
-        var selectedDate = document.getElementById('calendar').value;
-
-        if (selectedDate) {
-            selectedDateText.innerHTML = 'Until the time: ' + selectedDate;
         } else {
             selectedDateText.innerHTML = 'Time limits don\'t selected';
         }
@@ -557,121 +714,12 @@
         });
     });
 
-
     function validateNumberInput() {
         var numberInput = document.getElementById('numberInput');
         // Ensure it's a non-negative integer
         numberInput.value = Math.max(0, parseInt(numberInput.value) || 0);
     }
 
-
-    function selectBox(box) {
-        // Remove the 'selected' class from all boxes
-        document.querySelectorAll('.box, .box1, .box11, .box2, .box3').forEach(function (element) {
-            element.classList.remove('selected');
-        });
-
-        // Add the 'selected' class to the clicked box
-        box.classList.add('selected');
-
-        // Toggle the 'white-text' class for the text color
-        document.querySelectorAll('.highlight, .highlight1, .highlight11').forEach(function (element) {
-            element.classList.toggle('white-text', element.parentElement.classList.contains('selected'));
-        });
-    }
-
-
-    function addNewRoot() {
-        // Create a new root element
-        var newRoot = document.createElement("div");
-        newRoot.classList.add("creat", "root");
-
-        // Create the content for the new root (similar to the existing one)
-        newRoot.innerHTML = `
-    <div class="content_box3">
-      <input type="number" class="customAmountInput" placeholder="Enter amount">
-      <div class="content_box2">
-        <div class="rect2"></div>
-        <hr class="line" size="1" />
-        <h3 class="subtitle1">Short description</h3>
-        <h3 class="subtitle11">Main present</h3>
-        <div class="rect3"></div>
-        <div class="text3">
-          <input type="text" id="titleInput" placeholder="Main Present">
-        </div>
-        <div class="text2">
-          <input type="text" id="KAKInput" placeholder="Short Info about your Project">
-        </div>
-      </div>
-      <div class="box" onclick="selectBox(this)"><h5 class="highlight">₸1,000</h5></div>
-      <div class="box1" onclick="selectBox(this)"><h5 class="highlight1">₸5,000</h5></div>
-      <div class="box11" onclick="selectBox(this)"><h5 class="highlight1">₸9,000</h5></div>
-      <div class="box2" onclick="selectBox(this)"><h5 class="highlight11">₸20,000</h5></div>
-      <div class="box3" onclick="selectBox(this)"><h5 class="highlight11">₸100,000</h5></div>
-    </div>
-  `;
-
-        // Append the new root to the #tariffsContent container
-        document.getElementById("tariffsContent").appendChild(newRoot);
-    }
-
-    function selectBox(box) {
-
-        // Remove the 'selected' class from all boxes
-        document.querySelectorAll('.box, .box1, .box11, .box2, .box3').forEach(function (element) {
-            element.classList.remove('selected');
-        });
-
-        // Add the 'selected' class to the clicked box
-        box.classList.add('selected');
-
-        // Toggle the 'white-text' class for the text color
-        document.querySelectorAll('.highlight, .highlight1, .highlight11').forEach(function (element) {
-            element.classList.toggle('white-text', element.parentElement.classList.contains('selected'));
-        });
-    }
-
-    function addNewRoot() {
-        // Create a new root element
-        var newRoot = document.createElement('div');
-        newRoot.classList.add('creat', 'root');
-
-        // Create content for the new root element
-        var newContentBox3 = document.createElement('div');
-        newContentBox3.classList.add('content_box3');
-
-        // Generate a unique ID for the new elements
-        var uniqueId = 'newRoot_' + Date.now();
-
-        // Add content to the new root element
-        // You can customize this part based on your requirements
-        newContentBox3.innerHTML = `
-        <input type="number" class="customAmountInput" placeholder="Enter amount">
-        <div class="content_box2">
-            <div class="rect2"></div>
-            <hr class="line" size="1" />
-            <h3 class="subtitle1">Short description</h3>
-            <h3 class="subtitle11">Main present</h3>
-            <div class="rect3"></div>
-            <div class="text3">
-                <input type="text" id="${uniqueId}_newTitleInput" placeholder="Main Present">
-            </div>
-            <div class="text2">
-                <input type="text" id="${uniqueId}_newKAKInput" placeholder="Short Info about your Project">
-            </div>
-        </div>
-        <div class="box" onclick="selectBox(this)"><h5 class="highlight">₸1,000</h5></div>
-        <div class="box1" onclick="selectBox(this)"><h5 class="highlight1">₸5,000</h5></div>
-        <div class="box11" onclick="selectBox(this)"><h5 class="highlight1">₸9,000</h5></div>
-        <div class="box2" onclick="selectBox(this)"><h5 class="highlight11">₸20,000</h5></div>
-        <div class="box3" onclick="selectBox(this)"><h5 class="highlight11">₸100,000</h5></div>
-    `;
-
-        newRoot.appendChild(newContentBox3);
-
-        // Append the new root element below the existing button
-        document.getElementById('tariffsContent').appendChild(newRoot);
-    }
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>

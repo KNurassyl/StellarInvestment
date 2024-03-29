@@ -1,6 +1,7 @@
-let calendar;
 var currentTabIndex = 0;
+let calendar;
 
+// Function to show the "Previous Step" button based on the current tab index
 function showPreviousStepButton() {
     var previousStepButton = document.getElementById('previousStep');
     if (currentTabIndex === 0) {
@@ -32,16 +33,57 @@ function showTab(tabName) {
     // Show the selected tab content
     document.getElementById(tabName + "Content").style.display = "block";
 
-    // Update the visibility of the "Previous Step" button
-    showPreviousStepButton();
+    // Check if the current tab is the last one
+    var lastTab = tabOrder[tabOrder.length - 1];
+    if (tabName === lastTab) {
+        // If it's the last tab, show the singleContent
+        document.getElementById("singleContent").style.display = "block";
+
+        var continueTabButton = document.getElementById('continueTab');
+        var submitTabButton = document.getElementById('submitTabButton');
+
+        // Hide the "Next" button and show the "Submit" button
+        if (continueTabButton && submitTabButton) {
+            continueTabButton.style.display = 'none';
+            submitTabButton.style.display = 'block';
+        }
+
+        // Show singleContent only if the single radio button is chosen
+        if (document.getElementById('singleRadio').checked) {
+            document.getElementById("singleContent").style.display = "block";
+        } else {
+            document.getElementById("singleContent").style.display = "none";
+        }
+    } else {
+        // If not the last tab, reset button text to "Next"
+        var continueTabButton = document.getElementById('continueTab');
+        var submitTabButton = document.getElementById('submitTabButton');
+
+        if (continueTabButton && submitTabButton) {
+            continueTabButton.style.display = 'block';
+            submitTabButton.style.display = 'none';
+        }
+    }
+
+    // Check if the current tab is the first one
+    if (tabOrder.indexOf(tabName) === 0) {
+        // If it's the first tab, hide the "Previous Step" button
+        document.getElementById("previousStep").style.display = "none";
+    } else {
+        // If it's not the first tab, show the "Previous Step" button
+        document.getElementById("previousStep").style.display = "block";
+    }
 }
+
 
 
 function showPreviousStep() {
     // Handle logic for the "Previous Step" button
     if (currentTabIndex > 0) {
         currentTabIndex--;
+        console.log("Current tab index:", currentTabIndex);
         showTab(tabOrder[currentTabIndex]);
+        adjustButtonPosition();
     }
 }
 
@@ -50,7 +92,18 @@ function continueToNextTab() {
     if (currentTabIndex < tabOrder.length - 1) {
         currentTabIndex++;
         showTab(tabOrder[currentTabIndex]);
+        adjustButtonPosition();
+    } else {
+        replaceNextWithSubmit();
     }
+}
+
+
+
+function adjustButtonPosition() {
+    var buttonWrapper = document.getElementById('buttonWrapper');
+    var wrapperHeight = document.querySelector('.section21').offsetHeight;
+    buttonWrapper.style.marginTop = (tableWrapperHeight + 40) + "px"; // Adjust 40px for spacing
 }
 
 // Array to define the order of tabs
@@ -58,22 +111,6 @@ var tabOrder = ['basicData', 'details', 'tariffs', 'singleTeam'];
 
 // Initially show the Basic Data tab
 showTab('basicData');
-
-function showSingleContent() {
-    var singleContent = document.getElementById('singleContent');
-    var teamContent = document.getElementById('teamContent');
-
-    singleContent.style.display = 'block';
-    teamContent.style.display = 'none';
-}
-
-function showTeamContent() {
-    var singleContent = document.getElementById('singleContent');
-    var teamContent = document.getElementById('teamContent');
-
-    singleContent.style.display = 'none';
-    teamContent.style.display = 'block';
-}
 
 
 function toggleOptions() {
@@ -127,4 +164,26 @@ function updateSelectedQuantity() {
 
     // Hide the quantity select after selection
     quantitySelect.style.display = 'none';
+}
+
+function selectBox(box) {
+    // Remove the 'selected' class from all boxes
+    document.querySelectorAll('.box, .box1, .box11, .box2, .box3').forEach(function (element) {
+        element.classList.remove('selected');
+    });
+
+    // Add the 'selected' class to the clicked box
+    box.classList.add('selected');
+
+    // Toggle the 'white-text' class for the text color
+    document.querySelectorAll('.highlight, .highlight1, .highlight11').forEach(function (element) {
+        element.classList.toggle('white-text', element.parentElement.classList.contains('selected'));
+    });
+
+    // Get the value of the selected box
+    const selectedValue = box.querySelector('h5').textContent.trim().substring(1); // Get the text content of the <h5> element within the clicked box, excluding the first character
+
+    // Update the value of the input field with the selected value
+    const inputField = document.querySelector('.customAmountInput');
+    inputField.valueAsNumber = parseInt(selectedValue, 10);
 }

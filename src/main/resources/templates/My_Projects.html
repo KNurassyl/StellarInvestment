@@ -61,7 +61,7 @@
                 <li><a href="#investors" onclick="showTab(event, 'investors')">List of investors</a></li>
             </ul>
             
-            <div id="applied-persons" class="tab-content" th:each="myProject : ${myProjects}">
+            <div class="tab-content applied-persons" th:each="myProject : ${myProjects}">
                 <table class="main_table" th:if="${myProjects.isEmpty()}">
                     <tbody>
                     <tr>
@@ -164,7 +164,7 @@
 
 
             
-            <div id="investors" class="tab-content" style="display:none;">
+            <div id="investors" class="tab-content investors" style="display:none;">
                 <table class="main_table">
                     <thead class="description">
                     <tr>
@@ -304,8 +304,10 @@ $(document).ready(function() {
                 tabcontent[i].style.display = "none";
             }
 
-            document.getElementById(tabName).style.display = "block";
-
+            var tabToShow = document.getElementsByClassName(tabName);
+            for (i = 0; i < tabToShow.length; i++) {
+                tabToShow[i].style.display = "block";
+            }
             evt.preventDefault();
         }
 </script>

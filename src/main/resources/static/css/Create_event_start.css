@@ -451,6 +451,21 @@ a {
     top: 769px;
     width: 177px;
 }
+.content_box_submit {
+    background-color: rgb(35, 66, 74);
+    border-radius: 10px 10px 10px 10px;
+    bottom: 0px;
+    display: none;
+    flex-direction: column;
+    height: 54px;
+    left: 969px;
+    outline: 1px solid rgb(101, 169, 166);
+    outline-offset: -1px;
+    position: absolute;
+    right: 0px;
+    top: 769px;
+    width: 177px;
+}
 .subtitle {
     color: rgb(255, 255, 255);
     font: 500 20px/1.2 "Roboto", Helvetica, Arial, serif;
@@ -585,14 +600,13 @@ a {
 }
 .wrapper1 {
     background: var(--src) center center / 100% 100% no-repeat;
-    bottom: 128px;
     display: flex;
     flex-direction: column;
     height: 20px;
-    left: 400px;
-    position: relative;
+    left: 412px;
+    position: absolute;
     right: 710px;
-    top: -107px;
+    top: 677px;
     width: 22px;
     cursor: pointer;
 }
@@ -600,14 +614,13 @@ a {
 #calendar-container {
     display: none;
     position: absolute;
-    margin-top: -107px;
-    margin-left: 380px;
+    margin-top: 677px;
+    margin-left: 400px;
     /* Add other styles for the calendar container as needed */
 }
 
 #selected-date {
     font-weight: bold;
-
     /* Add other styles for the selected date as needed */
 }
 .subtitle2 {
@@ -678,7 +691,7 @@ a {
     height: 19px;
     left: 378px;
     position: absolute;
-    top: 53%;
+    top: 51%;
     width: 57px;
 
 }
@@ -701,9 +714,9 @@ a {
     border: 1px solid #23424A;
     width: 1345.3%;
     box-sizing: border-box;
-    margin-top: -112px;
+    margin-top: -96px;
     padding: 40.5px; /* Adjust padding as needed */
-    height: 270px;
+    height: 273px;
 
     border-width: 0 0 0 0;
 }
@@ -831,6 +844,16 @@ a {
     margin-top: -250px;
     padding: 40.5px; /* Adjust padding as needed */
     height: 30px;
+
+    border-width: 0 0 0 0;
+}
+#titleInputYourself {
+    border: 1px solid #23424A;
+    width: 335%;
+    box-sizing: border-box;
+    margin-top: -39px;
+    padding: 40.5px; /* Adjust padding as needed */
+    height: 298px;
 
     border-width: 0 0 0 0;
 }
@@ -1330,7 +1353,9 @@ a {
 
 .tabs {
     display: flex;
+    flex-grow: 1;
 }
+
 
 .tab {
     cursor: pointer;
@@ -1338,6 +1363,11 @@ a {
     border-radius: 10px 10px 0 0;
     outline: 2px solid rgb(255, 127, 80);
     outline-offset: -2px;
+}
+
+.tabs_container {
+    display: flex;
+    flex: 1;
 }
 
 .tab-content {
@@ -1748,14 +1778,27 @@ a {
 
     border-width: 0 0 0 0;
 }
+
+#tariffTitleInput {
+    border: 1px solid #23424A;
+    width: 335.3%;
+    box-sizing: border-box;
+    margin-top: -250px;
+    padding: 40.5px; /* Adjust padding as needed */
+    height: 30px;
+
+    border-width: 0 0 0 0;
+}
+
+
 #tableWrapper_for_tariff {
     display: flex;
-    z-index: 7;
     flex-direction: column;
 }
 
 #tableWrapper_for_person {
-    display:absolute;
+    display: flex;
+    flex-direction: column;
 }
 
 .table_for_tariff_section {
@@ -1777,24 +1820,38 @@ a {
 }
 
 
-table {
+.table_for_tariff_section table {
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 20px;
 }
 
-th, td {
+.table_for_tariff_section th,
+.table_for_tariff_section td {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
 }
 
-th {
+.table_for_tariff_section th {
     background-color: #f2f2f2;
 }
 
-tr:nth-child(even) {
+.table_for_tariff_section tr:nth-child(even) {
     background-color: #f2f2f2;
+}
+
+#addTariffButton {
+    cursor: pointer;
+    position: relative;
+    background-color: coral;
+    border-radius: 10px;
+    color: white;
+    margin-top: 10px;
+    padding: 10px 20px;
+    margin-left: 180px;
+    cursor: pointer;
+    width: 100px;
 }
 
 
@@ -2551,3 +2608,46 @@ tr:nth-child(even) {
     width: 1px;
 }
 
+#tableWRapper {
+    display: flex;
+    flex-direction: column;
+}
+
+#addPersonButton {
+    cursor: pointer;
+    position: relative;
+    background-color: coral;
+    border-radius: 10px;
+    color: white;
+    margin-top: 0px;
+    padding: 10px 20px;
+    margin-left: 0px;
+    cursor: pointer;
+    width: 100px;
+}
+
+.table_for_person_section {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.table_for_person_section table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.table_for_person_section th,
+.table_for_person_section td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.table_for_person_section th {
+    background-color: #f2f2f2;
+}
+
+.table_for_person_section tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

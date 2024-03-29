@@ -2,19 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
-          integrity="sha512-fvVGrO69KYlz0tjRGrOpRsdZIb6HemjSzExD9qQCeTtF8Zq4p21F5V32vlQ+8bXC7ZZIgAEbaHOcyEg6UeVs8A=="
-          crossorigin="anonymous"/>
-    <link rel="stylesheet" type="text/css"
-          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-fvVGrO69KYlz0tjRGrOpRsdZIb6HemjSzExD9qQCeTtF8Zq4p21F5V32vlQ+8bXC7ZZIgAEbaHOcyEg6UeVs8A==" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
 
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/fonts.css"/>
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link rel="stylesheet" type="text/css" href="/css/common.css" />
+    <link rel="stylesheet" type="text/css" href="/css/fonts.css" />
     <link rel="stylesheet" type="text/css" href="/css/Create_event_start.css"/>
 
     <title>Create Event Start Page</title>
@@ -78,14 +74,6 @@
 
             </div>
 
-            <div id="buttonWrapper">
-                <button type="button" id="previousStep" class="tab content_box1" onclick="showPreviousStep()">
-                    <h3 class="subtitle13">Previous Step</h3>
-                </button>
-                <button type="button" id="continueTab" class="tab content_box" onclick="continueToNextTab()">
-                    <h3 class="subtitle">Next</h3>
-                </button>
-            </div>
             <div id="basicDataContent" class="tab-content">
                 <table class="table">
                     <tr>
@@ -309,7 +297,7 @@
                 </div>
 
                 <!-- Button to add a new table -->
-                <div id="tableWrapper_for_tariff">
+                <div id="tableWrapper_for_tariff" style="margin-top: 195px">
                     <input type="button" id="addTariffButton" value="Add Tariff" onclick="addTariffAndPerson()"/><br>
                     <!-- <div id="newTablePlaceholder"></div> -->
                     <div class="table_for_tariff_section">
@@ -329,9 +317,9 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" id="addTariffButton2"
-                    style="background: bisque; padding: 10px; border: 1px solid; cursor: pointer">Submit
-            </button>
+<!--            <button type="submit" id="addTariffButton2"-->
+<!--                    style="background: bisque; padding: 10px; border: 1px solid; cursor: pointer">Submit-->
+<!--            </button>-->
         </div>
 
 
@@ -340,7 +328,7 @@
             <div class="options-container">
                 <label class="option-label">
                     <input type="radio" id="singleRadio" name="options" value="single"
-                           onclick="toggleContent('single')"> Single
+                           onclick="toggleContent('single')" checked> Single
                 </label>
                 <label class="option-label">
                     <input type="radio" id="teamRadio" name="options" value="team" onclick="toggleContent('team')"> Team
@@ -360,7 +348,8 @@
                     <h3 class="subtitle11">About Yourself</h3>
                     <div class="rect3"></div>
                     <div class="text3">
-                        <input type="text" id="titleInputYourself" name="aboutCreator" placeholder="About yourself or more about project">
+                        <input type="text" id="titleInputYourself" name="aboutCreator"
+                               placeholder="About yourself or more about project">
 
                     </div>
 
@@ -421,33 +410,48 @@
 
 
                     </div>
-                    <div id="tableWrapper_for_person">
-                        <input type="button" id="addPersonButton" value="Add Person" onclick="addPerson()"/><br>
-                        <div id="newTablePlace"></div>
-                    </div>
 
+                </div>
+
+                <div id="tableWrapper_for_person" style="margin-top: -200px;">
+                    <input type="button" id="addPersonButton" value="Add Person" onclick="addPerson()"/><br>
+                    <!-- <div id="newTablePlaceholder"></div> -->
+                    <div class="table_for_person_section">
+                        <table id="teamTable">
+                            <thead>
+                            <tr>
+                                <td>Position</td>
+                                <td>Experience</td>
+                                <td>Quantity</td>
+                                <td>Info</td>
+                                <td>Action</td>
+                            </tr>
+                            </thead>
+                            <tbody id="teamBodyTable">
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
 
-            <div class="table_for_team_project_section">
-                <table id="teamTable" style="display:none;">
-                    <thead>
-                    <tr>
-                        <td>Position</td>
-                        <td>Experience</td>
-                        <td>Quantity</td>
-                        <td>Info</td>
-                        <td>Action</td>
-                    </tr>
-                    </thead>
-                    <tbody id="teamBodyTable">
-
-                    </tbody>
-                </table>
-            </div>
 
 
+        </div>
+
+        <div id="buttonWrapper">
+            <button type="button" id="previousStep" class="tab content_box1"  onclick="showPreviousStep()" style="margin-top: 382px; margin-left: 172px;">
+                <h3 class="subtitle13">Previous Step</h3>
+            </button>
+
+            <button type="button" id="continueTab" class="tab content_box" style="display: flex; margin-top: 382px; margin-left: 172px;" onclick="continueToNextTab()">
+                <h3 class="subtitle">Next</h3>
+            </button>
+
+            <button type="submit" id="submitTabButton" class="tab content_box_submit" style="display: none; margin-top: 382px; margin-left: 172px;">
+                <h3 class="subtitle">Submit</h3>
+            </button>
         </div>
     </form>
 </main>
@@ -516,13 +520,13 @@
     </div>
 </section>
 
-<script src="/js/custom.js?v=2"></script>
+<script src="/js/custom.js?v=3"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="/js/addTariffAndPerson.js?v=7"></script>
 <script type="text/javascript">
 
-    $(document).ready(function() {
-        $("#imageUploadInput").change(function() {
+    $(document).ready(function () {
+        $("#imageUploadInput").change(function () {
             fileSize = this.files[0].size;
 
             if (fileSize > 502400) {
@@ -539,7 +543,7 @@
     function showImageThumbnail(fileInput) {
         var file = fileInput.files[0];
         var reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             $("#thumbnail").attr("src", e.target.result);
         };
 
@@ -563,7 +567,7 @@
             alert("Please fill in all fields before submitting the form.");
             return false;
         } else if (emptyInputs.length > 0) {
-            var missingFields = emptyInputs.map(function(input) {
+            var missingFields = emptyInputs.map(function (input) {
                 var inputId = input.id;
                 var inputName = "";
                 switch (inputId) {
@@ -618,7 +622,7 @@
         }
 
         var radioButtons = document.querySelectorAll('input[type="radio"][name="options"]');
-        var isRadioButtonSelected = Array.from(radioButtons).some(function(radioButton) {
+        var isRadioButtonSelected = Array.from(radioButtons).some(function (radioButton) {
             return radioButton.checked;
         });
 

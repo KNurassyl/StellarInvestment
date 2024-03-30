@@ -3,6 +3,7 @@ package com.example.stellarinvestment.controller;
 import com.example.stellarinvestment.file.FileUploadUtil;
 import com.example.stellarinvestment.model.User;
 import com.example.stellarinvestment.model.project.Project;
+import com.example.stellarinvestment.model.project.ProjectNotFoundException;
 import com.example.stellarinvestment.service.ProjectService;
 import com.example.stellarinvestment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,14 @@ public class ProjectController {
         return "client_projects";
     }
 
+    @GetMapping(value = "/details/{project_id}")
+    public String detailOfProjectPage(HttpServletRequest request, Model model, @PathVariable(name = "project_id") Integer id) throws ProjectNotFoundException {
+        User authenticatedUser = userService.getCurrentAuthUser(request);
+        model.addAttribute("user", authenticatedUser);
+        model.addAttribute("project", projectService.get(id));
+        return "Detail";
+    }
+
     @PostMapping("/create_new")
     public String createNewProject(@RequestParam("tariffsList") String tariffsListJson, @RequestParam("personsList") String personsListJson,
                                    @RequestParam(name = "amountNeeded") float amountNeeded,
@@ -70,19 +79,14 @@ public class ProjectController {
                                    @RequestParam(name = "aboutCreator") String aboutCreator,
                                    @RequestParam("finishTime") @DateTimeFormat(pattern = "yyyy-MM-dd") Date finishTime,
                                    @RequestParam(name = "userEmail") String userEmail,
-                                   @RequestParam("fileImage") MultipartFile multipartFile) throws IOException {
+                                   @RequestParam("fileImage") MultipartFile mainImageMultipart,
+                                   @RequestParam("extraImage") MultipartFile[] extraImageMultiparts) throws IOException {
 
         Project project = projectService.createNewProject(tariffsListJson, personsListJson, amountNeeded, shortDescription, title, longDescription, aboutCreator, finishTime, userEmail);
 
-        if (!multipartFile.isEmpty()) {
-            String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-            project.setMainImage(fileName);
-
-            String uploadDir = "project-images/" + project.getId();
-
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
-        }
+        projectService.setMainImageName(mainImageMultipart, project);
+        projectService.setExtraImageNames(extraImageMultiparts, project);
+        projectService.saveUploadedImages(mainImageMultipart, extraImageMultiparts, project);
 
         projectService.saveProject(project);
 

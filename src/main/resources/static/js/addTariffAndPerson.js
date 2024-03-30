@@ -69,6 +69,7 @@ function addPerson() {
     let personExperience = document.getElementById('experienceSelect').value.trim();
     let personQuantity = document.getElementById('QuantityInput').value.trim();
     let personAdditionalInfo = document.getElementById('InfoInput').value.trim();
+    const selectedTextElement = document.getElementById('selectedExperienceText');
 
     if (personPosition === "" || personExperience === "" || personQuantity === "" || personAdditionalInfo === "") {
         alert("Please fill in all fields before adding a person.");
@@ -83,6 +84,9 @@ function addPerson() {
     document.getElementById('experienceSelect').value = "";
     document.getElementById('QuantityInput').value = "";
     document.getElementById('InfoInput').value = "";
+
+    selectedTextElement.textContent = '- Not selected -';
+
 }
 
 

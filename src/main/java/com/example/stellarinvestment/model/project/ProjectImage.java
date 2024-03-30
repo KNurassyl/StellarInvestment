@@ -37,4 +37,9 @@ public class ProjectImage extends IdBasedEntity {
 	public void setProject(Project project) {
 		this.project = project;
 	}
+
+	@Transient
+	public String getImagePath() {
+		return "/project-images/" + project.getId() + "/extras/" + this.name;
+	}
 }

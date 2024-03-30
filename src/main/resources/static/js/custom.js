@@ -83,7 +83,6 @@ function showPreviousStep() {
         currentTabIndex--;
         console.log("Current tab index:", currentTabIndex);
         showTab(tabOrder[currentTabIndex]);
-        adjustButtonPosition();
     }
 }
 
@@ -92,19 +91,9 @@ function continueToNextTab() {
     if (currentTabIndex < tabOrder.length - 1) {
         currentTabIndex++;
         showTab(tabOrder[currentTabIndex]);
-        adjustButtonPosition();
-    } else {
-        replaceNextWithSubmit();
     }
 }
 
-
-
-function adjustButtonPosition() {
-    var buttonWrapper = document.getElementById('buttonWrapper');
-    var wrapperHeight = document.querySelector('.section21').offsetHeight;
-    buttonWrapper.style.marginTop = (tableWrapperHeight + 40) + "px"; // Adjust 40px for spacing
-}
 
 // Array to define the order of tabs
 var tabOrder = ['basicData', 'details', 'tariffs', 'singleTeam'];

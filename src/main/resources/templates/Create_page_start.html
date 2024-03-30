@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-fvVGrO69KYlz0tjRGrOpRsdZIb6HemjSzExD9qQCeTtF8Zq4p21F5V32vlQ+8bXC7ZZIgAEbaHOcyEg6UeVs8A==" crossorigin="anonymous" />
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-fvVGrO69KYlz0tjRGrOpRsdZIb6HemjSzExD9qQCeTtF8Zq4p21F5V32vlQ+8bXC7ZZIgAEbaHOcyEg6UeVs8A==" crossorigin="anonymous" />-->
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
 
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
@@ -17,7 +17,7 @@
 </head>
 
 
-<body onload="showBasicDataTab()">
+<body>
 <header class="header">
     <section class="section1" style="--src:url(/img/0502f0f63cc56790c6952133ae2b1481.png)">
         <div class="content_box">
@@ -35,7 +35,7 @@
 
             <img class="image4" src="/img/ace06293b0d4076285adfa86c63156ab.png" alt=""/>
             <div class="dropdown">
-                <img class="box" th:src="@{${user.photosImagePath}}" alt="alt text" onclick="toggleDropdown()">
+                <img class="box" th:src="@{${user.photosImagePath}}" alt="alt text">
                 <div id="myDropdown" class="dropdown-content">
                     <a th:href="@{'/main/account_details'}">My Profile</a>
                     <a th:href="@{'/project/my/'}">My Projects</a>
@@ -78,7 +78,7 @@
                 <table class="table">
                     <tr>
                         <td colspan="2">
-                            <div class="wrapper" style="--src:url(/img/d18269311afd6b2d8e99fa1b4e6eddd8.png)"></div>
+<!--                            <div class="wrapper" style="&#45;&#45;src:url(/img/d18269311afd6b2d8e99fa1b4e6eddd8.png)"></div>-->
                             <img class="image" src="/img/ff6cc32e20f34b587e17aeb18b5c6944.png" alt="alt text"/>
                         </td>
                     </tr>
@@ -175,7 +175,7 @@
                 <table class="table">
                     <tr>
                         <td colspan="2">
-                            <div class="wrapper" style="--src:url(/img/d18269311afd6b2d8e99fa1b4e6eddd8.png)"></div>
+<!--                            <div class="wrapper" style="&#45;&#45;src:url(/img/d18269311afd6b2d8e99fa1b4e6eddd8.png)"></div>-->
                             <img class="image" src="/img/ff6cc32e20f34b587e17aeb18b5c6944.png" alt="alt text"/>
                         </td>
                     </tr>
@@ -212,10 +212,10 @@
 
 
                             <img class="image11" src="/img/704fb994a95115eac452c12fd365a797.png" alt="alt text"/>
-                            <img class="image12" src="/img/orange_bat_silhouette.png" alt="alt text"/>
+                            <img class="image12" src="/img/704fb994a95115eac452c12fd365a797.png" alt="alt text"/>
                             <!-- <div class="text11" onclick="openModal('UrlModal')">PHOTO URL</div> -->
-                            <div class="text12" onclick="openModal('UploadModal')">UPLOAD AN IMAGE</div>
-                            <div class="text13" onclick="openModal('VideoModal')">LINK TO YOUTUBE VIDEO</div>
+                            <div class="text12" onclick="openModal('UploadModal')">Extra IMAGE #1</div>
+                            <div class="text13" onclick="openModal('VideoModal')">Extra IMAGE #2</div>
                         </td>
                         <!-- <div id="UrlModal" class="modal">
                             <label for="UrlModal">Enter Photo URL:</label>
@@ -225,13 +225,16 @@
 
 
                         <div id="UploadModal" class="modal">
-                            <input type="file" id="UploadModal">
+                            <img id="thumbnail2" alt="First extra image preview" class="img-fluid"
+                                 src="/projectImg/image-thumbnail.png" style="width: 200px"/>
+                            <input type="file" id="firstImageUploadInput" name="firstExtraImage" accept="image/png, image/jpeg">
                             <button type="button" onclick="closeModal('UploadModal')">Submit</button>
                         </div>
 
                         <div id="VideoModal" class="modal">
-                            <label for="videoUrlInput">Enter Video URL:</label>
-                            <input type="text" id="videoUrlInput">
+                            <img id="thumbnail3" alt="Second extra image preview" class="img-fluid"
+                                 src="/projectImg/image-thumbnail.png" style="width: 200px"/>
+                            <input type="file" id="secondImageUploadInput" name="secondExtraImage" accept="image/png, image/jpeg">
                             <button type="button" onclick="closeModal('VideoModal')">Submit</button>
                         </div>
 
@@ -520,33 +523,32 @@
     </div>
 </section>
 
-<script src="/js/custom.js?v=3"></script>
+<script src="/js/custom.js?v=4"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="/js/addTariffAndPerson.js?v=8"></script>
+<script src="/js/addTariffAndPerson.js?v=13"></script>
 <script type="text/javascript">
 
     $(document).ready(function () {
-        $("#imageUploadInput").change(function () {
-            fileSize = this.files[0].size;
+        $(document).on("change", "input[type='file']", function () {
+            var fileSize = this.files[0].size;
+            var inputId = $(this).attr("id");
 
             if (fileSize > 502400) {
                 this.setCustomValidity("You must choose an image less than 502400 bytes!");
                 this.reportValidity();
             } else {
                 this.setCustomValidity("");
-                showImageThumbnail(this);
+                showImageThumbnail(this, inputId);
             }
-
         });
     });
 
-    function showImageThumbnail(fileInput) {
+    function showImageThumbnail(fileInput, inputId) {
         var file = fileInput.files[0];
         var reader = new FileReader();
         reader.onload = function (e) {
-            $("#thumbnail").attr("src", e.target.result);
+            $("#" + inputId).prev("img").attr("src", e.target.result);
         };
-
         reader.readAsDataURL(file);
     }
 

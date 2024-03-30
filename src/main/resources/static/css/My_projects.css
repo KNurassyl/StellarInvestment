@@ -283,6 +283,14 @@ p {
   border-radius: 4px;
 }
 
+#hero_title {
+    color: forestgreen;
+    font: 700 23px/0.92 "Roboto", Helvetica, Arial, serif;
+    height: 37px;
+    width: 47%;
+    margin-left: 28%;
+}
+
 .nav li a:hover {
   background-color: #23424A;
   color: #fff;

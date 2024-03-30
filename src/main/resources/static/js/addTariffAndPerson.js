@@ -126,8 +126,8 @@ $(document).ready(function () {
                 contentType: false, // Important! Set content type to false
                 success: function (response) {
                     console.log(response);
+                    window.location.href = "/project/my/?success";
                     clearTableRows();
-                    location.reload();
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
@@ -142,7 +142,5 @@ $(document).ready(function () {
 function clearTableRows() {
     tariffsList = [];
     personsList = [];
-    displayPersons(personsList);
-    displayTariffs(tariffsList);
 }
 

@@ -55,6 +55,9 @@ public class Project extends IdBasedEntity {
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Set<ProjectImage> images = new HashSet<>();
 
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private Set<Candidate> candidates = new HashSet<>();
+
     public List<Tariff> getTariffs() {
         return tariffs;
     }
@@ -165,6 +168,14 @@ public class Project extends IdBasedEntity {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Set<Candidate> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(Set<Candidate> candidates) {
+        this.candidates = candidates;
     }
 
     public void addExtraImage(String imageName) {

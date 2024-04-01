@@ -1,10 +1,10 @@
 package com.example.stellarinvestment.service;
 
+import com.example.stellarinvestment.exception.ProjectNotFoundException;
 import com.example.stellarinvestment.file.FileUploadUtil;
 import com.example.stellarinvestment.model.User;
 import com.example.stellarinvestment.model.project.*;
 import com.example.stellarinvestment.repository.ProjectRepository;
-import com.example.stellarinvestment.repository.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -67,6 +67,7 @@ public class ProjectService {
 
         for (Team team : personsList) {
             team.setProject(project);
+            team.setCountOfApproved(0);
         }
 
         project.setTariffs(tariffsList);

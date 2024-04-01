@@ -1,7 +1,10 @@
 package com.example.stellarinvestment.model;
 
+import com.example.stellarinvestment.model.project.Candidate;
+
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -55,6 +58,9 @@ public class User extends IdBasedEntity {
     )
     private Set<Role> roles = new HashSet<>();
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Candidate> candidates;
+
     public User() {
     }
 
@@ -71,6 +77,14 @@ public class User extends IdBasedEntity {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<Candidate> getCandidates() {
+        return candidates;
+    }
+
+    public void setCandidates(List<Candidate> candidates) {
+        this.candidates = candidates;
     }
 
     public String getPassword() {

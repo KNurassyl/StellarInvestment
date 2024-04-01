@@ -38,7 +38,7 @@
                      onclick="toggleCustomDropdown()">
                 <div id="myCustomDropdown" class="custom-dropdown-content">
                     <a th:href="@{'/main/account_details'}">My Profile</a>
-                    <a href="#">My Projects</a>
+                    <a th:href="@{'/project/my/'}">My Projects</a>
                     <a th:href="@{'/project/'}">Create Projects</a>
                     <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
                         <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
@@ -52,6 +52,15 @@
     </section>
 </header>
 <section class="container light-style flex-grow-1 container-p-y" style="margin-bottom: 100px;">
+
+        <div th:if="${param.appliedAlready != null}">
+            <p style="text-align: center; background-color: red; color: white;">You have already applied for that position!</p>
+        </div>
+
+        <div th:if="${param.successfullyApplied != null}">
+            <p style="text-align: center; background-color: darkseagreen;">Successfully applied! You can see the status in 'My Requests'</p>
+        </div>
+
     <h4 class="font-weight-bold py-3 mb-4">
         Account details
     </h4>
@@ -168,25 +177,33 @@
                     </div>
 
                     <div class="tab-pane fade" id="account-connections">
-                        <div id="responseContainer">
+                        <div id="responseContainer" style="padding: 20px">
                             <div class="table-container" id="tableContainer">
                                 <table id="responseTable">
                                     <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Type of specialty</th>
+                                        <th>Name of Project</th>
+                                        <th>Applied Position</th>
                                         <th>Date of application</th>
                                         <th>Status</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody th:if="${#lists.isEmpty(myRequests)}">
                                     <tr>
-                                        <td>Open Bionics</td>
-                                        <td>Backend Developer(Java)</td>
-                                        <td>2014-03-21</td>
-                                        <td>Processing</td>
+                                        <td colspan="4" style="text-align: center; padding: 30px">You don't have any project requests.</td>
                                     </tr>
-
+                                    </tbody>
+                                    <tbody th:unless="${#lists.isEmpty(myRequests)}">
+                                    <tr th:each="request : ${myRequests}">
+                                        <td th:text="${request.project.title}"></td>
+                                        <td th:text="${request.projectTeam.position}"></td>
+                                        <td th:text="${request.appliedTime}"></td>
+                                        <td th:switch="${request.status}">
+                                            <span th:case="0" style="color: #0024A2">Waiting</span>
+                                            <span th:case="1" style="color: #1a8a12">Accepted</span>
+                                            <span th:case="2" style="color: red">Rejected</span>
+                                        </td>
+                                    </tr>
                                     </tbody>
                                 </table>
                             </div>

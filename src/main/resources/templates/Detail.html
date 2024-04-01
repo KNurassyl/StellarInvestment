@@ -121,9 +121,6 @@
             <div class="col-lg-8 col-md-12 left-box">
                 <div class="card single_post">
                     <div class="body">
-                        <!-- <div class="img-post">
-                            <img class="d-block img-fluid" src="assets/0651c306bccc50f882885f3249a4206c.png" alt="First slide">
-                        </div> -->
                         <h3><a href="">Full Description</a></h3>
                         <p th:text="${project.longDescription}"></p>
                     </div>
@@ -133,40 +130,23 @@
                         <h2>Team Members</h2>
                     </div>
                     <div class="body">
-                        <ul class="comment-reply list-unstyled">
-                            <li class="row clearfix">
-                                <div class="icon-box col-md-2 col-4"><img class="img-fluid img-thumbnail"
-                                                                          src="/img/sid.webp" alt="Awesome Image">
+                        <ul class="comment-reply list-unstyled" th:if="${#lists.isEmpty(teamMembers)}">
+                            <li>
+                                <p>So far we don't have any approved member.</p>
+                            </li>
+                        </ul>
+                        <ul class="comment-reply list-unstyled" th:unless="${#lists.isEmpty(teamMembers)}">
+                            <li class="row clearfix" th:each="teamMember : ${teamMembers}">
+                                <div class="icon-box col-md-2 col-4">
+                                    <img class="img-fluid img-thumbnail"
+                                         th:src="@{${teamMember.user.photosImagePath}}" alt="Awesome Image" style="width: 100%">
                                 </div>
                                 <div class="text-box col-md-10 col-8 p-l-0 p-r0">
-                                    <h5 class="m-b-0">Sid Ice</h5>
-                                    <p>Why are there so many tutorials on how to decouple WordPress? how fast and easy
-                                        it is to get it running (and keep it running!) and its massive ecosystem. </p>
-
+                                    <h5 class="m-b-0" th:text="${teamMember.user.fullName}"></h5>
+                                    <p th:text="'My position in that project is ' + ${teamMember.projectTeam.position} + '. You can find more info about me, using that link: ' + ${teamMember.cvLink}"></p>
                                 </div>
                             </li>
-                            <li class="row clearfix">
-                                <div class="icon-box col-md-2 col-4"><img class="img-fluid img-thumbnail"
-                                                                          src="/img/sid.webp" alt="Awesome Image">
-                                </div>
-                                <div class="text-box col-md-10 col-8 p-l-0 p-r0">
-                                    <h5 class="m-b-0">Ricardo Pepero</h5>
-                                    <p>Great tutorial but few issues with it? If i try open post i get following errors.
-                                        Please can you help me?</p>
 
-                                </div>
-                            </li>
-                            <li class="row clearfix">
-                                <div class="icon-box col-md-2 col-4"><img class="img-fluid img-thumbnail"
-                                                                          src="/img/sid.webp" alt="Awesome Image">
-                                </div>
-                                <div class="text-box col-md-10 col-8 p-l-0 p-r0">
-                                    <h5 class="m-b-0">Timmy Turner</h5>
-                                    <p>Very nice and informative article. In all the years I've done small and
-                                        side-projects as a freelancer, I've ran into a few problems here and there.</p>
-
-                                </div>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -198,21 +178,29 @@
                     <div class="header">
                         <h2>Desired Vacancies</h2>
                     </div>
+
                     <div id="myModal" class="modal">
                         <div class="modal-content">
                             <h2>Apply Form</h2>
                             <a class="close" href="javascript:void(0);" onclick="closeModal();">&times;</a>
                             <div class="content">
-                                <form>
+                                <form th:action="@{/project/apply}" method="post">
+                                    <input type="hidden" name="userEmail" th:value="${user.email}">
+                                    <input type="hidden" id="teamIdInput" name="teamId">
+                                    <input type="hidden" name="projectId" th:value="${project.id}">
                                     <label for="name">Link to your CV:</label>
-                                    <input type="text" id="name" placeholder="Enter link to CV" name="name">
-                                    <label for="email">Your email address:</label>
-                                    <input type="email" id="email" placeholder="Enter your email" name="email">
+                                    <input type="text" id="name" placeholder="Enter link to CV" name="cvLink"
+                                           required>
+                                    <label for="email">Your phone number:</label>
+                                    <input type="tel" id="email" placeholder="8-747-678-89-89"
+                                           pattern="[8]{1}-[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}" name="phoneNumber"
+                                           required>
                                     <button type="submit">Submit</button>
                                 </form>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="body widget popular-post">
                         <div class="row">
@@ -231,8 +219,9 @@
                                             <div class="text4" th:text="${team.experience}"></div>
                                         </div>
                                         <div class="wrapper2">
-                                            <a class="text31" href="javascript:void(0);"
+                                            <a class="text31" href="javascript:void(0);" th:if="${team.countOfApproved < team.quantity}" th:data-team-id="${team.id}"
                                                onclick="openModal();">Apply</a>
+                                            <button th:if="${team.countOfApproved >= team.quantity}" class="text31" disabled style="background-color: slategrey; color: black; cursor: none;">FULL</button>
                                         </div>
                                     </div>
                                 </div>
@@ -243,38 +232,6 @@
             </div>
         </div>
 
-
-        <!-- <div class="card">
-            <div class="header">
-                <h2>Instagram Post</h2>
-            </div>
-            <div class="body widget">
-                <ul class="list-unstyled instagram-plugin m-b-0">
-                    <li><a href="javascript:void(0);"><img src="https://www.bootdey.com/image/100x100/87CEFA/000000" alt="image description"></a></li>
-                    <li><a href="javascript:void(0);"><img src="https://www.bootdey.com/image/100x100/87CEFA/000000" alt="image description"></a></li>
-                    <li><a href="javascript:void(0);"><img src="https://www.bootdey.com/image/100x100/87CEFA/000000" alt="image description"></a></li>
-                    <li><a href="javascript:void(0);"><img src="https://www.bootdey.com/image/100x100/87CEFA/000000" alt="image description"></a></li>
-                    <li><a href="javascript:void(0);"><img src="https://www.bootdey.com/image/100x100/87CEFA/000000" alt="image description"></a></li>
-                    <li><a href="javascript:void(0);"><img src="https://www.bootdey.com/image/100x100/87CEFA/000000" alt="image description"></a></li>
-                    <li><a href="javascript:void(0);"><img src="https://www.bootdey.com/image/100x100/87CEFA/000000" alt="image description"></a></li>
-                    <li><a href="javascript:void(0);"><img src="https://www.bootdey.com/image/100x100/87CEFA/000000" alt="image description"></a></li>
-                    <li><a href="javascript:void(0);"><img src="https://www.bootdey.com/image/100x100/87CEFA/000000" alt="image description"></a></li>
-                </ul>
-            </div>
-        </div> -->
-        <!-- <div class="card">
-            <div class="header">
-                <h2>Email Newsletter <small>Get our products/news earlier than others, let’s get in touch.</small></h2>
-            </div>
-            <div class="body widget newsletter">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Enter Email">
-                    <div class="input-group-append">
-                        <span class="input-group-text"><i class="icon-paper-plane"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
 </div>
 
@@ -311,7 +268,7 @@
             </div>
             <div class="col-lg-6 mt-5 mt-lg-0">
                 <figure class="potoaboutwrap">
-                    <img src="/img/sid.webp" alt="potoabout" style="width: 450px; height: 550px;">
+                    <img src="/img/ourCompany.jpg" alt="potoabout" style="width: 450px; height: 550px;">
                 </figure>
             </div>
         </div>
@@ -416,6 +373,11 @@
     // Get the apply button element
     function openModal() {
         document.getElementById("myModal").style.display = "block";
+
+        const teamId = $(event.target).data("team-id");
+
+        // Set the value of the hidden input field with the team ID
+        $("#teamIdInput").val(teamId);
     }
 
     function closeModal() {

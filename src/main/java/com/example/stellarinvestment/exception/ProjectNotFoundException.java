@@ -1,4 +1,4 @@
-package com.example.stellarinvestment.model.project;
+package com.example.stellarinvestment.exception;
 
 public class ProjectNotFoundException extends Exception {
 

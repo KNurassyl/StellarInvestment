@@ -41,7 +41,6 @@ public class MainController {
     public String viewAccountDetails(Model model, HttpServletRequest request) {
         String email = userService.getEmailOfAuthenticatedCustomer(request);
         User user = userService.getUserByEmail(email);
-
         model.addAttribute("myRequests", candidateService.getAllMyRequests(user));
         model.addAttribute("user", user);
         return "profile_client";

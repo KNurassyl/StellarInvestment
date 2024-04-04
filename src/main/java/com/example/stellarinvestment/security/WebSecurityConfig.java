@@ -25,8 +25,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.exceptionHandling().accessDeniedPage("/main/forbidden");
 
         http.authorizeRequests()
-                .antMatchers("/main/**").authenticated()
-                .antMatchers("/project/**").authenticated()
+                .antMatchers("/main/**").hasAnyAuthority("Admin", "User")
+                .antMatchers("/project/**").hasAnyAuthority("Admin", "User")
+                .antMatchers("/admin/**").hasAuthority("Admin")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

@@ -71,8 +71,34 @@ public class CandidateService {
         return candidateRepository.countByProjectTeamAndResultIsTrue(team);
     }
 
+    public long getProjectCountOfCandidates(Project project) {
+        return candidateRepository.countByProjectAndResultIsTrue(project);
+    }
+
     public Candidate getById(Integer id) {
         return candidateRepository.findById(id).get();
+    }
+
+    public boolean getApprovedCandidateInProject(Integer projectId, Integer userId) {
+        boolean check = false;
+        Candidate candidate = candidateRepository.getCandidateByProjectIdAndUserIdAndResultIsTrue(projectId, userId);
+        if (candidate != null) {
+            return true;
+        }
+        return check;
+    }
+
+    public boolean checkAppliedOnce(Integer projectId, Integer userId) {
+        boolean check = false;
+        Candidate candidate = candidateRepository.getCandidateByProjectIdAndUserId(projectId, userId);
+        if (candidate != null) {
+            return true;
+        }
+//        If user can apply another position, if rejected from another
+//        if (candidate != null && candidate.getStatus() == 0) {
+//            return true;
+//        }
+        return check;
     }
 
     public void update(Candidate candidate) {

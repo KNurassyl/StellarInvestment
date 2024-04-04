@@ -58,8 +58,10 @@
     <section class="orders">
         <h3 id="hero_title" th:if="${param.success != null}">New project created! Stay tuned for updates on that
             page.</h3>
-        <h3 id="hero_title" th:if="${param.approved != null}">Candidate is approved!</h3>
-        <h3 id="hero_title" style="color:#8a1717;" th:if="${param.refused != null}">Candidate is refused!</h3>
+        <h3 id="hero_title" th:if="${param.approved != null}">Candidate has approved!</h3>
+        <h3 id="hero_title" th:if="${param.statusChanged != null}">The required number of candidates has been collected!
+            Now wait for a response on investor access</h3>
+        <h3 id="hero_title" style="color:#8a1717;" th:if="${param.refused != null}">Candidate has refused!</h3>
         <h3 id="hero_title" style="color:#8a1717;" th:if="${param.full != null}">Ups! Needed amount of candidate is
             already full!</h3>
         <div class="container">
@@ -75,7 +77,8 @@
                padding: 20px;">No active team projects you've created</p>
             </div>
 
-            <div class="tab-content applied-persons" th:unless="${myProjects.isEmpty()}" th:each="myProject : ${myProjects}">
+            <div class="tab-content applied-persons" th:unless="${myProjects.isEmpty()}"
+                 th:each="myProject : ${myProjects}">
                 <table class="main_table">
                     <thead>
                     <tr>
@@ -136,7 +139,7 @@
                             <th>Position Applied For</th>
                             <th>Phone Number</th>
                             <th>Status</th>
-                            <th>Decision</th>
+                            <th th:if="${myProject.status != T(com.example.stellarinvestment.model.project.ProjectStatus).WAITING}">Decision</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -153,19 +156,21 @@
                                 <span th:case="1" style="color: #1a8a12">Accepted</span>
                                 <span th:case="2" style="color: red">Rejected</span>
                             </td>
-                            <td>
+                            <td th:if="${myProject.status != T(com.example.stellarinvestment.model.project.ProjectStatus).WAITING}">
                                 <div class="btns">
                                     <form th:action="@{'/project/approve'}" method="post">
                                         <!--                                        <input type="hidden" name="teamId" th:value="${candidate.projectTeam.id}">-->
                                         <input type="hidden" name="applicantId" th:value="${candidate.id}">
                                         <button type="submit" class="approve"
-                                                th:style="${candidate.status == 1 ? 'display: none' : ''}">✓
+                                                th:style="${candidate.status == 1 ? 'display: none' : ''}">
+                                            ✓
                                         </button>
                                     </form>
                                     <form th:action="@{'/project/refuse'}" method="post">
                                         <input type="hidden" name="refuseapplicantId" th:value="${candidate.id}">
                                         <button type="submit" class="reject"
-                                                th:style="${candidate.status == 2 ? 'display: none' : ''}">X
+                                                th:style="${candidate.status == 2 ? 'display: none' : ''}">
+                                            X
                                         </button>
                                     </form>
                                 </div>

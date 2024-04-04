@@ -82,8 +82,8 @@ public class ProjectService {
         projectRepository.save(project);
     }
 
-    public List<Project> getProjectsInTeamFormationStatus() {
-        return projectRepository.findByStatus(ProjectStatus.TEAM_FORMATION);
+    public List<Project> getProjectsWithStatus(ProjectStatus projectStatus) {
+        return projectRepository.findByStatus(projectStatus);
     }
 
     public List<Project> getProjectsCreatedByUser(User user) {

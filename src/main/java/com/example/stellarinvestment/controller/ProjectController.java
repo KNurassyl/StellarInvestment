@@ -4,6 +4,7 @@ import com.example.stellarinvestment.model.User;
 import com.example.stellarinvestment.model.project.Candidate;
 import com.example.stellarinvestment.model.project.Project;
 import com.example.stellarinvestment.exception.ProjectNotFoundException;
+import com.example.stellarinvestment.model.project.ProjectStatus;
 import com.example.stellarinvestment.model.project.Team;
 import com.example.stellarinvestment.service.CandidateService;
 import com.example.stellarinvestment.service.ProjectService;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 
 
 @Controller
@@ -55,6 +57,16 @@ public class ProjectController {
     public String allMyProjects(HttpServletRequest request, Model model) {
         User authenticatedUser = userService.getCurrentAuthUser(request);
         model.addAttribute("user", authenticatedUser);
+
+        List<Project> projectList = projectService.getProjectsWithStatus(ProjectStatus.TEAM_FORMATION);
+        for (Project project:
+                projectList) {
+            if (teamService.getCountOfCandidateNeeded(project) == candidateService.getProjectCountOfCandidates(project)) {
+                project.setStatus(ProjectStatus.WAITING);
+                projectService.saveProject(project);
+            }
+        }
+
         model.addAttribute("myProjects", projectService.getProjectsCreatedByUser(authenticatedUser));
         return "My_Projects";
     }
@@ -64,7 +76,7 @@ public class ProjectController {
         User authenticatedUser = userService.getCurrentAuthUser(request);
         model.addAttribute("user", authenticatedUser);
         if (userService.hasRole(authenticatedUser, "User")) {
-            model.addAttribute("teamProjects", projectService.getProjectsInTeamFormationStatus());
+            model.addAttribute("teamProjects", projectService.getProjectsWithStatus(ProjectStatus.TEAM_FORMATION));
         }
         return "client_projects";
     }
@@ -120,6 +132,10 @@ public class ProjectController {
             User user = userService.getUserByEmail(userEmail);
             if (candidateService.getCandidateByTeamId(teamId, user)) {
                 redirectMessage = "appliedAlready";
+            } else if (candidateService.getApprovedCandidateInProject(projectId, user.getId())) {
+                redirectMessage = "memberAlready";
+            } else if (candidateService.checkAppliedOnce(projectId, user.getId())) {
+                redirectMessage = "applyOnlyOne";
             } else {
                 Candidate candidate = candidateService.firstCreateCandidate(cvLink, phoneNumber, user, teamId, projectId);
                 candidateService.createCandidate(candidate);

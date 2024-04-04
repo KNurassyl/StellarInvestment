@@ -36,8 +36,8 @@
             </div>
             <a class="subtitle1" href=""><h3>STELLAR<br/>INVESTMENT</h3></a>
 
-            <a class="subtitle2" th:href="@{'/project/all/team/'}"><h3>Projects</h3></a>
-            <a class="subtitle21" href="#"><h3>Home</h3></a>
+            <a class="subtitle2" th:href="@{'/project/all/team/'}" sec:authorize="hasAuthority('User')"><h3>Projects</h3></a>
+            <a class="subtitle21" href=""><h3>Home</h3></a>
             <div class="rect1"></div>
             <img class="image4" src="/img/ace06293b0d4076285adfa86c63156ab.png" alt=""/>
 
@@ -50,8 +50,9 @@
                 <div id="myDropdown" class="dropdown-content">
                     <th:block th:if="${user != null}">
                         <a th:href="@{'/main/account_details'}">My Profile</a>
-                        <a th:href="@{'/project/my/'}">My Projects</a>
-                        <a th:href="@{'/project/'}">Create Projects</a>
+                        <a sec:authorize="hasAuthority('Admin')" th:href="@{'/admin/projects'}">Manage Projects</a>
+                        <a th:href="@{'/project/my/'}" sec:authorize="hasAuthority('User')">My Projects</a>
+                        <a th:href="@{'/project/'}" sec:authorize="hasAuthority('User')">Create Projects</a>
                         <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
                             <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
                         </a>

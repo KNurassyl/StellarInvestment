@@ -11,8 +11,13 @@ import java.util.List;
 public interface CandidateRepository extends JpaRepository<Candidate, Integer> {
     long countByProjectTeamAndResultIsTrue(Team projectTeam);
 
+    long countByProjectAndResultIsTrue(Project project);
     List<Candidate> findAllByProjectAndResultIsTrue(Project project);
     Candidate getCandidateByProjectTeamIdAndUser(Integer id, User user);
+
+    Candidate getCandidateByProjectIdAndUserIdAndResultIsTrue(Integer projectId, Integer userId);
+
+    Candidate getCandidateByProjectIdAndUserId(Integer projectId, Integer userId);
 
     List<Candidate> findAllByUser(User user);
 }

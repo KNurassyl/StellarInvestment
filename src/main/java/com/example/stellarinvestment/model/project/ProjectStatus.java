@@ -4,5 +4,6 @@ public enum ProjectStatus {
     WAITING,
     IN_PROGRESS,
     TEAM_FORMATION,
-    FINISHED
+    FINISHED,
+    REJECTED
 }

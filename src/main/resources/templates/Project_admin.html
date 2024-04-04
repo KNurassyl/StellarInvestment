@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-fvVGrO69KYlz0tjRGrOpRsdZIb6HemjSzExD9qQCeTtF8Zq4p21F5V32vlQ+8bXC7ZZIgAEbaHOcyEg6UeVs8A=="
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" type="text/css"
+          href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
+
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/common.css"/>
+    <!-- <link rel="stylesheet" type="text/css" href="./css/fonts.css" /> -->
+    <link rel="stylesheet" type="text/css" href="/css/Project_admin.css"/>
+
+    <title>Project Page for Admin</title>
+</head>
+
+
+<body onload="showBasicDataTab()">
+<header class="header">
+    <section class="section1" style="--src:url(/img/0502f0f63cc56790c6952133ae2b1481.png)">
+        <div class="content_box">
+
+            <div class="searchBox">
+                <input class="searchInput" type="text" name="" placeholder="Search">
+                <button class="searchButton" href="#">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+            <a class="subtitle1" th:href="@{'/main/'}"><h3>STELLAR<br/>INVESTMENT</h3></a> </p>
+
+            <a class="subtitle21" th:href="@{'/main/'}"><h3>Home</h3></a>
+
+            <img class="image4" src="/img/ace06293b0d4076285adfa86c63156ab.png" alt=""/>
+            <div class="dropdown">
+                <img class="box" th:src="@{${user.photosImagePath}}" alt="alt text" onclick="toggleDropdown()">
+                <div id="myDropdown" class="dropdown-content">
+                    <a th:href="@{'/main/account_details'}">My Profile</a>
+                    <a sec:authorize="hasAuthority('Admin')" th:href="@{'/admin/projects'}">Manage Projects</a>
+                    <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
+                        <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
+                    </a>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+</header>
+
+<main class="kaif main">
+    <section class="orders">
+        <div class="container">
+            <ul class="nav">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#" onclick="showTab(event, 'existing-projects')"
+                       style="border: 1px solid #23424A; border-radius: 5px;">Incoming Projects</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showTab(event, 'requested-projects')"
+                       style="border: 1px solid #23424A; border-radius: 5px;">Approved Projects</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#" onclick="showTab(event, 'rejected-projects')"
+                       style="border: 1px solid #23424A; border-radius: 5px;">Rejected Projects</a>
+                </li>
+            </ul>
+
+            <div id="existing-projects" class="tab-content existing-projects">
+                <p id="customP">Incoming projects</p>
+                <h3 style="text-align: center; background-color: darkseagreen; margin-bottom: 20px" th:if="${param.approved != null}">Project has successfully approved!</h3>
+                <h3 style="text-align: center; background-color: firebrick; margin-bottom: 20px; color: white" th:if="${param.rejected != null}">Project has rejected!</h3>
+                <table id="existing-table" class="main_table">
+
+                    <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Description of the project</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${incomingProjects.isEmpty()}">
+                        <td></td>
+                        <td style="text-align: center;
+                                font-size: 20px;
+                                padding: 20px;">No incoming projects
+                        </td>
+                    </tr>
+                    <tr th:each="incomingProject : ${incomingProjects}" th:unless="${incomingProjects.isEmpty()}">
+                        <td th:text="${incomingProject.id}"></td>
+                        <td>
+                            <div class="cards_item">
+                                <div class="image">
+                                    <img th:src="@{${incomingProject.getMainImagePath}}">
+                                </div>
+                                <div class="text">
+                                    <div class="text_item">
+                                        <h3>Title:</h3>
+                                        <p th:text="${incomingProject.title}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Brief Info:</h3>
+                                        <p th:text="${incomingProject.shortDescription}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Status:</h3>
+                                        <p th:text="${incomingProject.status}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Deadline:</h3>
+                                        <p th:text="${incomingProject.finishTime}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Fund:</h3>
+                                        <p th:text="${incomingProject.amountNeeded}"></p>
+                                    </div>
+                                </div>
+                                <div class="content_box2">
+                                    <a th:href="@{'/admin/details/'+${incomingProject.id}}">
+                                        <button class="wrapper1">Details
+                                        </button>
+                                    </a>
+                                </div>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div id="requested-projects" class="tab-content requested-projects" style="display: none;">
+                <p id="customP">Approved projects</p>
+                <table id="requested-table" class="main_table">
+                    <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Description of the project</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${approvedProjects.isEmpty()}">
+                        <td></td>
+                        <td style="text-align: center;
+                                font-size: 20px;
+                                padding: 20px;">No approved projects
+                        </td>
+                    </tr>
+                    <tr th:each="approvedProject : ${approvedProjects}" th:unless="${approvedProjects.isEmpty()}">
+                        <td th:text="${approvedProject.id}"></td>
+                        <td>
+                            <div class="cards_item">
+                                <div class="image">
+                                    <img th:src="@{${approvedProject.getMainImagePath}}">
+                                </div>
+                                <div class="text">
+                                    <div class="text_item">
+                                        <h3>Title:</h3>
+                                        <p th:text="${approvedProject.title}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Brief Info:</h3>
+                                        <p th:text="${approvedProject.shortDescription}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Status:</h3>
+                                        <p th:text="${approvedProject.status}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Deadline:</h3>
+                                        <p th:text="${approvedProject.finishTime}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Fund:</h3>
+                                        <p th:text="${approvedProject.amountNeeded}"></p>
+                                    </div>
+                                </div>
+                                <form th:action="@{/admin/reject}" method="post">
+                                    <input type="hidden" name="projectIdToReject" th:value="${approvedProject.id}">
+                                    <div class="content_box2">
+                                        <button type="submit" class="wrapper1" style="left: 310%; color: #e31a3d;">Reject</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="rejected-projects" class="tab-content rejected-projects" style="display: none;">
+                <p id="customP">Rejected projects</p>
+                <table id="requested-table" class="main_table">
+                    <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Description of the project</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:if="${rejectedProjects.isEmpty()}">
+                        <td></td>
+                        <td style="text-align: center;
+                                font-size: 20px;
+                                padding: 20px;">No rejected projects
+                        </td>
+                    </tr>
+                    <tr th:each="rejectedProject : ${rejectedProjects}" th:unless="${rejectedProjects.isEmpty()}">
+                        <td th:text="${rejectedProject.id}"></td>
+                        <td>
+                            <div class="cards_item">
+                                <div class="image">
+                                    <img th:src="@{${rejectedProject.getMainImagePath}}">
+                                </div>
+                                <div class="text">
+                                    <div class="text_item">
+                                        <h3>Title:</h3>
+                                        <p th:text="${rejectedProject.title}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Brief Info:</h3>
+                                        <p th:text="${rejectedProject.shortDescription}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Status:</h3>
+                                        <p th:text="${rejectedProject.status}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Deadline:</h3>
+                                        <p th:text="${rejectedProject.finishTime}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Fund:</h3>
+                                        <p th:text="${rejectedProject.amountNeeded}"></p>
+                                    </div>
+                                </div>
+                                <form th:action="@{/admin/approve}" method="post">
+                                    <input type="hidden" name="projectIdToApprove" th:value="${rejectedProject.id}">
+                                    <div class="content_box2">
+                                        <button type="submit" class="wrapper1" style="left: 310%; color: #64ce3e;">Approve</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </section>
+</main>
+<section class="section3">
+    <h3 class="subtitle5">© 2024 Stellar Investment. All Rights Reserved.</h3>
+    <div class="group2">
+        <div class="group2">
+            <div class="group2">
+                <div class="group2">
+                    <div class="group2">
+                        <div class="group2">
+                            <img class="cover1" src="/img/bf14714a16ee134b1726c6434e792c99.png" alt="alt text"/>
+                            <div class="content_box7">
+                                <div class="rect10"></div>
+                                <h3 class="subtitle6">Would you like to join newsletters?</h3>
+                                <div class="rect7"></div>
+                                <div class="content_box6">
+                                    <h3 class="subtitle7">Join</h3>
+                                </div>
+                                <p class="desc">enter your email address...</p>
+                                <h3 class="subtitle8">Investing</h3>
+                                <h3 class="subtitle9">Help &amp; Guide</h3>
+                                <h3 class="subtitle91">About</h3>
+                                <h3 class="subtitle92">Social Media</h3>
+                                <h3 class="subtitle93">We accept</h3>
+                                <p class="paragraph">
+                                    Investment opportunities<br/>Fees<br/>Investor returns<br/>Tax relief<br/>Funded
+                                    companies
+                                </p>
+                                <p class="paragraph1">
+                                    Help Center<br/>How to  give<br/>Shipping &amp; Delivery <br/>Product Policy<br/>How
+                                    to
+                                    Return
+                                </p>
+                                <p class="paragraph2">MON<br/>Careers<br/>News<br/>Contact us</p>
+                                <div class="rect9"></div>
+                                <div class="rect91"></div>
+                                <div class="rect92"></div>
+                                <img class="image3" src="/img/7a39f00d34d9eb253b78883930095a82.png" alt="alt text"/><img
+                                    class="image4" src="/img/43ddc85fd5d45fd2a0953686d30322df.png" alt="alt text"/><img
+                                    class="image5" src="/img/5de47b8cb81c466e2e1b2b3e9e72b2f2.png" alt="alt text"/><img
+                                    class="decorator2" src="/img/121d5415873890d25a18dd9a49f38891.png"
+                                    alt="alt text"/><img class="image6" src="/img/a8dcc8aea20f758a7d9912e1526f1dac.png"
+                                                         alt="alt text"/>
+                            </div>
+                        </div>
+                        <div class="group3">
+                            <h3 class="subtitle10">+7 775 203 01 90</h3>
+                            <img class="image21" src="/img/399bf71dd023f1dc67ce0c39cc4d37d9.png" alt="alt text"/>
+                        </div>
+                    </div>
+                    <div class="group4">
+                        <div class="group5">
+                            <h3 class="subtitle101">contact@almightypush.com</h3>
+                            <img class="image22" src="/img/cd1d9907462f74cc57844c79ffd5b65a.png" alt="alt text"/>
+                        </div>
+                        <img class="image23" src="/img/38289c6e3617705c3e2d42820fe0b93a.png" alt="alt text"/>
+                    </div>
+                </div>
+                <h3 class="subtitle102">microdistrict Daraboz, home 123, Almaty, Kazakhstan</h3>
+            </div>
+            <h3 class="subtitle31">STELLAR<br/>INVESTMENT</h3>
+        </div>
+        <img class="image71" src="/img/3d_circular_chart_icon.png" alt="alt text"/>
+    </div>
+</section>
+
+<script type="text/javascript">
+
+    const dropdown = document.querySelector('.dropdown');
+    const dropdownContent = document.querySelector('.dropdown-content');
+
+    dropdown.addEventListener('click', function (event) {
+        dropdownContent.classList.toggle('show');
+    });
+
+    $(document).ready(function () {
+        // Add click event listener to all list items
+        $('.nav li').click(function () {
+            // Remove active class from all list items
+            $('.nav li').removeClass('active');
+
+            // Add active class to the clicked list item
+            $(this).addClass('active');
+        });
+    });
+
+    function showTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+
+        // Get all tab content elements
+        tabcontent = document.getElementsByClassName("tab-content");
+
+        // Hide all tab content elements
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all tab link elements
+        tablinks = document.getElementsByClassName("nav-link");
+
+        // Remove active class from all tab links
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].classList.remove("active");
+        }
+
+        // Show the selected tab content element
+        var tabToShow = document.getElementsByClassName(tabName);
+        for (i = 0; i < tabToShow.length; i++) {
+            tabToShow[i].style.display = "block";
+        }
+
+        // Add active class to the clicked tab link
+        evt.currentTarget.classList.add("active");
+
+        // Prevent default link behavior
+        evt.preventDefault();
+    }
+
+
+</script>
+
+</body>
+
+</html>

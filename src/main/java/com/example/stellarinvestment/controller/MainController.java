@@ -2,6 +2,7 @@ package com.example.stellarinvestment.controller;
 
 import com.example.stellarinvestment.file.FileUploadUtil;
 import com.example.stellarinvestment.model.User;
+import com.example.stellarinvestment.service.CandidateService;
 import com.example.stellarinvestment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,9 @@ public class MainController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CandidateService candidateService;
+
     @GetMapping(value = "/")
     public String authMainPage(HttpServletRequest request, Model model) {
         User authenticatedUser = userService.getCurrentAuthUser(request);
@@ -37,7 +41,7 @@ public class MainController {
     public String viewAccountDetails(Model model, HttpServletRequest request) {
         String email = userService.getEmailOfAuthenticatedCustomer(request);
         User user = userService.getUserByEmail(email);
-
+        model.addAttribute("myRequests", candidateService.getAllMyRequests(user));
         model.addAttribute("user", user);
         return "profile_client";
     }

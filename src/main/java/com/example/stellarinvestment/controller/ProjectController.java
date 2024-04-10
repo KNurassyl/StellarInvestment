@@ -68,6 +68,7 @@ public class ProjectController {
         }
 
         model.addAttribute("myProjects", projectService.getProjectsCreatedByUser(authenticatedUser));
+        model.addAttribute("myInvestmentProjects", projectService.getProjectsCreatedByUserAndStatus(authenticatedUser, ProjectStatus.IN_PROGRESS));
         return "My_Projects";
     }
 

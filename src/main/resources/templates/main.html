@@ -61,9 +61,6 @@
             </div>
 
 
-            <div class="wrapper5" style="--src:url(/img/3ac1d66869db66b7a9f0857bf70db63a.png)"
-                 sec:authorize="isAuthenticated()"></div>
-
             <div class="box" sec:authorize="!isAuthenticated()">
                 <img class="wrapper1" src="/img/c57eadf6ae997997f680beb6a90ca50d.png" alt="alt text"/>
                 <a th:href="@{'/auth/login'}" class="subtitle22" id="loginButton"

@@ -28,6 +28,15 @@ public class Project extends IdBasedEntity {
     @Enumerated(EnumType.STRING)
     private ProjectStatus status;
 
+    @Transient
+    private int totalInvestment;
+
+    @Transient
+    private int investorsCount;
+
+    @Transient
+    private double percent;
+
     @Column(name = "created_time")
     private Date createdTime;
 
@@ -57,6 +66,9 @@ public class Project extends IdBasedEntity {
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Set<Candidate> candidates = new HashSet<>();
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
+    private Set<Investment> investments = new HashSet<>();
 
     public List<Tariff> getTariffs() {
         return tariffs;
@@ -170,12 +182,44 @@ public class Project extends IdBasedEntity {
         this.enabled = enabled;
     }
 
+    public int getTotalInvestment() {
+        return totalInvestment;
+    }
+
+    public void setTotalInvestment(int totalInvestment) {
+        this.totalInvestment = totalInvestment;
+    }
+
+    public double getPercent() {
+        return percent;
+    }
+
+    public void setPercent(double percent) {
+        this.percent = percent;
+    }
+
+    public int getInvestorsCount() {
+        return investorsCount;
+    }
+
+    public void setInvestorsCount(int investorsCount) {
+        this.investorsCount = investorsCount;
+    }
+
     public Set<Candidate> getCandidates() {
         return candidates;
     }
 
     public void setCandidates(Set<Candidate> candidates) {
         this.candidates = candidates;
+    }
+
+    public Set<Investment> getInvestments() {
+        return investments;
+    }
+
+    public void setInvestments(Set<Investment> investments) {
+        this.investments = investments;
     }
 
     public void addExtraImage(String imageName) {

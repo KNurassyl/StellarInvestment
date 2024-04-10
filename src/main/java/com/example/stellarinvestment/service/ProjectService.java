@@ -86,8 +86,13 @@ public class ProjectService {
         return projectRepository.findByStatus(projectStatus);
     }
 
+
     public List<Project> getProjectsCreatedByUser(User user) {
         return projectRepository.findByUser(user);
+    }
+
+    public List<Project> getProjectsCreatedByUserAndStatus(User user, ProjectStatus projectStatus) {
+        return projectRepository.findAllByUserAndStatus(user, projectStatus);
     }
 
     public void saveUploadedImages(MultipartFile mainImageMultipart,

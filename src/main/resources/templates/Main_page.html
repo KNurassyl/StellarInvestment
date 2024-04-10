@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/Main_page.css">
+    <title>Stellar</title>
+</head>
+<body>
+<header class="header">
+    <div class="container">
+        <nav class="nav">
+            <div class="rigthSide">
+                <div class="logo">
+                    <img src="/img/ace06293b0d4076285adfa86c63156ab.png" alt="#">
+                    <a href="">STELLAR INVESTMENT</a>
+                </div>
+                <ul class="nav-btn">
+                    <li class="homeBtn">
+                        <a href="">Home</a>
+                    </li>
+                    <li>
+                        <a th:href="@{'/project/all/team/'}" sec:authorize="hasAuthority('User')">Projects</a>
+                        <a th:href="@{'/investor/all/projects/'}" sec:authorize="hasAuthority('Investor')">Projects</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="functionalBtn">
+                <div class="search">
+                    <button class="btn-search">
+                        <img src="/img/search.svg" alt="#">
+                    </button>
+                    <input type="text" class="input-search" placeholder="Type to Search...">
+                </div>
+
+
+                <div class="loginBtn" sec:authorize="!isAuthenticated()">
+                    <a th:href="@{'/auth/login'}">
+                        <button type="button" class="btn" style="width: 105px; background-color: #FF7F50; color: #fff;">
+                            Login
+                        </button>
+                    </a>
+                </div>
+
+                <div class="authUser" sec:authorize="isAuthenticated()">
+                    <th:block th:if="${user != null}">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false" style="padding: 0;">
+                            <img th:src="@{${user.photosImagePath}}" alt=""
+                                 style="width: 50px; height: 50px; border-radius: 100%;">
+                        </a>
+                    </th:block>
+                    <ul class="dropdown-menu" style="padding-top: 0; border-radius: 15px;">
+                        <th:block th:if="${user != null}">
+                            <li><a class="dropdown-item" th:href="@{'/main/account_details'}"
+                                   style="color: #000; border-radius: 15px 15px 0 0;">My
+                                profile</a></li>
+                            <li><a class="dropdown-item" sec:authorize="hasAuthority('Admin')"
+                                   th:href="@{'/admin/projects'}" style="color: #000;">Manage projects</a></li>
+                            <li><a class="dropdown-item" th:href="@{'/project/my/'}"
+                                   sec:authorize="hasAuthority('User')" style="color: #000;">My Projects</a></li>
+                            <li><a class="dropdown-item" th:href="@{'/project/'}" sec:authorize="hasAuthority('User')"
+                                   style="color: #000;">Create Projects</a></li>
+                            <li><a class="dropdown-item" sec:authorize="hasAuthority('Investor')"
+                                   th:href="@{'/investor/my/investments'}" style="color: #000;">My Investments</a></li>
+                            <li><a class="dropdown-item" href="JavaScript:void(0)" onclick="singOutForm.submit()" style="color: #000;">Log
+                                Out
+                                <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
+                            </a></li>
+                        </th:block>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<section class="exampleCard">
+    <div class="container">
+        <div class="cards">
+            <img src="/img/917681335b0fd9727686007b50f6b668.png" alt="#"
+                 style="display: block; border-radius: 40px 0 0 40px; width: 100%; margin-right: -30px;">
+            <div class="card_info">
+                <div class="company-logo">
+                    <img src="/img/snimok.png" alt="#">
+                    <div class="companyMoney">
+                        <div class="money" style="padding: 10px;">
+                            ₸ 509,821 Raised
+                        </div>
+                        <div class="progression" style="padding: 10px;">
+                            <progress id="file" max="100" value="70">70%</progress>
+                        </div>
+                        <div class="info">
+                            <div class="investors">
+                                996 investors
+                            </div>
+                            <div class="target">
+                                70% of target
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text">
+                    <h4 style="color: #23424A; padding-bottom: 5px;">Perplexity AI</h4>
+                    <p style="font-size: 20px; line-height: 31px; color: #3B707D;">
+                        is a powerful tool that leverages language models to provide accurate answers and information
+                        without the need for complex technical expertise. It is designed..
+                    </p>
+                </div>
+                <div class="date">
+                    <div class="days">
+                        <button type="button" class="btn"
+                                style="width: 203px; border-radius: 10px; font-weight: bold; background-color: #F2F2F7; color: #000;">
+                            12 days remaining
+                        </button>
+                    </div>
+                    <div class="tarif">
+                        <button type="button" class="btn"
+                                style="width: 110px; border-radius: 10px; background-color: #22424A; color: #fff;">
+                            Tariffs
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="startInvest">
+    <div class="container">
+        <h1 style="font-size: 40px; color: #23424A; padding-bottom: 60px;">Start Investing</h1>
+        <!-- Info card start -->
+        <div class="row row-cols-1 row-cols-md-3 g-3">
+            <div class="col">
+                <div class="card" style="width: 366px; border-radius: 15px;  height: 100%;">
+                    <img src="/img/image-f66a46d2-80e9-4532-add9-d0ff98f05e5c.webp" class="card-img-top" alt="#">
+                    <div class="card-body">
+                        <h5 class="card-title">Open Bionics</h5>
+                        <p class="card-text">
+                            makes functional and empowering prosthestic limbs for people with upper limb loss and limb
+                            difference.
+                        </p>
+                        <div class="bussines">
+                            <div class="progression" style="padding: 10px;">
+                                <progress id="file" max="100" value="70">70%</progress>
+                            </div>
+                            <div class="info-bussines">
+                                <div class="percent">
+                                    <p>70%</p>
+                                    <p>ACTIVE</p>
+                                </div>
+                                <div class="moneyPled">
+                                    <p>₸210,908</p>
+                                    <p>MONEY PLEDGED</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 366px; border-radius: 15px;  height: 100%;">
+                    <img src="/img/image-f66a46d2-80e9-4532-add9-d0ff98f05e5c.webp" class="card-img-top" alt="#">
+                    <div class="card-body">
+                        <h5 class="card-title">Open Bionics</h5>
+                        <p class="card-text">
+                            makes functional and empowering prosthestic limbs for people with upper limb loss and limb
+                            difference.
+                        </p>
+                        <div class="bussines">
+                            <div class="progression" style="padding: 10px;">
+                                <progress id="file" max="100" value="70">70%</progress>
+                            </div>
+                            <div class="info-bussines">
+                                <div class="percent">
+                                    <p>70%</p>
+                                    <p>ACTIVE</p>
+                                </div>
+                                <div class="moneyPled">
+                                    <p>₸210,908</p>
+                                    <p>MONEY PLEDGED</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card" style="width: 366px; border-radius: 15px; height: 100%;">
+                    <img src="/img/image-f66a46d2-80e9-4532-add9-d0ff98f05e5c.webp" class="card-img-top" alt="#">
+                    <div class="card-body">
+                        <h5 class="card-title">Open Bionics</h5>
+                        <p class="card-text">
+                            makes functional and empowering prosthestic limbs for people with upper limb loss and limb
+                            difference.
+                        </p>
+                        <div class="bussines">
+                            <div class="progression" style="padding: 10px;">
+                                <progress id="file" max="100" value="70">70%</progress>
+                            </div>
+                            <div class="info-bussines">
+                                <div class="percent">
+                                    <p>70%</p>
+                                    <p>ACTIVE</p>
+                                </div>
+                                <div class="moneyPled">
+                                    <p>₸210,908</p>
+                                    <p>MONEY PLEDGED</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end -->
+        <div class="more">
+            <a href="#">See more opportunities <span>  <img src="/img/arrow.svg" alt="#"></span> </a>
+        </div>
+    </div>
+</section>
+<section class="aboutCompany">
+    <div class="container">
+        <div class="aboutInfo">
+            <div class="textPart">
+                <div class="textAbout">
+                    <h3>Since 2013, we’ve kept  <span> impressive </span> company</h3>
+                    <p>
+                        In that time we’ve helped raise over ₸1.4 billion for over 1,300 mission-driven businesses and
+                        built up a community of over 1.7 million members. More recently than that we had…
+                    </p>
+                </div>
+                <div class="row row-cols-2">
+                    <div class="numbersEach">
+                        <p>NEW MEMBERS LAST MONTH</p>
+                        <h3>4040</h3>
+                    </div>
+                    <div class="numbersEach">
+                        <p>UNIQUE INVESTMENTS LAST MONTH</p>
+                        <h3>3990</h3>
+                    </div>
+                    <div class="numbersEach">
+                        <p>TOTAL INVESTED LAST MONTH</p>
+                        <h3>₸2.1m</h3>
+                    </div>
+                    <div class="numbersEach">
+                        <p>TOTAL INVESTED LAST MONTH</p>
+                        <h3>190k</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="photoCompanies">
+                <div class="row row-cols-2" style="position: relative;">
+                    <div class="col"><img src="/img/a202e842d2c8bbd95651b4648662c3b0.png" alt=""></div>
+                    <div class="col"><img src="/img/a202e842d2c8bbd95651b4648662c3b0.png" alt=""></div>
+                    <div class="col"><img src="/img/a202e842d2c8bbd95651b4648662c3b0.png" alt=""></div>
+                    <div class="col"><img src="/img/a202e842d2c8bbd95651b4648662c3b0.png" alt=""></div>
+                    <div class="col"><img src="/img/a202e842d2c8bbd95651b4648662c3b0.png" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="join">
+    <div class="container">
+        <h1 style="font-size: 40px; color: #FF8055; padding-bottom: 60px;">
+            Our Happy Journey Grew With Them!
+        </h1>
+        <div class="nameCompanies">
+            <div class="infoName">
+                <div class="detail"><img src="/img/joinTeam1.png" alt=""></div>
+                <div class="detail"><img src="/img/dc86201539da0a1e71e2f8113692a59b.png" alt=""></div>
+                <div class="detail"><img src="/img/joinTeam1.png" alt=""></div>
+                <div class="detail"><img src="/img/dc86201539da0a1e71e2f8113692a59b.png" alt=""></div>
+                <div class="detail"><img src="/img/joinTeam1.png" alt=""></div>
+            </div>
+            <div class="infoName2">
+                <div class="detail-2"><img src="/img/joinTeam1.png" alt=""></div>
+                <div class="detail-2"><img src="/img/dc86201539da0a1e71e2f8113692a59b.png" alt=""></div>
+                <div class="detail-2"><img src="/img/joinTeam1.png" alt=""></div>
+                <div class="detail-2"><img src="/img/dc86201539da0a1e71e2f8113692a59b.png" alt=""></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="review">
+    <div class="container">
+        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <h3 style="margin-bottom: 35px; font-size: 40px;">What People Say</h3>
+                    <img src="/img/39db5c26c32238feffa5aa1cbe2c8743.png" class="d-block" alt="#">
+                    <p style="font-size: 20px; margin-bottom: 10px;">Burito Arborito</p>
+                    <p style="font-size: 14px; margin-bottom: 32px;">Founder</p>
+                    <p class="reviewText">
+                        Sea chub demoiselle whalefish zebra lionfish mud cat pelican eel. Minnow snoek icefish
+                        velvet-belly shark, California halibut round stingray northern sea robin. Southern grayling
+                        trout-perchSharksucker sea toad candiru rocket danio tilefish stingray deepwater stingray
+                        Sacramento splittail, Canthigaster rostrata.
+                    </p>
+                </div>
+                <div class="carousel-item">
+                    <h3 style="margin-bottom: 35px; font-size: 40px;">What People Say</h3>
+                    <img src="/img/39db5c26c32238feffa5aa1cbe2c8743.png" class="d-block" alt="#">
+                    <p style="font-size: 20px; margin-bottom: 10px;">Burito Arborito</p>
+                    <p style="font-size: 14px; margin-bottom: 32px;">Founder</p>
+                    <p class="reviewText">
+                        Sea chub demoiselle whalefish zebra lionfish mud cat pelican eel. Minnow snoek icefish
+                        velvet-belly shark, California halibut round stingray northern sea robin. Southern grayling
+                        trout-perchSharksucker sea toad candiru rocket danio tilefish stingray deepwater stingray
+                        Sacramento splittail, Canthigaster rostrata.
+                    </p>
+                </div>
+                <div class="carousel-item">
+                    <h3 style="margin-bottom: 35px; font-size: 40px;">What People Say</h3>
+                    <img src="/img/39db5c26c32238feffa5aa1cbe2c8743.png" class="d-block" alt="#">
+                    <p style="font-size: 20px; margin-bottom: 10px;">Burito Arborito</p>
+                    <p style="font-size: 14px; margin-bottom: 32px;">Founder</p>
+                    <p class="reviewText">
+                        Sea chub demoiselle whalefish zebra lionfish mud cat pelican eel. Minnow snoek icefish
+                        velvet-belly shark, California halibut round stingray northern sea robin. Southern grayling
+                        trout-perchSharksucker sea toad candiru rocket danio tilefish stingray deepwater stingray
+                        Sacramento splittail, Canthigaster rostrata.
+                    </p>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="false"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+                    data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+<section class="FAQ">
+    <div class="container">
+        <div class="contents">
+            <div class="faqPhoto" style="border: 20px solid #65A9A6;">
+                <img src="/img/ourCompany.jpg" alt="#" style="width: 400px;">
+            </div>
+            <div class="accordion">
+                <div class="accordion_wrap accordion_1" id="quests">
+                    <div class="header-item">
+                        Make a difference in the life of a child
+                    </div>
+                    <div class="text">
+                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                            invidunt ut labore et dolore magna aliquyam erat.</p>
+                    </div>
+                </div>
+                <div class="accordion_wrap accordion_2" id="quests">
+                    <div class="header-item">
+                        Let's do the right thing now
+                    </div>
+                    <div class="text">
+                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                            invidunt ut labore et dolore magna aliquyam erat.</p>
+                    </div>
+                </div>
+                <div class="accordion_wrap accordion_3" id="quests">
+                    <div class="header-item">
+                        Can I donate anonymously?
+                    </div>
+                    <div class="text">
+                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                            invidunt ut labore et dolore magna aliquyam erat.</p>
+                    </div>
+                    <div class="accordion_wrap accordion_3" id="quests">
+                        <div class="header-item">
+                            Join your hand with us for a better life
+                        </div>
+                        <div class="text">
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                                invidunt ut labore et dolore magna aliquyam erat.</p>
+                        </div>
+                    </div>
+                    <div class="accordion_wrap accordion_3" id="quests">
+                        <div class="header-item">
+                            How do I cancel my recurring donation?
+                        </div>
+                        <div class="text">
+                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+                                invidunt ut labore et dolore magna aliquyam erat.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bot">
+            <h3 style="font-size: 24px;">If you have additional questions, you can use the chatbot <span> <img
+                    src="/img/botArrow.svg" alt=""></span></h3>
+            <div class="bot_detail" style="text-align: center;">
+                <img src="/img/bot.svg" alt="#" style="margin-bottom: 18px;">
+                <p style="font-size: 20px;">You need a help?</p>
+            </div>
+        </div>
+    </div>
+</section>
+<footer class="footer">
+    <div class="container2">
+        <div class="footerNav">
+            <div class="logoFooter">
+                <img src="/img/logo.svg" alt="#">
+                <a href="#">STELLAR INVESTMENT</a>
+            </div>
+            <ul class="eachNav">
+                <li>
+                    <img src="/img/geo.svg" alt="#">
+                    <p style="width: 300px;">microdistrict Daraboz, home 123, Almaty, Kazakhstan</p>
+                </li>
+                <li>
+                    <img src="/img/mail.svg" alt="#">
+                    <p>contact@almightypush.com</p>
+                </li>
+                <li>
+                    <img src="/img/phone.svg" alt="#">
+                    <p>+7 775 203 01 90</p>
+                </li>
+            </ul>
+        </div>
+        <p class="year">© 2024 Stellar Investment. All Rights Reserved.</p>
+    </div>
+</footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="/js/jquery-3.6.0.min.js"></script>
+<!-- FAQ script -->
+<script type="text/javascript">
+    $(".header-item").click(function () {
+        $(".header-item").removeClass("active");
+        $(this).addClass("active");
+    });
+</script>
+</html>

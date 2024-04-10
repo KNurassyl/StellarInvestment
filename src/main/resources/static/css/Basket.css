@@ -14,19 +14,19 @@
     a {
       text-decoration: none;
       font: 700 20px/1.35 "Roboto", Helvetica, Arial, serif;
-    
+
     }
-  
+
   .header h3 {
     color: white;
   }
-    
+
     .header .section1 {
       background: var(--src) center center/100% 100% no-repeat;
       display: flex;
       flex-direction: column;
     }
-    
+
     .header .content_box {
       display: flex;
       flex-direction: column;
@@ -36,7 +36,7 @@
       position: relative;
       width: 1196px;
     }
-    
+
     .header .searchBox {
       position: absolute;
       top: 53%;
@@ -47,17 +47,17 @@
       border-radius: 40px;
       padding: 0px;
     }
-    
+
     .header .searchBox:hover > .searchInput {
       width: 240px;
       padding: 0 6px;
     }
-    
+
     .header .searchBox:hover > .searchButton {
     background: #23424A;
     color: white;
     }
-    
+
     .header .searchButton {
       color: white;
       float: right;
@@ -70,7 +70,7 @@
       align-items: center;
       transition: 0.4s;
     }
-    
+
     .header .searchInput {
       border:none;
       background: none;
@@ -82,10 +82,10 @@
       transition: 0.4s;
       line-height: 40px;
       width: 0px;
-    
+
     }
-    
-    
+
+
     .header .subtitle1 {
       bottom: 0px;
       color: white;
@@ -97,7 +97,7 @@
       top: 4px;
       width: 158px;
     }
-  
+
     .header .subtitle2 {
       bottom: 16px;
       color: white;
@@ -109,7 +109,7 @@
       top: 15px;
       width: 75px;
     }
-    
+
     .header .subtitle21 {
       bottom: 16px;
       color: white;
@@ -121,7 +121,7 @@
       top: 15px;
       width: 54px;
     }
-    
+
     .header .rect1 {
       background-color: white;
       bottom: 14px;
@@ -132,7 +132,7 @@
       top: 41px;
       width: 57px;
     }
-    
+
     .header .image4 {
       border-radius: 20px 20px 20px 20px;
       bottom: 1px;
@@ -143,12 +143,12 @@
       top: 0px;
       width: 52px;
     }
-  
+
   .dropdown {
     float: left;
     overflow: hidden;
   }
-  
+
   .dropdown-content {
     display: none;
     position: absolute;
@@ -162,7 +162,7 @@
   }
   .dropdown.clicked .dropdown-content {
     display: block;
-    
+
   }
   /* Links inside the dropdown */
   .dropdown-content a {
@@ -172,21 +172,21 @@
     text-decoration: none;
     display: block;
     text-align: left;
-    
+
   }
-  
+
   /* Add a grey background color to dropdown links on hover */
   .dropdown-content a:hover {
     background-color: #23424A;
     border-radius: 10px;
     color: #fff
   }
-  
-  
+
+
   .dropdown .dropdown-content.show {
     display: block;
   }
-  
+
   .header .box {
       border-radius: 30px 30px 30px 30px;
       bottom: 1px;
@@ -197,13 +197,13 @@
       width: 57px;
       cursor: pointer;
   }
-    
+
     .header .wrapper1 {
       height: 20px;
       margin: 7px 0px 14px 17px;
       width: 20px;
     }
-    
+
     .header .subtitle22 {
       color: white;
       font: 500 20px/1.35 "Roboto", Helvetica, Arial, serif;
@@ -211,7 +211,7 @@
       margin: 7px 14px 7px 0px;
       width: 50px;
     }
-    
+
     .header .wrapper5 {
       background: var(--src) center center/100% 100% no-repeat;
       display: flex;
@@ -223,6 +223,7 @@
       top: 18px;
       width: 25px;
     }
+
 /* main part */
 h1, h2, h3, h4, h5, h6 {
 	margin: 0;
@@ -241,12 +242,6 @@ ul, li {
     display: block;
 }
 
-#customP {
-  text-align: center;
-  padding: 30px;
-  font-size: 30px;
-}
-
 p {
 	margin: 0;
 	padding: 0;
@@ -254,7 +249,7 @@ p {
 
 .main a {
     text-decoration: none;
-    color: #FFFFFF;
+    margin-left: 530px;
 }
 
 
@@ -267,12 +262,20 @@ p {
   border-radius: 30px;
 }
 
-.nav {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-  margin-top: -10px;
-  
+.dav {
+    display: flex;
+    flex-direction: column; /* Align items vertically */
+    justify-content: center;
+    align-items: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-top: -10px;
+    margin-bottom: 40px;
+    font: 500 30px/1 "Roboto", Helvetica, Arial, serif;
+  }
+.dav h1{
+    align-items: center;
 }
 
 .nav li {
@@ -283,7 +286,7 @@ p {
 .nav li a {
   display: block;
   padding: 10px;
- 
+
   text-decoration: none;
   color: #000;
   border-radius: 4px;
@@ -388,6 +391,10 @@ td {
     text-align: center;
 }
 
+.text {
+    height: 135px;
+}
+
 
 .project_items table {
     border-radius: 8px;
@@ -442,7 +449,6 @@ table {
 .cards_item {
     display: flex;
     align-items: center;
-    position: relative;
 }
 
 .image {
@@ -452,21 +458,16 @@ table {
 
 .image img {
     height: 160px;
-    width: 200px;
     border-radius: 20px;
 }
-  
+
 
 .text_item {
     font-size: 15px;
     display: flex;
-    align-items: center;
+    align-items: start;
     text-align: left;
     margin-bottom: 10px;
-}
-
-.text_item:nth-child(5n) {
-    margin-bottom: 0;
 }
 
 .text_item h3 {
@@ -505,14 +506,15 @@ th:nth-child(1){
     padding: 5.5px;
     text-align: center;
 }
-/*.content_box2 {*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  margin: 0px 11px 0px auto;*/
-/*  width: 180px;*/
-/*  min-height: 41px;*/
-/*}*/
-.rect {
+.content_box2 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0px 11px 0px auto;
+  width: 180px;
+  min-height: 41px;
+}
+rect {
   position: absolute;
   top: 1px;
   right: 0px;
@@ -528,25 +530,160 @@ th:nth-child(1){
 
 .wrapper1 {
   position: absolute;
-  top: 92%;
-  left: 95%;
+  top: 210%;
+  left: 65%;
   transform: translate(-50%, -50%);
   width: 130px;
   height: 40px;
   font: 500 20px/1 "Roboto", Helvetica, Arial, serif;
   color: #000;
-  border-radius: 6px; 
+  border-radius: 6px;
   border-style: solid; /* add this line */
-  border-color: #23424A; 
-  padding: 6px; 
-  transition: background-color 0.3s; 
+  border-color: #23424A;
+  padding: 6px;
+  transition: background-color 0.3s;
   cursor: pointer;
 }
+
+.qr {
+    background-color: #23424A;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    width: 160px;
+    font: 500 20px/1 "Roboto", Helvetica, Arial, serif;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 10px 0 10px 0;
+
+  }
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 40%;
+
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    margin-bottom: 31px;
+    text-align: center;
+    font-size: 25px;
+}
+
+
+
+.close {
+    transition: all 200ms;
+    font-size: 30px;
+    font-weight: bold;
+    color: #333;
+    z-index: 1;
+}
+
+.amount-container {
+    display: flex;
+    align-items: center;
+    margin-top: -138px;
+    margin-left: -125px;
+
+}
+
+.amount-container button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #23424A;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #23424A;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+.modal-content form {
+    display: flex; /* Align form elements horizontally */
+    flex-direction: column; /* Place form elements vertically */
+
+}
+
+.modal-content form input,
+.modal-content form button {
+    margin-bottom: 10px; /* Add spacing between form elements */
+}
+
+.modal-content form button {
+    background-color: #23424A;
+    color: white;
+    padding: 12px 12px;
+
+    border: none;
+    border-radius: 5px; /* Add border-radius */
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add smooth background color transition */
+}
+.modal-content form button:hover {
+    background-color: #ff7f50;
+
+}
+
+
+.bank-option {
+    display: inline-block;
+    margin-right: 20px; /* Adjust spacing between bank options */
+}
+
+.bank-option img {
+    width: 75px; /* Adjust image size */
+    height: 40px; /* Adjust image size */
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.modal-content .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+}
+
+.modal-content .image {
+    width: 300px;
+    height: 500px;
+    /* Center the image within its container */
+    display: block;
+    margin: auto;
+}
+
+
 
 .accept {
   position: absolute;
   top: 210%;
-  left: -5%;
+  left: -15%;
   transform: translate(-50%, -50%);
   width: 130px;
   height: 40px;

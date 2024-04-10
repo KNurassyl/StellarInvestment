@@ -1,6 +1,7 @@
 package com.example.stellarinvestment.model;
 
 import com.example.stellarinvestment.model.project.Candidate;
+import com.example.stellarinvestment.model.project.Investment;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -60,6 +61,9 @@ public class User extends IdBasedEntity {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
     private List<Candidate> candidates;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Investment> investments;
 
     public User() {
     }
@@ -161,6 +165,14 @@ public class User extends IdBasedEntity {
 
     public void setResetPasswordToken(String resetPasswordToken) {
         this.resetPasswordToken = resetPasswordToken;
+    }
+
+    public List<Investment> getInvestments() {
+        return investments;
+    }
+
+    public void setInvestments(List<Investment> investments) {
+        this.investments = investments;
     }
 
     @Override

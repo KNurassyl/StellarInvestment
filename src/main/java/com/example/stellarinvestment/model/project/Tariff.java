@@ -3,6 +3,7 @@ package com.example.stellarinvestment.model.project;
 import com.example.stellarinvestment.model.IdBasedEntity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "tariffs")
@@ -19,6 +20,9 @@ public class Tariff extends IdBasedEntity {
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "projectTariff", fetch = FetchType.LAZY)
+    private List<Investment> investments;
 
     public int getTariffAmount() {
         return tariffAmount;
@@ -50,5 +54,13 @@ public class Tariff extends IdBasedEntity {
 
     public void setProject(Project project) {
         this.project = project;
+    }
+
+    public List<Investment> getInvestments() {
+        return investments;
+    }
+
+    public void setInvestments(List<Investment> investments) {
+        this.investments = investments;
     }
 }

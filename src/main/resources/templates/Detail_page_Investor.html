@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8"/>
@@ -19,10 +19,10 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/css/fonts.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/Detail_for_admin.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/Detail_page_Investor.css"/>
 
 
-    <title>Detail for Admin Page</title>
+    <title>Detail Project Page</title>
 </head>
 <body>
 <header class="custom-header">
@@ -37,6 +37,7 @@
             </div>
             <a class="subtitle1" th:href="@{'/main/'}"><h3>STELLAR<br/>INVESTMENT</h3></a>
 
+            <a class="subtitle2" th:href="@{'/investor/all/projects/'}"><h3>Projects</h3></a>
             <a class="subtitle21" th:href="@{'/main/'}"><h3>Home</h3></a>
 
             <img class="image4" src="/img/ace06293b0d4076285adfa86c63156ab.png" alt=""/>
@@ -45,14 +46,14 @@
                      onclick="toggleCustomDropdown()">
                 <div id="myCustomDropdown" class="custom-dropdown-content">
                     <a th:href="@{'/main/account_details'}">My Profile</a>
-                    <a sec:authorize="hasAuthority('Admin')" th:href="@{'/admin/projects'}">Manage Projects</a>
+                    <a th:href="@{'/investor/my/investments'}">My Investments</a>
                     <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
                         <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
                     </a>
                 </div>
             </div>
 
-            <div class="wrapper5" style="--src:url(/img/3ac1d66869db66b7a9f0857bf70db63a.png)"></div>
+            <a th:href="@{'/investor/basket/'}"><div class="wrapper5" style="--src:url(/img/purchase.png)"></div></a>
 
         </div>
     </section>
@@ -72,28 +73,29 @@
 
             <div class="content_box3">
                 <div class="progressi-bar">
-                    <!-- <div class="progressi progressi-one" style="--progress-width: 0%;">0%</div> -->
-                    <div class="progressi progressi-two" style="--progress-width: 100%;">0%</div>
+                    <div class="progressi progressi-one" th:style="'--progress-width: ' + ${project.percent} + '%'" th:text="${project.percent} + '%'" th:if="${project.percent != 0}"></div>
+                    <div class="progressi progressi-two" th:style="'--progress-width: ' + ${100 - project.percent} + '%'" th:text="${100 - project.percent} + '%'" th:if="${project.percent != 0}"></div>
+                    <div class="progressi progressi-one" th:style="'--progress-width: ' + ${100 - project.percent} + '%; background-color: ' + 'rgb(35, 66, 74)'" th:text="${project.percent} + '%'" th:if="${project.percent == 0}"></div>
                 </div>
                 <div class="flex_col2">
                     <div class="text">RAISED</div>
-                    <h2 class="medium_title1">₸0</h2>
+                    <h2 class="medium_title" th:text="'₸'+ ${project.totalInvestment}"></h2>
                 </div>
                 <div class="flex_col3">
                     <div class="text1">Closed Investment</div>
                     <h2 class="medium_title1" th:text="${project.finishTime}"></h2>
                 </div>
-                <div class="flex_col4">
-                    <div class="text1">SHARE PRICE<br/></div>
-                    <h2 class="medium_title1">₸0</h2>
+                <div class="flex_col4" th:if="${project.amountNeeded >= project.totalInvestment}">
+                    <div class="text1">REMAINED<br/></div>
+                    <h2 class="medium_title" th:text="'₸'+ ${project.amountNeeded - project.totalInvestment}"></h2>
                 </div>
                 <div class="flex_col5">
                     <div class="text">TARGET</div>
-                    <h2 class="medium_title1" th:text="'₸'+ ${project.amountNeeded}"></h2>
+                    <h2 class="medium_title" th:text="'₸'+ ${project.amountNeeded}"></h2>
                 </div>
                 <div class="flex_col6">
                     <div class="text1">INVESTORS</div>
-                    <h2 class="medium_title2">0</h2>
+                    <h2 class="medium_title2" th:text="${project.investorsCount}"></h2>
                 </div>
                 <hr class="line" size="1"/>
                 <div class="text11">Short Description:</div>
@@ -105,16 +107,7 @@
         </div>
         <div class="content_box2">
 
-            <form th:action="@{/admin/approve}" method="post">
-                <input type="hidden" name="projectIdToApprove" th:value="${project.id}">
-                <button type="submit" class="join-button">Accept</button>
-            </form>
-
-            <form th:action="@{/admin/reject}" method="post">
-                <input type="hidden" name="projectIdToReject" th:value="${project.id}">
-                <button type="submit" class="wrapper1">Reject</button>
-            </form>
-
+            <a href="#tariffKO"><button class="join-button">Invest</button></a>
         </div>
     </div>
 </section>
@@ -181,20 +174,50 @@
                 </div>
 
                 <div class="card">
+                    <div class="header">
+                        <h2>Choose appropriate tariff</h2>
+                    </div>
+                    <div id="myModal" class="modal">
+                        <div class="modal-content">
+                            <h2>Apply Form</h2>
+                            <a class="close" href="javascript:void(0);" onclick="closeModal();">&times;</a>
+                            <div class="content">
+                                <form>
+                                    <label for="name">Link to your CV:</label>
+                                    <input type="text" id="name" placeholder="Enter link to CV" name="name">
+                                    <label for="email">Your email address:</label>
+                                    <input type="email" id="email" placeholder="Enter your email" name="email">
+                                    <button type="submit">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
-
-                    <div class="body widget popular-post">
+                    <div class="body widget popular-post" id="tariffKO">
                         <div class="row">
                             <div class="col-lg-10">
                                 <div class="single_post" th:each="tariff : ${project.tariffs}">
 
                                     <div class="content_box6">
+
                                         <div class="text" th:text="${tariff.tariffName}"></div>
-                                        <p class="paragraph11" th:text="${tariff.tariffInfo}">
-                                        </p>
                                         <h2 class="medium_title" th:text="'₸' + ${tariff.tariffAmount}"></h2>
+                                        <form th:action="@{/investor/addToBasket}" method="post">
+                                            <input type="hidden" name="projectId" th:value="${project.id}">
+                                            <input type="hidden" name="tariffId" th:value="${tariff.id}">
+                                            <input type="hidden" name="userEmail" th:value="${user.email}">
+                                            <button class="custom-button" type="submit">
+                                                <img class="image1" src="/img/black_fast_forward_symbol.png"
+                                                     alt="alt text"/>
+                                            </button>
+                                        </form>
+                                        <p class="desc" th:text="${tariff.tariffInfo}">
+
+                                        </p>
+
                                     </div>
                                 </div>
+
 
                             </div>
                         </div>
@@ -203,14 +226,45 @@
             </div>
         </div>
 
+
     </div>
 </div>
 
-</div>
 
-
-</div>
-
+<section id="about-section" class="pt-5 pb-5">
+    <div class="container wrapabout">
+        <div class="red"></div>
+        <div class="row">
+            <div class="col-lg-6 align-items-center justify-content-left d-flex mb-5 mb-lg-0">
+                <div class="blockabout">
+                    <div class="blockabout-inner text-center text-sm-start">
+                        <div class="title-big pb-3 mb-3">
+                            <h3>ABOUT COMPANY</h3>
+                        </div>
+                        <p class="description-p text-muted pe-0 pe-lg-0">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus quas optio reiciendis
+                            deleniti voluptatem facere sequi, quia, est sed dicta aliquid quidem facilis culpa iure
+                            perferendis? Dolor ad quia deserunt.
+                        </p>
+                        <p class="description-p text-muted pe-0 pe-lg-0">Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. Natus quas optio reiciendis deleniti voluptatem facere.</p>
+                        <div class="sosmed-horizontal pt-3 pb-3">
+                            <a href="#"><i class="fa fa-facebook"></i></a>
+                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="#"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                        <a href="#" class="btn rey-btn mt-3">See More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-5 mt-lg-0">
+                <figure class="potoaboutwrap">
+                    <img src="/img/ourCompany.jpg" alt="potoabout" style="width: 450px; height: 550px;">
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
 
 <footer class="footer">
     <div class="container2">

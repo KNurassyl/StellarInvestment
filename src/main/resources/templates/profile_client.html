@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/css/fonts.css"/>
     <link rel="stylesheet" type="text/css" href="/css/Profka_client.css"/>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <title>Profile for Client</title>
 </head>
 <body>
@@ -31,6 +31,8 @@
 
             <a class="subtitle2" th:href="@{'/project/all/team/'}" sec:authorize="hasAuthority('User')"><h3>
                 Projects</h3></a>
+
+            <a class="subtitle2" th:href="@{'/investor/all/projects/'}" sec:authorize="hasAuthority('Investor')"><h3>Projects</h3></a>
             <a class="subtitle21" th:href="@{'/main/'}"><h3>Home</h3></a>
 
             <img class="image4" src="/img/ace06293b0d4076285adfa86c63156ab.png" alt=""/>
@@ -40,6 +42,7 @@
                 <div id="myCustomDropdown" class="custom-dropdown-content">
                     <a th:href="@{'/main/account_details'}">My Profile</a>
                     <a sec:authorize="hasAuthority('Admin')" th:href="@{'/admin/projects'}">Manage Projects</a>
+                    <a sec:authorize="hasAuthority('Investor')" th:href="@{'/investor/my/investments'}">My Investments</a>
                     <a th:href="@{'/project/my/'}" sec:authorize="hasAuthority('User')">My Projects</a>
                     <a th:href="@{'/project/'}" sec:authorize="hasAuthority('User')">Create Projects</a>
                     <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
@@ -48,7 +51,8 @@
                 </div>
             </div>
 
-            <div class="wrapper5" style="--src:url(/img/3ac1d66869db66b7a9f0857bf70db63a.png)"></div>
+            <a th:href="@{'/investor/basket/'}"><div class="wrapper5" style="--src:url(/img/purchase.png)" sec:authorize="hasAuthority('Investor')"></div></a>
+
 
         </div>
     </section>

@@ -2,7 +2,11 @@ package com.example.stellarinvestment.controller;
 
 import com.example.stellarinvestment.file.FileUploadUtil;
 import com.example.stellarinvestment.model.User;
+import com.example.stellarinvestment.model.project.Project;
+import com.example.stellarinvestment.model.project.ProjectStatus;
 import com.example.stellarinvestment.service.CandidateService;
+import com.example.stellarinvestment.service.InvestmentService;
+import com.example.stellarinvestment.service.ProjectService;
 import com.example.stellarinvestment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
 @Controller
 @RequestMapping(value = "/main")
@@ -29,7 +35,7 @@ public class MainController {
     public String authMainPage(HttpServletRequest request, Model model) {
         User authenticatedUser = userService.getCurrentAuthUser(request);
         model.addAttribute("user", authenticatedUser);
-        return "main";
+        return "Main_page";
     }
 
     @GetMapping(value = "/forbidden")

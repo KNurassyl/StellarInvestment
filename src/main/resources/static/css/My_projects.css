@@ -869,3 +869,75 @@ th:nth-child(1){
     width: 52px;
   }
 
+.footer {
+    padding: 100px 0;
+    background: url('../img/2f3ece1de78afc35b4c0ad51e4395183.png') 0 0 no-repeat;
+    background-size: 100%;
+    position: relative;
+}
+
+.container2 {
+    margin-top: 100px;
+}
+
+.footerNav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.eachNav li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 70px;
+}
+
+.eachNav li:nth-child(3n) {
+    margin-right: 0;
+}
+
+.eachNav li p{
+    font-size: 20px;
+    color: #fff;
+}
+
+.eachNav li img{
+    margin-right: 10px;
+}
+
+.eachNav {
+    display: flex;
+    align-items: center;
+}
+
+
+.logoFooter{
+    display: flex;
+    align-items: center;
+    width: 200px;
+    margin-right: 25px;
+}
+
+.logoFooter img {
+    margin-right: 10px;
+}
+
+.logoFooter a{
+    display: block;
+    font-weight: bold;
+    width: 20%;
+    color: #fff;
+    font-size: 20px;
+}
+
+.year {
+    text-align: center;
+    color: #fff;
+    font-size: 20px;
+    position: absolute;
+    top: 92%;
+    bottom: 10%;
+    right: 35%;
+    left: 35%;
+}

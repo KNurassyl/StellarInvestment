@@ -47,8 +47,6 @@
                 </div>
             </div>
 
-            <div class="wrapper5" style="--src:url(/img/3ac1d66869db66b7a9f0857bf70db63a.png)"></div>
-
 
         </div>
     </section>
@@ -78,7 +76,7 @@
             </div>
 
             <div class="tab-content applied-persons" th:unless="${myProjects.isEmpty()}"
-                 th:each="myProject : ${myProjects}">
+                 th:each="myProject : ${myProjects}" style="margin-bottom: 30px">
                 <table class="main_table">
                     <thead>
                     <tr>
@@ -156,7 +154,7 @@
                                 <span th:case="1" style="color: #1a8a12">Accepted</span>
                                 <span th:case="2" style="color: red">Rejected</span>
                             </td>
-                            <td th:if="${myProject.status != T(com.example.stellarinvestment.model.project.ProjectStatus).WAITING}">
+                            <td th:if="${myProject.status == T(com.example.stellarinvestment.model.project.ProjectStatus).TEAM_FORMATION}">
                                 <div class="btns">
                                     <form th:action="@{'/project/approve'}" method="post">
                                         <!--                                        <input type="hidden" name="teamId" th:value="${candidate.projectTeam.id}">-->
@@ -183,12 +181,58 @@
             </div>
 
 
-            <div id="investors" class="tab-content investors" style="display:none;">
+            <div class="tab-content applied-persons" th:if="${myInvestmentProjects.isEmpty()}">
+                <p style="text-align: center;
+               font-size: 20px;
+               padding: 20px;">No active projects in progress</p>
+            </div>
+
+            <div id="investors" class="tab-content investors" style="display:none; margin-bottom: 30px" th:each="myInvestmentProject : ${myInvestmentProjects}">
                 <table class="main_table">
+                    <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Description of the project</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td th:text="${myInvestmentProject.id}"></td>
+                        <td>
+                            <div class="cards_item">
+                                <div class="image">
+                                    <img th:src="@{${myInvestmentProject.getMainImagePath}}">
+                                </div>
+                                <div class="text">
+                                    <div class="text_item">
+                                        <h3>Title:</h3>
+                                        <p th:text="${myInvestmentProject.title}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Brief Info:</h3>
+                                        <p th:text="${myInvestmentProject.shortDescription}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Status:</h3>
+                                        <p th:text="${myInvestmentProject.status}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Deadline:</h3>
+                                        <p th:text="${myInvestmentProject.finishTime}"></p>
+                                    </div>
+                                    <div class="text_item">
+                                        <h3>Fund:</h3>
+                                        <p th:text="${myInvestmentProject.amountNeeded}"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
                     <thead class="description">
                     <tr>
                         <th></th>
-                        <th>Customers who have applied for this billboard</th>
+                        <th>Investors who have invested for this project</th>
                     </tr>
                     </thead>
                 </table>
@@ -197,44 +241,25 @@
                         <thead>
                         <tr>
                             <th>№</th>
-                            <th>Investor Name</th>
+                            <th>Name</th>
                             <th>Last Name</th>
                             <th>Invested Date</th>
-
-                            <th>Phone Number</th>
-                            <th>Incoming Money</th>
-                            <th>Applied tariff</th>
+                            <th>Invested Money</th>
+                            <th>Chosen Tariff Name</th>
                         </tr>
                         </thead>
-                        <tbody th:each="order : ${orders}">
-                        <tr th:hidden="${order.billboard.id != billboard.id}">
-                            <td th:text="${order.id}"></td>
-                            <td th:text="${order.user.surname}"></td>
-                            <td th:text="${order.user.name}"></td>
-                            <td th:text="${order.startDate}"></td>
-                            <td th:text="${order.endDate}"></td>
-                            <td th:text="${order.telNumber}"></td>
-                            <td th:switch="${order.status}">
-                                <span th:case="0" style="color: #0024A2">Waiting</span>
-                                <span th:case="1" style="color: #1a8a12">Accepted</span>
-                                <span th:case="2" style="color: red">Rejected</span>
-                            </td>
-                            <td>
-                                <div class="btns">
-                                    <form th:action="@{'/admin/changeStatus'}" method="post">
-                                        <input type="hidden" name="orderId" th:value="${order.id}">
-                                        <button type="submit" class="approve" th:hidden="${order.status == 1}">✓
-                                        </button>
-                                    </form>
-                                    <form th:action="@{'/admin/refuseOrder'}" method="post">
-                                        <input type="hidden" name="refuseOrderId" th:value="${order.id}">
-                                        <button class="reject" th:hidden="${order.status == 2}">X</button>
-                                    </form>
-                                </div>
-                            </td>
+                        <tbody>
+                        <tr th:each="investor : ${myInvestmentProject.investments}">
+                            <td th:text="${investor.id}"></td>
+                            <td th:text="${investor.user.firstName}"></td>
+                            <td th:text="${investor.user.lastName}"></td>
+                            <td th:text="${investor.investedTime}"></td>
+                            <td th:text="${investor.investedMoney}"></td>
+                            <td th:text="${investor.projectTariff.tariffName}"></td>
                         </tr>
                         </tbody>
                     </div>
+
                 </table>
             </div>
 
@@ -242,69 +267,32 @@
         </div>
     </section>
 </main>
-<section class="section3">
-    <h3 class="subtitle5">© 2024 Stellar Investment. All Rights Reserved.</h3>
-    <div class="group2">
-        <div class="group2">
-            <div class="group2">
-                <div class="group2">
-                    <div class="group2">
-                        <div class="group2">
-                            <img class="cover1" src="/img/bf14714a16ee134b1726c6434e792c99.png" alt="alt text"/>
-                            <div class="content_box7">
-                                <div class="rect10"></div>
-                                <h3 class="subtitle6">Would you like to join newsletters?</h3>
-                                <div class="rect7"></div>
-                                <div class="content_box6">
-                                    <h3 class="subtitle7">Join</h3>
-                                </div>
-                                <p class="desc">enter your email address...</p>
-                                <h3 class="subtitle8">Investing</h3>
-                                <h3 class="subtitle9">Help &amp; Guide</h3>
-                                <h3 class="subtitle91">About</h3>
-                                <h3 class="subtitle92">Social Media</h3>
-                                <h3 class="subtitle93">We accept</h3>
-                                <p class="paragraph">
-                                    Investment opportunities<br/>Fees<br/>Investor returns<br/>Tax relief<br/>Funded
-                                    companies
-                                </p>
-                                <p class="paragraph1">
-                                    Help Center<br/>How to  give<br/>Shipping &amp; Delivery <br/>Product Policy<br/>How
-                                    to
-                                    Return
-                                </p>
-                                <p class="paragraph2">MON<br/>Careers<br/>News<br/>Contact us</p>
-                                <div class="rect9"></div>
-                                <div class="rect91"></div>
-                                <div class="rect92"></div>
-                                <img class="image3" src="/img/7a39f00d34d9eb253b78883930095a82.png" alt="alt text"/><img
-                                    class="image4" src="/img/43ddc85fd5d45fd2a0953686d30322df.png" alt="alt text"/><img
-                                    class="image5" src="/img/5de47b8cb81c466e2e1b2b3e9e72b2f2.png" alt="alt text"/><img
-                                    class="decorator2" src="/img/121d5415873890d25a18dd9a49f38891.png"
-                                    alt="alt text"/><img class="image6" src="/img/a8dcc8aea20f758a7d9912e1526f1dac.png"
-                                                         alt="alt text"/>
-                            </div>
-                        </div>
-                        <div class="group3">
-                            <h3 class="subtitle10">+7 775 203 01 90</h3>
-                            <img class="image21" src="/img/399bf71dd023f1dc67ce0c39cc4d37d9.png" alt="alt text"/>
-                        </div>
-                    </div>
-                    <div class="group4">
-                        <div class="group5">
-                            <h3 class="subtitle101">contact@almightypush.com</h3>
-                            <img class="image22" src="/img/cd1d9907462f74cc57844c79ffd5b65a.png" alt="alt text"/>
-                        </div>
-                        <img class="image23" src="/img/38289c6e3617705c3e2d42820fe0b93a.png" alt="alt text"/>
-                    </div>
-                </div>
-                <h3 class="subtitle102">microdistrict Daraboz, home 123, Almaty, Kazakhstan</h3>
+
+<footer class="footer">
+    <div class="container2">
+        <div class="footerNav">
+            <div class="logoFooter">
+                <img src="/img/logo.svg" alt="#">
+                <a href="#">STELLAR INVESTMENT</a>
             </div>
-            <h3 class="subtitle31">STELLAR<br/>INVESTMENT</h3>
+            <ul class="eachNav">
+                <li>
+                    <img src="/img/geo.svg" alt="#">
+                    <p style="width: 300px;">microdistrict Daraboz, home 123, Almaty, Kazakhstan</p>
+                </li>
+                <li>
+                    <img src="/img/mail.svg" alt="#">
+                    <p>contact@almightypush.com</p>
+                </li>
+                <li>
+                    <img src="/img/phone.svg" alt="#">
+                    <p>+7 775 203 01 90</p>
+                </li>
+            </ul>
         </div>
-        <img class="image71" src="/img/3d_circular_chart_icon.png" alt="alt text"/>
+        <p class="year">© 2024 Stellar Investment. All Rights Reserved.</p>
     </div>
-</section>
+</footer>
 
 <script type="text/javascript">
 

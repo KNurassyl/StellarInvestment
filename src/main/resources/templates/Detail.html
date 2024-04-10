@@ -53,8 +53,6 @@
                 </div>
             </div>
 
-            <div class="wrapper5" style="--src:url(/img/3ac1d66869db66b7a9f0857bf70db63a.png)"></div>
-
         </div>
     </section>
 </header>
@@ -75,8 +73,7 @@
 
             <div class="content_box3">
                 <div class="progressi-bar">
-                    <div class="progressi progressi-one" style="--progress-width: 34%;">34%</div>
-                    <div class="progressi progressi-two" style="--progress-width: 66%;">66%</div>
+                    <div class="progressi progressi-one" style="--progress-width: 100%; background-color: rgb(35, 66, 74);">0%</div>
                 </div>
                 <div class="flex_col2">
                     <div class="text">RAISED</div>
@@ -105,11 +102,7 @@
         </div>
         <div class="content_box2">
 
-
-            <div class="wrapper1" style="--src:url(/img/b8d50b7e6b56a8d223789d97d6168ba5.png)">
-                <div class="button"></div>
-            </div>
-            <button class="join-button">Join</button>
+            <a href="#chooseTeam"><button class="join-button">Join</button></a>
         </div>
     </div>
 </section>
@@ -202,7 +195,7 @@
                     </div>
 
 
-                    <div class="body widget popular-post">
+                    <div class="body widget popular-post" id="chooseTeam">
                         <div class="row">
                             <div class="col-lg-10">
                                 <div class="single_post" th:each="team : ${project.teams}">
@@ -275,69 +268,31 @@
     </div>
 </section>
 
-<section class="section3">
-    <h3 class="subtitle5">© 2024 Stellar Investment. All Rights Reserved.</h3>
-    <div class="group2">
-        <div class="group2">
-            <div class="group2">
-                <div class="group2">
-                    <div class="group2">
-                        <div class="group2">
-                            <img class="cover1" src="/img/bf14714a16ee134b1726c6434e792c99.png" alt="alt text"/>
-                            <div class="content_box7">
-                                <div class="rect10"></div>
-                                <h3 class="subtitle6">Would you like to join newsletters?</h3>
-                                <div class="rect7"></div>
-                                <div class="content_box6">
-                                    <h3 class="subtitle7">Join</h3>
-                                </div>
-                                <p class="desc">enter your email address...</p>
-                                <h3 class="subtitle8">Investing</h3>
-                                <h3 class="subtitle9">Help &amp; Guide</h3>
-                                <h3 class="subtitle91">About</h3>
-                                <h3 class="subtitle92">Social Media</h3>
-                                <h3 class="subtitle93">We accept</h3>
-                                <p class="paragraph">
-                                    Investment opportunities<br/>Fees<br/>Investor returns<br/>Tax relief<br/>Funded
-                                    companies
-                                </p>
-                                <p class="paragraph1">
-                                    Help Center<br/>How to  give<br/>Shipping &amp; Delivery <br/>Product Policy<br/>How
-                                    to
-                                    Return
-                                </p>
-                                <p class="paragraph2">MON<br/>Careers<br/>News<br/>Contact us</p>
-                                <div class="rect9"></div>
-                                <div class="rect91"></div>
-                                <div class="rect92"></div>
-                                <img class="image3" src="/img/7a39f00d34d9eb253b78883930095a82.png" alt="alt text"/><img
-                                    class="image4" src="/img/43ddc85fd5d45fd2a0953686d30322df.png" alt="alt text"/><img
-                                    class="image5" src="/img/5de47b8cb81c466e2e1b2b3e9e72b2f2.png" alt="alt text"/><img
-                                    class="decorator2" src="/img/121d5415873890d25a18dd9a49f38891.png"
-                                    alt="alt text"/><img class="image6" src="/img/a8dcc8aea20f758a7d9912e1526f1dac.png"
-                                                         alt="alt text"/>
-                            </div>
-                        </div>
-                        <div class="group3">
-                            <h3 class="subtitle10">+7 775 203 01 90</h3>
-                            <img class="image21" src="/img/399bf71dd023f1dc67ce0c39cc4d37d9.png" alt="alt text"/>
-                        </div>
-                    </div>
-                    <div class="group4">
-                        <div class="group5">
-                            <h3 class="subtitle101">contact@almightypush.com</h3>
-                            <img class="image22" src="/img/cd1d9907462f74cc57844c79ffd5b65a.png" alt="alt text"/>
-                        </div>
-                        <img class="image23" src="/img/38289c6e3617705c3e2d42820fe0b93a.png" alt="alt text"/>
-                    </div>
-                </div>
-                <h3 class="subtitle102">microdistrict Daraboz, home 123, Almaty, Kazakhstan</h3>
+<footer class="footer">
+    <div class="container2">
+        <div class="footerNav">
+            <div class="logoFooter">
+                <img src="/img/logo.svg" alt="#">
+                <a href="#">STELLAR INVESTMENT</a>
             </div>
-            <h3 class="subtitle31">STELLAR<br/>INVESTMENT</h3>
+            <ul class="eachNav">
+                <li>
+                    <img src="/img/geo.svg" alt="#">
+                    <p style="width: 300px;">microdistrict Daraboz, home 123, Almaty, Kazakhstan</p>
+                </li>
+                <li>
+                    <img src="/img/mail.svg" alt="#">
+                    <p>contact@almightypush.com</p>
+                </li>
+                <li>
+                    <img src="/img/phone.svg" alt="#">
+                    <p>+7 775 203 01 90</p>
+                </li>
+            </ul>
         </div>
-        <img class="image71" src="/img/3d_circular_chart_icon.png" alt="alt text"/>
+        <p class="year">© 2024 Stellar Investment. All Rights Reserved.</p>
     </div>
-</section>
+</footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 

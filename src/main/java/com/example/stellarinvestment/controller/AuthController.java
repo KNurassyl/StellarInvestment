@@ -61,7 +61,7 @@ public class AuthController {
 
     @GetMapping(value = "/main")
     public String mainPage() {
-        return "main";
+        return "Main_page";
     }
 
     @GetMapping(value = "/register")

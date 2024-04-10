@@ -365,7 +365,7 @@
         color: rgb(165, 165, 165);
       }
       .section2 .medium_title1 {
-        width: 161%;
+        width: 100%;
         font: 700 24px/0.66 "Roboto", Helvetica, Arial, serif;
         color: rgb(61, 61, 61);
       }
@@ -439,7 +439,7 @@
         right: 431px;
         bottom: 416px;
         left: 0px;
-        width: 280px;
+        width: 143px;
         height: 16px;
         font: 700 24px/0.66 "Roboto", Helvetica, Arial, serif;
         color: rgb(61, 61, 61);
@@ -462,9 +462,9 @@
 
       .section2  .paragraph {
         position: absolute;
-        top: 97px;
+        top: 107px;
         left: 1px;
-        width: 688px;
+        width: 573px;
         height: 72px;
         font: 400 14px/1.71 "Roboto", Helvetica, Arial, serif;
         color: rgb(114, 114, 114);
@@ -595,65 +595,87 @@
       outline-offset: -3px;
       margin-bottom: 10px;
     }
-    .subtitle5 {
-      width: 98.92%;
-      font: 700 20px/0.8 "Roboto", Helvetica, Arial, serif;
-      color: rgb(255, 255, 255);
-    }
-    .paragraph11 {
-      margin: 6px 0px 0px;
-      width: 98.92%;
-      font: 400 14px/1.71 "Roboto", Helvetica, Arial, serif;
-      color: rgb(255, 255, 255);
-    }
-    .subtitle6 {
-      margin: 2px 0px 0px;
-      width: 25.27%;
-      font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
-      color: rgb(0, 0, 0);
-      background: var(--src) center center / 100% 100% no-repeat;
-      padding: 15px 17px 15px 18px;
-    }
-    .flex_row1 {
-      display: flex;
-      margin: 8px 0px 0px;
-      width: 100%;
-    }
-    .text3 {
-      width: 94px;
-      font: 500 14px/1.14 "Roboto", Helvetica, Arial, serif;
-      color: rgb(255, 255, 255);
-      background-color: rgb(59, 112, 125);
-      padding: 13px 15px 13px 10px;
-    }
-    .text4 {
-      width: 88px;
-      font: 500 14px/1.14 "Roboto", Helvetica, Arial, serif;
-      color: rgb(35, 66, 74);
-      background-color: rgb(255, 255, 255);
-      padding: 13px 7px 13px 4px;
-      outline: 1px solid rgb(35, 66, 74);
-      outline-offset: -1px;
-    }
-    .wrapper2 {
-      display: flex;
-      flex-direction: column;
-      margin: 17px 0px 0px;
-      width: 70.43%;
-      background-color: rgb(255, 127, 80);
-      border-radius: 15px;
-      color:white;
+    .single_post .content_box6 .rect1 {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 233px;
+        height: 277px;
+        background-color: rgb(35, 66, 74);
+        border-radius: 15px 15px 15px 15px;
+        outline: 3px solid rgb(255, 127, 80);
+        outline-offset: -3px;
+      }
+      .single_post .content_box6  .text {
+        position: absolute;
+        top: 22px;
+        left: 19px;
+        width: 152px;
+        height: 16px;
+        font: 700 14px/1.14 "Roboto", Helvetica, Arial, serif;
+        color: rgb(255, 255, 255);
+      }
+      .single_post .content_box6  .medium_title {
+        position: absolute;
+        bottom: 35px;
+        left: 23px;
+        width: 95px;
+        height: 16px;
+        font: 700 24px/0.66 "Roboto", Helvetica, Arial, serif;
+        color: rgb(255, 255, 255);
+      }
+      .single_post .content_box6 .rect {
+        position: absolute;
+        bottom: 30px;
+        left: 121px;
+        width: 73px;
+        height: 25px;
+        background-color: rgb(255, 127, 80);
+        border-radius: 12.5px 12.5px 12.5px 12.5px;
+      }
+      .custom-button {
+        /* Add your custom button styles here */
+        background-color: rgb(255, 127, 80); /* Example background color */
+        color: #fff; /* Example text color */
+        border-radius: 10px;
+        margin-top:195px;
+        margin-left: 90px;
+        cursor: pointer;
+
+        /* Add more styles as needed to customize your button */
     }
     
-    .wrapper2 .text31 {
-      padding: 10px; /* Add padding to create a clickable area */
-      border-radius: 15px; /* Round the corners of the button */
-      text-align: center; /* Center align the text */
-      cursor: pointer; /* Change cursor to pointer on hover */
-      transition: background-color 0.5s; /* Add transition effect */
-      text-decoration: none;
-      color: white;
-    }
+    .single_post .content_box6  .flex_row {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0px;
+        margin: 223px 12.32% 30px auto;
+        width: 51px;
+ 
+      }
+      .single_post .content_box6 .image1 {
+        
+        width: 34px;
+        height: 34px;
+      }
+      .single_post .content_box6 .wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 31px;
+        height: 31px;
+        min-height: 21px;
+        background: var(--src) center center / 100% 100% no-repeat;
+      }
+      .single_post .content_box6  .desc {
+        position: absolute;
+        top: 51px;
+        left: 19px;
+        width: 212px;
+        height: 144px;
+        font: 500 12px/2 "Roboto", Helvetica, Arial, serif;
+        color: rgb(255, 255, 255);
+      }
 
     
    
@@ -1520,6 +1542,7 @@
    
   }
 
+
 .footer {
   padding: 100px 0;
   background: url('../img/2f3ece1de78afc35b4c0ad51e4395183.png') 0 0 no-repeat;
@@ -1592,4 +1615,3 @@
   right: 35%;
   left: 35%;
 }
- 

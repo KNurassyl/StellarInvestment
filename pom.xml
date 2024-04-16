@@ -92,7 +92,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <!-- Exclude Lombok from Maven Compiler Plugin -->
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
@@ -101,23 +100,19 @@
                     </excludes>
                 </configuration>
             </plugin>
-            <!-- Add the Maven Compiler Plugin with configuration -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <!-- Use 'javac' compiler instead of the internal one -->
                     <compilerId>javac</compilerId>
-                    <!-- Set source and target versions -->
                     <source>11</source>
                     <target>11</target>
-                    <!-- Exclude Lombok from annotation processing -->
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.20</version> <!-- Update with your Lombok version -->
+                            <version>1.18.20</version>
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
@@ -125,7 +120,7 @@
                     <dependency>
                         <groupId>org.projectlombok</groupId>
                         <artifactId>lombok</artifactId>
-                        <version>1.18.20</version> <!-- Update with your Lombok version -->
+                        <version>1.18.20</version>
                     </dependency>
                 </dependencies>
             </plugin>

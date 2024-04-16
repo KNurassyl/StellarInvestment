@@ -398,7 +398,7 @@ a {
     left: 106px;
     position: absolute;
     top: 8px;
-    width: 61px;
+    width: 100%;
   }
   .flex_col {
     display: flex;

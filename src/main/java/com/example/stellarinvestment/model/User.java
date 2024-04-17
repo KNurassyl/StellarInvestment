@@ -1,5 +1,6 @@
 package com.example.stellarinvestment.model;
 
+import com.example.stellarinvestment.amazon.Constants;
 import com.example.stellarinvestment.model.project.Candidate;
 import com.example.stellarinvestment.model.project.Investment;
 
@@ -192,7 +193,7 @@ public class User extends IdBasedEntity {
         if (photos == null || photos.isEmpty()) {
             return "/profileImg/user-default.png";
         } else {
-            return "/user-ava-photos/" + this.id + "/" + this.photos;
+            return Constants.S3_BASE_URI + "/user-ava-photos/" + this.id + "/" + this.photos;
         }
     }
 }

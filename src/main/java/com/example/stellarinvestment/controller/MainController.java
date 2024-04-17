@@ -1,6 +1,6 @@
 package com.example.stellarinvestment.controller;
 
-import com.example.stellarinvestment.file.FileUploadUtil;
+import com.example.stellarinvestment.amazon.AmazonS3Util;
 import com.example.stellarinvestment.model.User;
 import com.example.stellarinvestment.service.CandidateService;
 import com.example.stellarinvestment.service.UserService;
@@ -68,8 +68,8 @@ public class MainController {
 
             String uploadDir = "user-ava-photos/" + user.getId();
 
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            AmazonS3Util.removeFolder(uploadDir);
+            AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
         }
 
         model.addAttribute("message", "Your account details have been updated.");

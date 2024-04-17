@@ -1,5 +1,6 @@
 package com.example.stellarinvestment.model.project;
 
+import com.example.stellarinvestment.amazon.Constants;
 import com.example.stellarinvestment.model.IdBasedEntity;
 import com.example.stellarinvestment.model.User;
 
@@ -230,6 +231,6 @@ public class Project extends IdBasedEntity {
     public String getMainImagePath() {
         if (id == null || mainImage == null) return "/projectImg/image-thumbnail.png";
 
-        return "/project-images/" + this.id + "/" + this.mainImage;
+        return Constants.S3_BASE_URI + "/project-images/" + this.id + "/" + this.mainImage;
     }
 }

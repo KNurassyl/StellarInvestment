@@ -1,7 +1,7 @@
 package com.example.stellarinvestment.service;
 
+import com.example.stellarinvestment.amazon.AmazonS3Util;
 import com.example.stellarinvestment.exception.ProjectNotFoundException;
-import com.example.stellarinvestment.file.FileUploadUtil;
 import com.example.stellarinvestment.model.User;
 import com.example.stellarinvestment.model.project.*;
 import com.example.stellarinvestment.repository.ProjectRepository;
@@ -101,8 +101,14 @@ public class ProjectService {
             String fileName = StringUtils.cleanPath(Objects.requireNonNull(mainImageMultipart.getOriginalFilename()));
             String uploadDir = "project-images/" + project.getId();
 
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, mainImageMultipart);
+            List<String> listObjectKeys = AmazonS3Util.listFolder(uploadDir + "/");
+            for (String objectKey : listObjectKeys) {
+                if (!objectKey.contains("/extras/")) {
+                    AmazonS3Util.deleteFile(objectKey);
+                }
+            }
+
+            AmazonS3Util.uploadFile(uploadDir, fileName, mainImageMultipart.getInputStream());
         }
 
         if (extraImageMultiparts.length > 0) {
@@ -112,7 +118,7 @@ public class ProjectService {
                 if (multipartFile.isEmpty()) continue;
 
                 String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-                FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+                AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
             }
         }
 

@@ -1,5 +1,6 @@
 package com.example.stellarinvestment.model.project;
 
+import com.example.stellarinvestment.amazon.Constants;
 import com.example.stellarinvestment.model.IdBasedEntity;
 
 import javax.persistence.*;
@@ -40,6 +41,6 @@ public class ProjectImage extends IdBasedEntity {
 
 	@Transient
 	public String getImagePath() {
-		return "/project-images/" + project.getId() + "/extras/" + this.name;
+		return Constants.S3_BASE_URI + "/project-images/" + project.getId() + "/extras/" + this.name;
 	}
 }

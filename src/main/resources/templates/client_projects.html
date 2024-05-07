@@ -45,7 +45,8 @@
                 <img class="box" th:src="@{${user.photosImagePath}}" alt="alt text" onclick="toggleDropdown()">
                 <div id="myDropdown" class="dropdown-content">
                     <a th:href="@{'/main/account_details'}">My Profile</a>
-                    <a th:href="@{'/project/my/'}">My Projects</a>
+                    <a th:href="@{'/project/my/'}">Project Applications</a>
+                    <a th:href="@{'/project/my/created/'}">My Projects</a>
                     <a th:href="@{'/project/'}">Create Project</a>
                     <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
                         <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>

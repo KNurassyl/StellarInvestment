@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
     <!-- <link rel="stylesheet" type="text/css" href="./css/fonts.css" /> -->
     <link rel="stylesheet" type="text/css" href="/css/Basket.css"/>
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
     <title>Basket Page for Investor</title>
 </head>
@@ -65,13 +66,38 @@
                 <h1>List of My Chosen Projects</h1>
             </div>
 
-            <p th:if="${param.added != null}"
-               style="text-align: center; background-color: darkseagreen; padding: 20px; margin-bottom: 10px">
-                Successfully added to the basket. Proceed with further actions here.</p>
+            <div id="success-box" th:if="${param.added != null}">
+                <div class="dot"></div>
+                <div class="dot two"></div>
+                <div class="face">
+                    <div class="eye"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth happy"></div>
+                </div>
+                <div class="shadow scale"></div>
+                <div class="message">
+                    <h1 class="alert">Successfully added to the basket!</h1>
+                    <p>Proceed with further actions here.</p>
+                </div>
+                <button class="button-box" onclick="hideSuccessBox()"><h1 class="green">Great</h1></button>
+            </div>
 
-            <p th:if="${param.deleted != null}"
-               style="text-align: center; background-color: #fc8383; padding: 20px; margin-bottom: 10px">
-                Deleted from basket. You can see another investments in 'Project'</p>
+            <div id="error-box" th:if="${param.deleted != null}">
+                <div class="dot"></div>
+                <div class="dot two"></div>
+                <div class="face2">
+                    <div class="eye"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth sad"></div>
+                </div>
+                <div class="shadow move"></div>
+                <div class="message">
+                    <h1 class="alert">Deleted from basket!</h1>
+                    <p>You can see another investments in 'Project'</p>
+                </div>
+                <button class="button-box" onclick="hideErrorBox()"><h1 class="red">Okay</h1></button>
+            </div>
+
 
             <div class="tab-content existing-projects" th:if="${investments.isEmpty()}">
                 <p style="text-align: center;
@@ -284,12 +310,19 @@
         }
     }
 
-    function resetAmount(button) {
-        var amount = button.parentElement.querySelector(".amount");
-        amount.innerText = "1";
+    function hideSuccessBox() {
+        var successBox = document.getElementById('success-box');
+        if (successBox) {
+            successBox.style.display = 'none';
+        }
     }
 
-
+    function hideErrorBox() {
+        var errorBox = document.getElementById('error-box');
+        if (errorBox) {
+            errorBox.style.display = 'none';
+        }
+    }
 </script>
 
 </body>

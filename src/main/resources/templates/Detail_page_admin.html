@@ -20,7 +20,7 @@
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/css/fonts.css"/>
     <link rel="stylesheet" type="text/css" href="/css/Detail_for_admin.css"/>
-
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
     <title>Detail for Admin Page</title>
 </head>
@@ -51,9 +51,6 @@
                     </a>
                 </div>
             </div>
-
-            <div class="wrapper5" style="--src:url(/img/3ac1d66869db66b7a9f0857bf70db63a.png)"></div>
-
         </div>
     </section>
 </header>
@@ -71,9 +68,23 @@
             </div>
 
             <div class="content_box3">
-                <div class="progressi-bar">
-                    <!-- <div class="progressi progressi-one" style="--progress-width: 0%;">0%</div> -->
-                    <div class="progressi progressi-two" style="--progress-width: 100%;">0%</div>
+                <div class="progress" style="margin-top: 235px; height: 40px; border-radius: 25px;">
+                    <div class="progress-bar" role="progressbar"
+                         th:style="'width: ' + ${100} + '%; background-color: #ff7f50; font-size: 20px;'"
+                         th:text="${project.percent} + '%'" th:if="${project.percent >= 100}"
+                         aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar" role="progressbar"
+                         th:style="'width: ' + ${100} + '%; background-color: #23424A; font-size: 20px;'"
+                         th:text="${project.percent} + '%'" th:if="${project.percent == 0}"
+                         aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar" role="progressbar"
+                         th:style="'width: ' + ${project.percent} + '%; background-color: #ff7f50; font-size: 20px;'"
+                         th:text="${project.percent} + '%'" th:if="${project.percent != 0 and project.percent < 100}"
+                         aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar" role="progressbar"
+                         th:style="'width: ' + (100 - ${project.percent}) + '%; background-color: #23424A; font-size: 20px;'"
+                         th:text="${100 - project.percent} + '%'" th:if="${project.percent != 0 and project.percent < 100}"
+                         aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
                 <div class="flex_col2">
                     <div class="text">RAISED</div>
@@ -157,12 +168,13 @@
                     </div>
                 </div>
 
-                <div class="card single_post">
+                <div class="card single_post" th:unless="${project.aboutCreator == null or project.aboutCreator == ''}">
                     <div class="body">
                         <h3><a href="">About Creator</a></h3>
                         <p th:text="${project.aboutCreator}"></p>
                     </div>
                 </div>
+
 
             </div>
             <div class="col-lg-4 col-md-12 right-box">

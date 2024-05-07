@@ -61,12 +61,16 @@
                             <li><a class="dropdown-item" sec:authorize="hasAuthority('Admin')"
                                    th:href="@{'/admin/projects'}" style="color: #000;">Manage projects</a></li>
                             <li><a class="dropdown-item" th:href="@{'/project/my/'}"
+                                   sec:authorize="hasAuthority('User')" style="color: #000;">Project Applications</a>
+                            </li>
+                            <li><a class="dropdown-item" th:href="@{'/project/my/created/'}"
                                    sec:authorize="hasAuthority('User')" style="color: #000;">My Projects</a></li>
                             <li><a class="dropdown-item" th:href="@{'/project/'}" sec:authorize="hasAuthority('User')"
                                    style="color: #000;">Create Projects</a></li>
                             <li><a class="dropdown-item" sec:authorize="hasAuthority('Investor')"
                                    th:href="@{'/investor/my/investments'}" style="color: #000;">My Investments</a></li>
-                            <li><a class="dropdown-item" href="JavaScript:void(0)" onclick="singOutForm.submit()" style="color: #000;">Log
+                            <li><a class="dropdown-item" href="JavaScript:void(0)" onclick="singOutForm.submit()"
+                                   style="color: #000;">Log
                                 Out
                                 <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
                             </a></li>
@@ -127,99 +131,82 @@
         </div>
     </div>
 </section>
+
 <section class="startInvest">
-    <div class="container">
-        <h1 style="font-size: 40px; color: #23424A; padding-bottom: 60px;">Start Investing</h1>
-        <!-- Info card start -->
-        <div class="row row-cols-1 row-cols-md-3 g-3">
-            <div class="col">
-                <div class="card" style="width: 366px; border-radius: 15px;  height: 100%;">
-                    <img src="/img/image-f66a46d2-80e9-4532-add9-d0ff98f05e5c.webp" class="card-img-top" alt="#">
-                    <div class="card-body">
-                        <h5 class="card-title">Open Bionics</h5>
-                        <p class="card-text">
-                            makes functional and empowering prosthestic limbs for people with upper limb loss and limb
-                            difference.
-                        </p>
-                        <div class="bussines">
-                            <div class="progression" style="padding: 10px;">
-                                <progress id="file" max="100" value="70">70%</progress>
-                            </div>
-                            <div class="info-bussines">
-                                <div class="percent">
-                                    <p>70%</p>
-                                    <p>ACTIVE</p>
-                                </div>
-                                <div class="moneyPled">
-                                    <p>₸210,908</p>
-                                    <p>MONEY PLEDGED</p>
-                                </div>
-                            </div>
+    <div class="container3">
+        <div class="item-container" th:each="project : ${projects}">
+            <div class="img-container">
+                <img th:src="@{${project.getMainImagePath}}" alt="Event image">
+            </div>
+
+            <div class="body-container">
+                <div class="overlay"></div>
+
+                <div class="event-info">
+                    <p class="title" th:text="${project.title}"></p>
+                    <div class="separator">
+                        <div class="progress" style="margin-top: 15px; height: 25px; border-radius: 25px;">
+                            <div class="progress-bar" role="progressbar"
+                                 th:style="'width: ' + ${100} + '%; background-color: #23424A; font-size: 20px;'"
+                                 th:text="${project.percent} + '%'" th:if="${project.percent == 0}" aria-valuemin="0"
+                                 aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar"
+                                 th:style="'width: ' + ${project.percent} + '%; background-color: #ff7f50; font-size: 20px;'"
+                                 th:text="${project.percent} + '%'" th:if="${project.percent != 0}" aria-valuemin="0"
+                                 aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar"
+                                 th:style="'width: ' + (100 - ${project.percent}) + '%; background-color: #23424A; font-size: 20px;'"
+                                 th:text="${100 - project.percent} + '%'" th:if="${project.percent != 0}"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 366px; border-radius: 15px;  height: 100%;">
-                    <img src="/img/image-f66a46d2-80e9-4532-add9-d0ff98f05e5c.webp" class="card-img-top" alt="#">
-                    <div class="card-body">
-                        <h5 class="card-title">Open Bionics</h5>
-                        <p class="card-text">
-                            makes functional and empowering prosthestic limbs for people with upper limb loss and limb
-                            difference.
+
+                    <p class="price" th:text="${'₸' + project.amountNeeded}"></p>
+
+                    <div class="additional-info">
+                        <p class="info" style="justify-content: center; align-items: center">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Kazakhstan
                         </p>
-                        <div class="bussines">
-                            <div class="progression" style="padding: 10px;">
-                                <progress id="file" max="100" value="70">70%</progress>
-                            </div>
-                            <div class="info-bussines">
-                                <div class="percent">
-                                    <p>70%</p>
-                                    <p>ACTIVE</p>
-                                </div>
-                                <div class="moneyPled">
-                                    <p>₸210,908</p>
-                                    <p>MONEY PLEDGED</p>
-                                </div>
-                            </div>
-                        </div>
+                        <p class="info" style="justify-content: center; align-items: center"
+                           th:text="${'Till ' + project.finishTime}">
+                            <i class="far fa-calendar-alt"></i>
+                        </p>
+
+                        <p class="info description" th:text="${project.shortDescription}"
+                           style="height: 120px; overflow: scroll">
+                        </p>
                     </div>
                 </div>
+                <th:block th:if="${roles != null}">
+                    <th:block th:if="${roles.contains('User')}">
+                        <a th:href="@{'/project/details/' + ${project.id}}">
+                            <button class="action">In detail</button>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${roles.contains('Investor')}">
+                        <a th:href="@{'/investor/details/' + ${project.id}}">
+                            <button class="action">In detail</button>
+                        </a>
+                    </th:block>
+                    <th:block th:if="${roles.contains('Admin')}">
+                        <a th:href="@{'/admin/details/' + ${project.id}}">
+                            <button class="action">In detail</button>
+                        </a>
+                    </th:block>
+                </th:block>
+
+                <th:block th:unless="${roles != null}">
+                    <a th:href="@{'/projects/details/' + ${project.id}}">
+                        <button class="action">In detail</button>
+                    </a>
+                </th:block>
+
             </div>
-            <div class="col">
-                <div class="card" style="width: 366px; border-radius: 15px; height: 100%;">
-                    <img src="/img/image-f66a46d2-80e9-4532-add9-d0ff98f05e5c.webp" class="card-img-top" alt="#">
-                    <div class="card-body">
-                        <h5 class="card-title">Open Bionics</h5>
-                        <p class="card-text">
-                            makes functional and empowering prosthestic limbs for people with upper limb loss and limb
-                            difference.
-                        </p>
-                        <div class="bussines">
-                            <div class="progression" style="padding: 10px;">
-                                <progress id="file" max="100" value="70">70%</progress>
-                            </div>
-                            <div class="info-bussines">
-                                <div class="percent">
-                                    <p>70%</p>
-                                    <p>ACTIVE</p>
-                                </div>
-                                <div class="moneyPled">
-                                    <p>₸210,908</p>
-                                    <p>MONEY PLEDGED</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end -->
-        <div class="more">
-            <a href="#">See more opportunities <span>  <img src="/img/arrow.svg" alt="#"></span> </a>
         </div>
     </div>
 </section>
+
 <section class="aboutCompany">
     <div class="container">
         <div class="aboutInfo">
@@ -290,38 +277,26 @@
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <h3 style="margin-bottom: 35px; font-size: 40px;">What People Say</h3>
-                    <img src="/img/39db5c26c32238feffa5aa1cbe2c8743.png" class="d-block" alt="#">
-                    <p style="font-size: 20px; margin-bottom: 10px;">Burito Arborito</p>
-                    <p style="font-size: 14px; margin-bottom: 32px;">Founder</p>
+                    <img src="/img/img.png" class="d-block" alt="#">
+                    <p style="font-size: 20px; margin-bottom: 10px;">Sarah</p>
+                    <p style="font-size: 14px; margin-bottom: 32px;">Recent Graduate</p>
                     <p class="reviewText">
-                        Sea chub demoiselle whalefish zebra lionfish mud cat pelican eel. Minnow snoek icefish
-                        velvet-belly shark, California halibut round stingray northern sea robin. Southern grayling
-                        trout-perchSharksucker sea toad candiru rocket danio tilefish stingray deepwater stingray
-                        Sacramento splittail, Canthigaster rostrata.
+                        As a recent graduate, I struggled to find job opportunities in my field due to my lack of
+                        practical experience. 'Stellar Investment' changed the game for me. I was able to join a project
+                        team in my area of interest and gain valuable hands-on experience while collaborating with
+                        experienced professionals.
                     </p>
                 </div>
                 <div class="carousel-item">
                     <h3 style="margin-bottom: 35px; font-size: 40px;">What People Say</h3>
-                    <img src="/img/39db5c26c32238feffa5aa1cbe2c8743.png" class="d-block" alt="#">
-                    <p style="font-size: 20px; margin-bottom: 10px;">Burito Arborito</p>
-                    <p style="font-size: 14px; margin-bottom: 32px;">Founder</p>
+                    <img src="/img/img_1.png" class="d-block" alt="#">
+                    <p style="font-size: 20px; margin-bottom: 10px;">John</p>
+                    <p style="font-size: 14px; margin-bottom: 32px;">Investor</p>
                     <p class="reviewText">
-                        Sea chub demoiselle whalefish zebra lionfish mud cat pelican eel. Minnow snoek icefish
-                        velvet-belly shark, California halibut round stingray northern sea robin. Southern grayling
-                        trout-perchSharksucker sea toad candiru rocket danio tilefish stingray deepwater stingray
-                        Sacramento splittail, Canthigaster rostrata.
-                    </p>
-                </div>
-                <div class="carousel-item">
-                    <h3 style="margin-bottom: 35px; font-size: 40px;">What People Say</h3>
-                    <img src="/img/39db5c26c32238feffa5aa1cbe2c8743.png" class="d-block" alt="#">
-                    <p style="font-size: 20px; margin-bottom: 10px;">Burito Arborito</p>
-                    <p style="font-size: 14px; margin-bottom: 32px;">Founder</p>
-                    <p class="reviewText">
-                        Sea chub demoiselle whalefish zebra lionfish mud cat pelican eel. Minnow snoek icefish
-                        velvet-belly shark, California halibut round stingray northern sea robin. Southern grayling
-                        trout-perchSharksucker sea toad candiru rocket danio tilefish stingray deepwater stingray
-                        Sacramento splittail, Canthigaster rostrata.
+                        I've been looking for ways to diversify my investment portfolio, but I was hesitant to invest in
+                        traditional avenues due to the high entry barriers. 'Stellar Investment' offered me a unique
+                        opportunity to support innovative projects while mitigating risks. The platform's transparent
+                        communication and project vetting process gave me confidence in my investment decisions.
                     </p>
                 </div>
             </div>
@@ -347,46 +322,54 @@
             <div class="accordion">
                 <div class="accordion_wrap accordion_1" id="quests">
                     <div class="header-item">
-                        Make a difference in the life of a child
+                        How does "Stellar Investment" ensure project quality?
                     </div>
                     <div class="text">
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                            invidunt ut labore et dolore magna aliquyam erat.</p>
+                        <p>Stellar Investment" employs a rigorous vetting process for project submissions, ensuring that
+                            only high-quality and legitimate projects are listed on the platform. Additionally,
+                            third-party oversight helps maintain integrity and compliance with regulatory standards.</p>
                     </div>
                 </div>
                 <div class="accordion_wrap accordion_2" id="quests">
                     <div class="header-item">
-                        Let's do the right thing now
+                        What experience level is required to join projects?
                     </div>
                     <div class="text">
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                            invidunt ut labore et dolore magna aliquyam erat.</p>
+                        <p>"Stellar Investment" is open to individuals of all experience levels, from beginners to
+                            experts. Whether you're looking to gain practical experience or contribute your expertise to
+                            a project, there are opportunities available for everyone.</p>
                     </div>
                 </div>
                 <div class="accordion_wrap accordion_3" id="quests">
                     <div class="header-item">
-                        Can I donate anonymously?
+                        How do investors choose which projects to fund?
                     </div>
                     <div class="text">
-                        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                            invidunt ut labore et dolore magna aliquyam erat.</p>
+                        <p>Investors on "Stellar Investment" have the flexibility to browse through various project
+                            listings and choose the ones that align with their interests, goals, and risk preferences.
+                            Each project listing provides detailed information to help investors make informed
+                            decisions.</p>
                     </div>
                     <div class="accordion_wrap accordion_3" id="quests">
                         <div class="header-item">
-                            Join your hand with us for a better life
+                            What role does the admin play on the platform?
                         </div>
                         <div class="text">
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam erat.</p>
+                            <p>The admin oversees the overall functioning of the platform, ensuring smooth communication
+                                between stakeholders, enforcing compliance with rules and regulations, and addressing
+                                any issues or concerns that may arise. Admin control helps maintain integrity and
+                                efficiency throughout the platform.</p>
                         </div>
                     </div>
                     <div class="accordion_wrap accordion_3" id="quests">
                         <div class="header-item">
-                            How do I cancel my recurring donation?
+                            Can I create my own project on "Stellar Investment"?
                         </div>
                         <div class="text">
-                            <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-                                invidunt ut labore et dolore magna aliquyam erat.</p>
+                            <p>Yes, absolutely! "Stellar Investment" encourages users to create their own projects or
+                                collaborate with others on team projects. Whether you have a unique idea you want to
+                                bring to life or you're looking to work with others on a shared vision, you can create
+                                and manage your projects on the platform.</p>
                         </div>
                     </div>
                 </div>

@@ -2,6 +2,7 @@ package com.example.stellarinvestment.service;
 
 import com.example.stellarinvestment.amazon.AmazonS3Util;
 import com.example.stellarinvestment.exception.ProjectNotFoundException;
+import com.example.stellarinvestment.model.Role;
 import com.example.stellarinvestment.model.User;
 import com.example.stellarinvestment.model.project.*;
 import com.example.stellarinvestment.repository.ProjectRepository;
@@ -15,10 +16,8 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class ProjectService {
@@ -86,6 +85,22 @@ public class ProjectService {
         return projectRepository.findByStatus(projectStatus);
     }
 
+    public List<Project> getAllProjectsWithStatus(User user) {
+        Set<Role> roles = user.getRoles();
+        boolean isUser = roles.stream().anyMatch(role -> "User".equals(role.getName()));
+
+        List<Project> projects = getProjectsWithStatus(isUser ? ProjectStatus.TEAM_FORMATION : ProjectStatus.IN_PROGRESS);
+        Collections.shuffle(projects);
+
+        return projects.stream()
+                .limit(3)
+                .collect(Collectors.toList());
+    }
+
+    public List<Project> getAllEnabledProjects() {
+        return projectRepository.findAllByEnabledIsTrue();
+    }
+
 
     public List<Project> getProjectsCreatedByUser(User user) {
         return projectRepository.findByUser(user);
@@ -122,6 +137,30 @@ public class ProjectService {
             }
         }
 
+    }
+
+
+    public List<Project> getAllProjectsEnabled() {
+        List<Project> allProjects = projectRepository.findAll();
+        List<Project> allEnabledProjects = getAllProjectsWithStatusIsActive(allProjects ,ProjectStatus.TEAM_FORMATION, ProjectStatus.IN_PROGRESS);
+        Collections.shuffle(allEnabledProjects);
+
+        return allEnabledProjects.stream()
+                .limit(3)
+                .collect(Collectors.toList());
+    }
+
+    public List<Project> getAllProjectsWithStatusIsActive(List<Project> allProjects, ProjectStatus... statuses) {
+        return allProjects.stream()
+                .filter(project -> {
+                    for (ProjectStatus status : statuses) {
+                        if (project.getStatus() == status) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })
+                .collect(Collectors.toList());
     }
 
     public void setExtraImageNames(MultipartFile[] extraImageMultiparts, Project project) {

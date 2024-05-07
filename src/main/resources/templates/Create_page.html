@@ -12,7 +12,8 @@
     <link rel="stylesheet" type="text/css" href="/css/common.css" />
     <link rel="stylesheet" type="text/css" href="/css/fonts.css" />
     <link rel="stylesheet" type="text/css" href="/css/create_event.css"/>
-
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tingle.js/dist/tingle.min.css">
     <title>Create Event Page</title>
 </head>
 <body>
@@ -36,7 +37,8 @@
                 <img class="box" th:src="@{${user.photosImagePath}}" alt="alt text" onclick="toggleDropdown()">
                 <div id="myDropdown" class="dropdown-content">
                     <a th:href="@{'/main/account_details'}">My Profile</a>
-                    <a th:href="@{'/project/my/'}">My Projects</a>
+                    <a th:href="@{'/project/my/'}">Project Applications</a>
+                    <a th:href="@{'/project/my/created/'}">My Projects</a>
                     <a th:href="@{'/project/'}">Create Project</a>
                     <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
                         <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
@@ -68,7 +70,7 @@
         <div class="flex_col1">
             <div class="flex_row">
                 <input type="checkbox" id="checkbox2" class="custom-checkbox">
-                <label for="checkbox2" class="checkbox_option_label">I agree with the terms of service</label>
+                <label for="checkbox2" class="checkbox_option_label">I agree with the <span style="color: blue; cursor: pointer;" onclick="openService()">terms of service</span></label>
             </div>
             <hr class="line" size="1" />
         </div>
@@ -153,6 +155,33 @@
         <h4 class="highlight">Join</h4>
     </section>
 
+    <section class="section4">
+        <div class="card-list">
+            <a href="#" class="card-item">
+                <img src="/img/—Pngtree—document file page pen resume_4770912.png" alt="Card Image">
+                <span class="document">Documents</span>
+                <p class="techno">Before launching the project, sign an agreement on the terms and conditions of cooperation with Stellar Investment.</p>
+
+            </a>
+            <a href="#" class="card-item">
+                <img src="/img/—Pngtree—programmers code the website from_4157708.png" alt="Card Image">
+                <span class="moderator" style="justify-content: center;">Moderator</span>
+                <p class="techno">You will receive a reply from the Administrator within three business days.</p>
+            </a>
+            <a href="#" class="card-item">
+                <img src="/img/—Pngtree—animation computer editor monitor software_4968803.png" alt="Card Image">
+                <span class="editor">Editor</span>
+                <p class="techno"> Create a draft in the editor: outline the purpose and timeline of the project, add a description,
+                    photos and tariffs.</p>
+            </a>
+            <a href="#" class="card-item">
+                <img src="/img/—Pngtree—rocket launch logo icon design_3698972.png" alt="Card Image">
+                <span class="lauch">Launch</span>
+                <p class="techno">Your project is up and running. We wish you success!</p>
+            </a>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="container2">
             <div class="footerNav">
@@ -182,6 +211,7 @@
     
 
 </main>
+<script src="https://cdn.jsdelivr.net/npm/tingle.js/dist/tingle.min.js"></script>
 <script type="text/javascript">
     const dropdown = document.querySelector('.dropdown');
     const dropdownContent = document.querySelector('.dropdown-content');
@@ -206,6 +236,36 @@
         window.location.href = "create/new/";
     }
 }
+
+    var modal = new tingle.modal({
+        footer: false,
+        closeMethods: ['overlay', 'button'], // Allow closing by clicking overlay (outside modal) or button
+        closeLabel: "Close",
+        cssClass: ['modal-container']
+    });
+
+    var termsText = '<span class="modal-title">Terms of Service</span>' +
+        '<p>By using our service, you agree to the following terms:</p>' +
+        '<ol>' +
+        '<li><strong>Responsibility:</strong> Use the service responsibly and comply with applicable laws.</li>' +
+        '<li><strong>Privacy:</strong> Your data may be collected and processed according to our privacy policy.</li>' +
+        '<li><strong>Intellectual Property:</strong> Respect intellectual property rights; do not use content without permission.</li>' +
+        '<li><strong>Disclaimer:</strong> Service provided "as is" without warranties of any kind.</li>' +
+        '<li><strong>Limitation of Liability:</strong> We are not liable for damages arising from use of the service.</li>' +
+        '<li><strong>Termination:</strong> We reserve the right to terminate or suspend access to the service.</li>' +
+        '</ol>' +
+        '<.>By using the service, you acknowledge and agree to these terms. Read our full Terms of Service for more details in <a href="www.domain.com">www.domain.com</a></p>';
+
+    modal.setContent(termsText); // Use termsText variable to set modal content
+
+    function openService() {
+        modal.open();
+    }
+
+    // Close modal when clicking outside of it (overlay)
+    modal.overlay.addEventListener('click', function() {
+        modal.close();
+    });
 
 </script>
 </body>

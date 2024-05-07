@@ -13,5 +13,7 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
     List<Project> findByStatus(ProjectStatus status);
     List<Project> findByUser(User user);
 
+    List<Project> findAllByEnabledIsTrue();
+
     List<Project> findAllByUserAndStatus(User user, ProjectStatus status);
 }

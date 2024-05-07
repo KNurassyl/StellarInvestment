@@ -6,10 +6,7 @@ import com.example.stellarinvestment.model.project.Project;
 import com.example.stellarinvestment.exception.ProjectNotFoundException;
 import com.example.stellarinvestment.model.project.ProjectStatus;
 import com.example.stellarinvestment.model.project.Team;
-import com.example.stellarinvestment.service.CandidateService;
-import com.example.stellarinvestment.service.ProjectService;
-import com.example.stellarinvestment.service.TeamService;
-import com.example.stellarinvestment.service.UserService;
+import com.example.stellarinvestment.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -32,6 +29,9 @@ public class ProjectController {
 
     @Autowired
     private TeamService teamService;
+
+    @Autowired
+    private InvestmentService investmentService;
 
     @Autowired
     private CandidateService candidateService;
@@ -72,6 +72,18 @@ public class ProjectController {
         return "My_Projects";
     }
 
+    @GetMapping(value = "/my/created/")
+    public String allMyCreatedProjects(HttpServletRequest request, Model model) {
+        User authenticatedUser = userService.getCurrentAuthUser(request);
+        model.addAttribute("user", authenticatedUser);
+
+        List<Project> allMyCreatedProjects = projectService.getProjectsCreatedByUser(authenticatedUser);
+        investmentService.setTheIntermediateValues(allMyCreatedProjects);
+
+        model.addAttribute("myProjects", allMyCreatedProjects);
+        return "My_PROJECT_list";
+    }
+
     @GetMapping(value = "/all/team/")
     public String allProjectsTeam(HttpServletRequest request, Model model) {
         User authenticatedUser = userService.getCurrentAuthUser(request);
@@ -93,6 +105,8 @@ public class ProjectController {
             team.setCountOfApproved((int) count);
             teamService.updateTeam(team);
         }
+
+        investmentService.setTheIntermediateValue(project);
 
         model.addAttribute("teamMembers", candidateService.getAllApprovedCandidates(project));
         model.addAttribute("project", project);

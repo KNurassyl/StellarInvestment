@@ -65,8 +65,9 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public String updateAuthPassword(User user, String currentPassword, String newPassword) {
+    public String[] updateAuthPassword(User user, String currentPassword, String newPassword) {
         String message;
+        String path;
 
         String userExistingPassword = user.getPassword();
 
@@ -75,11 +76,13 @@ public class UserService {
             encodePassword(user);
             userRepository.save(user);
             message = "Successfully changed password.";
+            path = "changed";
         } else {
             message = "Your current password is incorrect.";
+            path = "incorrect";
         }
 
-        return message;
+        return new String[]{message, path};
     }
 
 

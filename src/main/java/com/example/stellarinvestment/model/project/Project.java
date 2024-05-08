@@ -5,10 +5,8 @@ import com.example.stellarinvestment.model.IdBasedEntity;
 import com.example.stellarinvestment.model.User;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Entity
 @Table(name = "projects")
@@ -159,8 +157,10 @@ public class Project extends IdBasedEntity {
         this.createdTime = createdTime;
     }
 
-    public Date getFinishTime() {
-        return finishTime;
+    public String getFinishTime() {
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy", Locale.ENGLISH);
+
+        return sdf.format(finishTime);
     }
 
     public void setFinishTime(Date finishTime) {

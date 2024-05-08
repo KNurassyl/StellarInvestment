@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="/css/common.css" />
     <link rel="stylesheet" type="text/css" href="/css/fonts.css" />
     <link rel="stylesheet" type="text/css" href="/css/Create_event_start.css"/>
-
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <title>Create Event Start Page</title>
 </head>
 
@@ -38,7 +38,8 @@
                 <img class="box" th:src="@{${user.photosImagePath}}" alt="alt text">
                 <div id="myDropdown" class="dropdown-content">
                     <a th:href="@{'/main/account_details'}">My Profile</a>
-                    <a th:href="@{'/project/my/'}">My Projects</a>
+                    <a th:href="@{'/project/my/'}">Project Applications</a>
+                    <a th:href="@{'/project/my/created/'}">My Projects</a>
                     <a th:href="@{'/project/'}">Create Project</a>
                     <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
                         <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>

@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="/css/fonts.css"/>
     <link rel="stylesheet" type="text/css" href="/css/Profka_client.css"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <title>Profile for Client</title>
 </head>
 <body>
@@ -43,7 +44,8 @@
                     <a th:href="@{'/main/account_details'}">My Profile</a>
                     <a sec:authorize="hasAuthority('Admin')" th:href="@{'/admin/projects'}">Manage Projects</a>
                     <a sec:authorize="hasAuthority('Investor')" th:href="@{'/investor/my/investments'}">My Investments</a>
-                    <a th:href="@{'/project/my/'}" sec:authorize="hasAuthority('User')">My Projects</a>
+                    <a th:href="@{'/project/my/'}" sec:authorize="hasAuthority('User')">Project Applications</a>
+                    <a th:href="@{'/project/my/created/'}" sec:authorize="hasAuthority('User')">My Projects</a>
                     <a th:href="@{'/project/'}" sec:authorize="hasAuthority('User')">Create Projects</a>
                     <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
                         <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
@@ -59,25 +61,101 @@
 </header>
 <section class="container light-style flex-grow-1 container-p-y" style="margin-bottom: 100px;">
 
-    <div th:if="${param.appliedAlready != null}">
-        <p style="text-align: center; background-color: red; color: white;">You have already applied for that
-            position!</p>
+
+    <div id="success-box" th:if="${param.changed != null}">
+        <div class="dot"></div>
+        <div class="dot two"></div>
+        <div class="face">
+            <div class="eye"></div>
+            <div class="eye right"></div>
+            <div class="mouth happy"></div>
+        </div>
+        <div class="shadow scale"></div>
+        <div class="message">
+            <p>Successfully changed password</p>
+        </div>
+        <button class="button-box" onclick="hideSuccessBox()"><h1 class="green">Great</h1></button>
     </div>
 
-    <div th:if="${param.memberAlready != null}">
-        <p style="text-align: center; background-color: red; color: white;">You are already member of that project
-            position!</p>
+    <div id="error-box" th:if="${param.incorrect != null}">
+        <div class="dot"></div>
+        <div class="dot two"></div>
+        <div class="face2">
+            <div class="eye"></div>
+            <div class="eye right"></div>
+            <div class="mouth sad"></div>
+        </div>
+        <div class="shadow move"></div>
+        <div class="message">
+            <p>Your current password is incorrect! Try again.</p>
+        </div>
+        <button class="button-box" onclick="hideErrorBox()"><h1 class="red">Okay</h1></button>
     </div>
 
-    <div th:if="${param.applyOnlyOne != null}">
-        <p style="text-align: center; background-color: red; color: white;">You can only apply for one position of project!</p>
+    <div id="error-box" th:if="${param.appliedAlready != null}">
+        <div class="dot"></div>
+        <div class="dot two"></div>
+        <div class="face2">
+            <div class="eye"></div>
+            <div class="eye right"></div>
+            <div class="mouth sad"></div>
+        </div>
+        <div class="shadow move"></div>
+        <div class="message">
+            <p>You have already applied for that
+                position!</p>
+        </div>
+        <button class="button-box" onclick="hideErrorBox()"><h1 class="red">Okay</h1></button>
     </div>
 
-
-    <div th:if="${param.successfullyApplied != null}">
-        <p style="text-align: center; background-color: darkseagreen;">Successfully applied! You can see the status in
-            'My Requests'</p>
+    <div id="success-box" th:if="${param.memberAlready != null}">
+        <div class="dot"></div>
+        <div class="dot two"></div>
+        <div class="face">
+            <div class="eye"></div>
+            <div class="eye right"></div>
+            <div class="mouth happy"></div>
+        </div>
+        <div class="shadow scale"></div>
+        <div class="message">
+            <p>You are already member of that project
+                position!</p>
+        </div>
+        <button class="button-box" onclick="hideSuccessBox()"><h1 class="green">Great</h1></button>
     </div>
+
+    <div id="error-box" th:if="${param.applyOnlyOne != null}">
+        <div class="dot"></div>
+        <div class="dot two"></div>
+        <div class="face2">
+            <div class="eye"></div>
+            <div class="eye right"></div>
+            <div class="mouth sad"></div>
+        </div>
+        <div class="shadow move"></div>
+        <div class="message">
+            <p>You can only apply for one position of project!</p>
+        </div>
+        <button class="button-box" onclick="hideErrorBox()"><h1 class="red">Okay</h1></button>
+    </div>
+
+    <div id="success-box" th:if="${param.successfullyApplied != null}">
+        <div class="dot"></div>
+        <div class="dot two"></div>
+        <div class="face">
+            <div class="eye"></div>
+            <div class="eye right"></div>
+            <div class="mouth happy"></div>
+        </div>
+        <div class="shadow scale"></div>
+        <div class="message">
+            <h1 class="alert" style="margin-bottom: -1rem;">Successfully applied!</h1>
+            <p>You can see the status in
+                'My Requests'</p>
+        </div>
+        <button class="button-box" onclick="hideSuccessBox()"><h1 class="green">Great</h1></button>
+    </div>
+
 
     <h4 class="font-weight-bold py-3 mb-4">
         Account details
@@ -393,6 +471,20 @@
     dropdown.addEventListener('click', function (event) {
         dropdownContent.classList.toggle('show');
     });
+
+    function hideSuccessBox() {
+        var successBox = document.getElementById('success-box');
+        if (successBox) {
+            successBox.style.display = 'none';
+        }
+    }
+
+    function hideErrorBox() {
+        var errorBox = document.getElementById('error-box');
+        if (errorBox) {
+            errorBox.style.display = 'none';
+        }
+    }
 </script>
 </body>
 </html>

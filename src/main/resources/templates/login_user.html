@@ -54,9 +54,10 @@
                             <input type="email" name="email" placeholder="Email" required />
                         </div>
                         <div class="input_field">
-                            <span><i aria-hidden="true" class="fa fa-lock"></i></span>
+                            <span class="lock-icon"><i aria-hidden="true" class="fa fa-lock"></i></span>
                             <input type="password" name="password" placeholder="Password" required />
                         </div>
+                        <span class="eye-icon" id="togglePassword" style="position: absolute; right: 33px; top: 44%; transform: translateY(-50%);"><i aria-hidden="true" class="fa fa-eye" onclick="togglePasswordVisibility()"></i></span>
                         <div class="input_field checkbox_option">
                             <input type="checkbox" id="cb2" name="remember-me">
                             <label for="cb2">Remember me</label>
@@ -72,10 +73,33 @@
     </div>
     <p class="credit">Not a member yet? <a th:href="@{'/auth/register'}">Register now</a></p>
 
-    <script>
+    <script type="text/javascript">
         document.getElementById('close').addEventListener('click', function() {
             document.querySelector('.login-warning').style.display = 'none';
         });
+
+        function togglePasswordVisibility() {
+            var passwordInput = document.querySelector('input[name="password"]');
+            var eyeIcon = document.getElementById('togglePassword').querySelector('i');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+
+            document.getElementById('togglePassword').addEventListener('mouseleave', function() {
+                if (passwordInput.type === 'text') {
+                    passwordInput.type = 'password';
+                    eyeIcon.classList.remove('fa-eye-slash');
+                    eyeIcon.classList.add('fa-eye');
+                }
+            });
+        }
     </script>
 </body>
 

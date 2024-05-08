@@ -1,8 +1,12 @@
 package com.example.stellarinvestment.controller;
 
 import com.example.stellarinvestment.amazon.AmazonS3Util;
+import com.example.stellarinvestment.model.Role;
 import com.example.stellarinvestment.model.User;
+import com.example.stellarinvestment.model.project.Project;
 import com.example.stellarinvestment.service.CandidateService;
+import com.example.stellarinvestment.service.InvestmentService;
+import com.example.stellarinvestment.service.ProjectService;
 import com.example.stellarinvestment.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/main")
@@ -23,12 +30,27 @@ public class MainController {
     private UserService userService;
 
     @Autowired
+    private InvestmentService investmentService;
+    @Autowired
+    private ProjectService projectService;
+    @Autowired
     private CandidateService candidateService;
 
     @GetMapping(value = "/")
     public String authMainPage(HttpServletRequest request, Model model) {
         User authenticatedUser = userService.getCurrentAuthUser(request);
-        model.addAttribute("user", authenticatedUser);
+        if (authenticatedUser != null) {
+            Set<String> roles = authenticatedUser.getRoles().stream()
+                                .map(Role::getName)
+                                .collect(Collectors.toSet());
+
+            List<Project> allProjectsWithStatus = projectService.getAllProjectsWithStatus(authenticatedUser);
+            investmentService.setTheIntermediateValues(allProjectsWithStatus);
+            model.addAttribute("roles", roles);
+            model.addAttribute("user", authenticatedUser);
+            model.addAttribute("projects", allProjectsWithStatus);
+        }
+
         return "Main_page";
     }
 
@@ -52,11 +74,12 @@ public class MainController {
                                      @RequestParam(name = "email") String email,
                                      Model model) {
         User authenticatedUser = userService.getUserByEmail(email);
-        String messagePassword = userService.updateAuthPassword(authenticatedUser, currentPassword, newPassword);
-        System.out.println(messagePassword);
+        String[] result = userService.updateAuthPassword(authenticatedUser, currentPassword, newPassword);
+        String messagePassword = result[0];
+        String path = result[1];
         model.addAttribute("messagePassword", messagePassword);
 
-        return "redirect:/main/account_details";
+        return "redirect:/main/account_details?" + path;
     }
 
     @PostMapping("/update_account_details")

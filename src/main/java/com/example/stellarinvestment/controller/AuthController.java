@@ -3,7 +3,9 @@ package com.example.stellarinvestment.controller;
 import com.example.stellarinvestment.exception.UserNotFoundException;
 import com.example.stellarinvestment.mail.Utility;
 import com.example.stellarinvestment.model.User;
+import com.example.stellarinvestment.model.project.Project;
 import com.example.stellarinvestment.repository.RoleRepository;
+import com.example.stellarinvestment.service.ProjectService;
 import com.example.stellarinvestment.service.UserService;
 import com.example.stellarinvestment.setting.EmailSettingBag;
 import com.example.stellarinvestment.setting.SettingService;
@@ -22,6 +24,9 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/auth")
@@ -32,6 +37,9 @@ public class AuthController {
 
     @Autowired
     private SettingService settingService;
+
+    @Autowired
+    private ProjectService projectService;
 
     @Autowired
     private RoleRepository roleRepository;
@@ -60,7 +68,9 @@ public class AuthController {
     }
 
     @GetMapping(value = "/main")
-    public String mainPage() {
+    public String mainPage(Model model) {
+        model.addAttribute("projects", projectService.getAllProjectsEnabled());
+        model.addAttribute("roles", null);
         return "Main_page";
     }
 

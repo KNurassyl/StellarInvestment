@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
     <!-- <link rel="stylesheet" type="text/css" href="./css/fonts.css" /> -->
     <link rel="stylesheet" type="text/css" href="/css/My_investments.css"/>
-
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <title>My Investments</title>
 </head>
 
@@ -37,7 +37,6 @@
 
             <a class="subtitle2" th:href="@{'/investor/all/projects/'}"><h3>Projects</h3></a>
             <a class="subtitle21" th:href="@{'/main/'}"><h3>Home</h3></a>
-            <div class="rect1"></div>
             <img class="image4" src="/img/ace06293b0d4076285adfa86c63156ab.png" alt=""/>
             <div class="dropdown">
                 <img class="box" th:src="@{${user.photosImagePath}}" alt="alt text" onclick="toggleDropdown()">
@@ -61,9 +60,21 @@
 <main class="kaif main">
     <section class="orders">
         <div class="container">
-            <p th:if="${param.paid != null}"
-               style="text-align: center; background-color: darkseagreen; padding: 20px; margin-bottom: 40px">
-                Successfully paid, stay tuned further updates of project</p>
+            <div id="success-box" th:if="${param.paid != null}">
+                <div class="dot"></div>
+                <div class="dot two"></div>
+                <div class="face">
+                    <div class="eye"></div>
+                    <div class="eye right"></div>
+                    <div class="mouth happy"></div>
+                </div>
+                <div class="shadow scale"></div>
+                <div class="message">
+                    <h1 class="alert">Successfully paid!</h1>
+                    <p>Stay tuned further updates of project</p>
+                </div>
+                <button class="button-box" onclick="hideSuccessBox()"><h1 class="green">Great</h1></button>
+            </div>
 
             <ul class="nav">
                 <li class="nav-item"><a class="nav-link active" href="#" onclick="showTab(event, 'investments')"
@@ -246,17 +257,10 @@
         });
     });
 
-    function eraseElement(element) {
-        var row = element.closest(".existing-projects");
-        var tbody = row.parentElement;
-        var thead = tbody.previousElementSibling;
-
-        // Remove the row from tbody
-        row.remove();
-
-        // Check if there are no more rows in tbody, remove the thead as well
-        if (tbody.querySelectorAll(".existing-projects").length === 0) {
-            thead.remove();
+    function hideSuccessBox() {
+        var successBox = document.getElementById('success-box');
+        if (successBox) {
+            successBox.style.display = 'none';
         }
     }
 

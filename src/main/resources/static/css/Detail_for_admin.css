@@ -11,7 +11,7 @@
     }
     .custom-header  a {
       text-decoration: none;
-      font: 700 20px/1.35 "Roboto", Helvetica, Arial, serif;
+      font: 700 20px/1.35 "Roboto", sans-serif;
     
     }
     
@@ -83,7 +83,7 @@
     .custom-header .subtitle1 {
       bottom: 0px;
       color: white;
-      font: 700 20px/1.35 "Roboto", Helvetica, Arial, serif;
+      font: 700 20px/1.35 "Roboto", sans-serif;
       height: 54px;
       left: 66px;
       position: absolute;
@@ -95,7 +95,7 @@
     .custom-header .subtitle2 {
       bottom: 16px;
       color: white;
-      font: 500 20px/1.35 "Roboto", Helvetica, Arial, serif;
+      font: 500 20px/1.35 "Roboto", sans-serif;
       height: 27px;
       left: 501px;
       position: absolute;
@@ -107,7 +107,7 @@
     .custom-header .subtitle21 {
       bottom: 16px;
       color: white;
-      font: 500 20px/1.35 "Roboto", Helvetica, Arial, serif;
+      font: 500 20px/1.35 "Roboto", sans-serif;
       height: 27px;
       left: 389px;
       position: absolute;
@@ -197,7 +197,7 @@
     
     .custom-header .subtitle22 {
       color: white;
-      font: 500 20px/1.35 "Roboto", Helvetica, Arial, serif;
+      font: 500 20px/1.35 "Roboto", sans-serif;
       height: 27px;
       margin: 7px 14px 7px 0px;
       width: 50px;
@@ -299,7 +299,7 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        font: 500 20px/0.8 "Roboto", Helvetica, Arial, sans-serif;
+        font: 500 20px/0.8 "Roboto", sans-sans-serif;
         color: #fff;
         display: flex;
         justify-content: center;
@@ -340,11 +340,11 @@
       }
       .section2 .text {
         width: 100%;
-        font: 500 14px/2.85 "Roboto", Helvetica, Arial, serif;
+        font: 500 14px/2.85 "Roboto", sans-serif;
         color: rgb(165, 165, 165);
       }
       .section2 .medium_title {
-        font: 700 24px/0.66 "Roboto", Helvetica, Arial, serif;
+        font: 700 24px/0.66 "Roboto", sans-serif;
         color: rgb(61, 61, 61);
       }
       .section2 .flex_col3 {
@@ -361,12 +361,12 @@
         height: 57px;
       }
       .section2 .text1 {
-        font: 500 14px/2.85 "Roboto", Helvetica, Arial, serif;
+        font: 500 14px/2.85 "Roboto", sans-serif;
         color: rgb(165, 165, 165);
       }
       .section2 .medium_title1 {
         width: 100%;
-        font: 700 24px/0.66 "Roboto", Helvetica, Arial, serif;
+        font: 700 24px/0.66 "Roboto", sans-serif;
         color: rgb(61, 61, 61);
       }
       .section2 .flex_col4 {
@@ -409,7 +409,7 @@
       }
       .section2 .medium_title2 {
         margin: 0px 33px 0px 0px;
-        font: 700 24px/0.66 "Roboto", Helvetica, Arial, serif;
+        font: 700 24px/0.66 "Roboto", sans-serif;
         color: rgb(61, 61, 61);
       }
       .section2 .line {
@@ -430,7 +430,7 @@
         left: 0px;
         width: 113px;
         height: 16px;
-        font: 500 14px/1.14 "Roboto", Helvetica, Arial, serif;
+        font: 500 14px/1.14 "Roboto", sans-serif;
         color: rgb(61, 61, 61);
       }
       .section2 .medium_title3 {
@@ -441,7 +441,7 @@
         left: 0px;
         width: 143px;
         height: 16px;
-        font: 700 24px/0.66 "Roboto", Helvetica, Arial, serif;
+        font: 700 24px/0.66 "Roboto", sans-serif;
         color: rgb(61, 61, 61);
       }
       .section2 .subtitle13 {
@@ -452,7 +452,7 @@
         left: 0px;
         width: 84px;
         height: 16px;
-        font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+        font: 500 20px/0.8 "Roboto", sans-serif;
         color: rgb(101, 169, 166);
       }
       .body.widget .categories-clouds li a {
@@ -466,7 +466,7 @@
         left: 1px;
         width: 573px;
         height: 72px;
-        font: 400 14px/1.71 "Roboto", Helvetica, Arial, serif;
+        font: 400 14px/1.71 "Roboto", sans-serif;
         color: rgb(114, 114, 114);
       }
       .section2 .text12 {
@@ -475,7 +475,7 @@
         left: 0px;
         width: 114px;
         height: 16px;
-        font: 500 14px/1.14 "Roboto", Helvetica, Arial, serif;
+        font: 500 14px/1.14 "Roboto", sans-serif;
         color: rgb(61, 61, 61);
       }
       .section2 .content_box2 {
@@ -507,7 +507,7 @@
         transform: translate(-50%, -50%);
         width: 130px;
         height: 40px;
-        font: 500 20px/1 "Roboto", Helvetica, Arial, serif;
+        font: 500 20px/1 "Roboto", sans-serif;
         color: #000;
         border-radius: 6px; 
         border-style: solid; /* add this line */
@@ -527,7 +527,7 @@
         transform: translate(-50%, -50%);
         width: 130px;
         height: 40px;
-        font: 500 20px/1 "Roboto", Helvetica, Arial, serif;
+        font: 500 20px/1 "Roboto", sans-serif;
         color: rgb(255, 255, 255);
         background-color: #ff7f50;
         border-radius: 6px;
@@ -598,19 +598,19 @@
     }
     .subtitle5 {
       width: 98.92%;
-      font: 700 20px/0.8 "Roboto", Helvetica, Arial, serif;
+      font: 700 20px/0.8 "Roboto", sans-serif;
       color: rgb(255, 255, 255);
     }
     .paragraph11 {
       margin: 6px 0px 0px;
       width: 98.92%;
-      font: 400 14px/1.71 "Roboto", Helvetica, Arial, serif;
+      font: 400 14px/1.71 "Roboto", sans-serif;
       color: rgb(255, 255, 255);
     }
     .subtitle6 {
       margin: 2px 0px 0px;
       width: 25.27%;
-      font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+      font: 500 20px/0.8 "Roboto", sans-serif;
       color: rgb(0, 0, 0);
       background: var(--src) center center / 100% 100% no-repeat;
       padding: 15px 17px 15px 18px;
@@ -622,14 +622,14 @@
     }
     .text3 {
       width: 94px;
-      font: 500 14px/1.14 "Roboto", Helvetica, Arial, serif;
+      font: 500 14px/1.14 "Roboto", sans-serif;
       color: rgb(255, 255, 255);
       background-color: rgb(59, 112, 125);
       padding: 13px 15px 13px 10px;
     }
     .text4 {
       width: 88px;
-      font: 500 14px/1.14 "Roboto", Helvetica, Arial, serif;
+      font: 500 14px/1.14 "Roboto", sans-serif;
       color: rgb(35, 66, 74);
       background-color: rgb(255, 255, 255);
       padding: 13px 7px 13px 4px;
@@ -658,18 +658,18 @@
 
     .text {
         width: 100%;
-        font: 700 14px/1.14 "Roboto", Helvetica, Arial, serif;
+        font: 700 14px/1.14 "Roboto", sans-serif;
         color: rgb(255, 255, 255);
       }
       .desc {
         margin: 18px 0px 0px;
-        font: 500 12px/2 "Roboto", Helvetica, Arial, serif;
+        font: 500 12px/2 "Roboto", sans-serif;
         color: rgb(255, 255, 255);
       }
       .medium_title {
         margin: 36px 0px 0px;
         width: 96.23%;
-        font: 700 24px/0.66 "Roboto", Helvetica, Arial, serif;
+        font: 700 24px/0.66 "Roboto", sans-serif;
         color: rgb(255, 255, 255);
       }
 
@@ -711,19 +711,19 @@
     }
     .subtitle5 {
       width: 98.92%;
-      font: 700 20px/0.8 "Roboto", Helvetica, Arial, serif;
+      font: 700 20px/0.8 "Roboto", sans-serif;
       color: rgb(255, 255, 255);
     }
     .paragraph11 {
       margin: 6px 0px 0px;
       width: 98.92%;
-      font: 400 14px/1.71 "Roboto", Helvetica, Arial, serif;
+      font: 400 14px/1.71 "Roboto", sans-serif;
       color: rgb(255, 255, 255);
     }
     .subtitle6 {
       margin: 2px 0px 0px;
       width: 25.27%;
-      font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+      font: 500 20px/0.8 "Roboto", sans-serif;
       color: rgb(0, 0, 0);
       background: var(--src) center center / 100% 100% no-repeat;
       padding: 15px 17px 15px 18px;
@@ -735,14 +735,14 @@
     }
     .text3 {
       width: 94px;
-      font: 500 14px/1.14 "Roboto", Helvetica, Arial, serif;
+      font: 500 14px/1.14 "Roboto", sans-serif;
       color: rgb(255, 255, 255);
       background-color: rgb(59, 112, 125);
       padding: 13px 15px 13px 10px;
     }
     .text4 {
       width: 88px;
-      font: 500 14px/1.14 "Roboto", Helvetica, Arial, serif;
+      font: 500 14px/1.14 "Roboto", sans-serif;
       color: rgb(35, 66, 74);
       background-color: rgb(255, 255, 255);
       padding: 13px 7px 13px 4px;
@@ -897,19 +897,19 @@
     }
     .single_post .subtitle5 {
         width: 98.92%;
-        font: 700 20px/0.8 "Roboto", Helvetica, Arial, serif;
+        font: 700 20px/0.8 "Roboto", sans-serif;
         color: rgb(255, 255, 255);
       }
     .single_post .paragraph11 {
         margin: 6px 0px 0px;
         width: 98.92%;
-        font: 400 14px/1.71 "Roboto", Helvetica, Arial, serif;
+        font: 400 14px/1.71 "Roboto", sans-serif;
         color: rgb(255, 255, 255);
       }
       .single_post .subtitle6 {
         margin: 2px 0px 0px;
         width: 25.27%;
-        font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+        font: 500 20px/0.8 "Roboto", sans-serif;
         color: rgb(0, 0, 0);
         background: var(--src) center center / 100% 100% no-repeat;
         padding: 15px 17px 15px 18px;
@@ -921,14 +921,14 @@
       }
       .single_post .text3 {
         width: 94px;
-        font: 500 14px/1.14 "Roboto", Helvetica, Arial, serif;
+        font: 500 14px/1.14 "Roboto", sans-serif;
         color: rgb(255, 255, 255);
         background-color: rgb(59, 112, 125);
         padding: 13px 15px 13px 10px;
       }
       .text4 {
         width: 88px;
-        font: 500 14px/1.14 "Roboto", Helvetica, Arial, serif;
+        font: 500 14px/1.14 "Roboto", sans-serif;
         color: rgb(35, 66, 74);
         background-color: rgb(255, 255, 255);
         padding: 13px 7px 13px 4px;
@@ -1039,7 +1039,7 @@
       }
       .section3 .subtitle5 {
         color: rgb(255, 255, 255);
-        font: 400 20px/1.5 "Roboto", Helvetica, Arial, serif;
+        font: 400 20px/1.5 "Roboto", sans-serif;
         margin: 481px 32.43% 7px auto;
         position: relative;
         width: 418px;
@@ -1083,7 +1083,7 @@
       .section3 .subtitle6 {
         bottom: 204px;
         color: rgb(61, 61, 61);
-        font: 500 20px/1 "Roboto", Helvetica, Arial, serif;
+        font: 500 20px/1 "Roboto", sans-serif;
         height: 20px;
         left: 883px;
         position: absolute;
@@ -1118,13 +1118,13 @@
       }
       .section3 .subtitle7 {
         color: rgb(255, 255, 255);
-        font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+        font: 500 20px/0.8 "Roboto", sans-serif;
         margin: 7px 4px 8px 5px;
       }
       .section3 .desc {
         bottom: 154px;
         color: rgb(172, 172, 172);
-        font: 400 12px/1.33 "Roboto", Helvetica, Arial, serif;
+        font: 400 12px/1.33 "Roboto", sans-serif;
         height: 16px;
         left: 927px;
         position: absolute;
@@ -1135,7 +1135,7 @@
       .section3 .subtitle8 {
         bottom: 213px;
         color: rgb(61, 61, 61);
-        font: 700 20px/0.8 "Roboto", Helvetica, Arial, serif;
+        font: 700 20px/0.8 "Roboto", sans-serif;
         height: 16px;
         left: 18px;
         position: absolute;
@@ -1147,7 +1147,7 @@
       .section3 .subtitle9 {
         bottom: 207px;
         color: rgb(61, 61, 61);
-        font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+        font: 500 20px/0.8 "Roboto", sans-serif;
         height: 16px;
         left: 286px;
         position: absolute;
@@ -1158,7 +1158,7 @@
       .section3 .subtitle91 {
         bottom: 211px;
         color: rgb(61, 61, 61);
-        font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+        font: 500 20px/0.8 "Roboto", sans-serif;
         height: 16px;
         left: 547px;
         position: absolute;
@@ -1169,7 +1169,7 @@
       .section3 .subtitle92 {
         bottom: 211px;
         color: rgb(61, 61, 61);
-        font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+        font: 500 20px/0.8 "Roboto", sans-serif;
         height: 16px;
         left: 739px;
         position: absolute;
@@ -1180,7 +1180,7 @@
       .section3 .subtitle93 {
         bottom: 103px;
         color: rgb(61, 61, 61);
-        font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+        font: 500 20px/0.8 "Roboto", sans-serif;
         height: 16px;
         left: 746px;
         position: absolute;
@@ -1191,7 +1191,7 @@
       .section3 .paragraph {
         bottom: 49px;
         color: rgb(61, 61, 61);
-        font: 400 14px/2.14 "Roboto", Helvetica, Arial, serif;
+        font: 400 14px/2.14 "Roboto", sans-serif;
         height: 150px;
         left: 18px;
         position: absolute;
@@ -1202,7 +1202,7 @@
       .section3 .paragraph1 {
         bottom: 49px;
         color: rgb(61, 61, 61);
-        font: 400 14px/2.14 "Roboto", Helvetica, Arial, serif;
+        font: 400 14px/2.14 "Roboto", sans-serif;
         height: 150px;
         left: 286px;
         position: absolute;
@@ -1213,7 +1213,7 @@
       .section3 .paragraph2 {
         bottom: 79px;
         color: rgb(61, 61, 61);
-        font: 400 14px/2.14 "Roboto", Helvetica, Arial, serif;
+        font: 400 14px/2.14 "Roboto", sans-serif;
         height: 120px;
         left: 554px;
         position: absolute;
@@ -1309,7 +1309,7 @@
       .section3 .subtitle10 {
         color: rgb(255, 255, 255);
         display: flex;
-        font: 500 20px/1.1 "Roboto", Helvetica, Arial, serif;
+        font: 500 20px/1.1 "Roboto", sans-serif;
         height: 22px;
         justify-content: flex-end;
         left: 0px;
@@ -1346,7 +1346,7 @@
       .section3 .subtitle101 {
         color: rgb(255, 255, 255);
         display: flex;
-        font: 500 20px/1.1 "Roboto", Helvetica, Arial, serif;
+        font: 500 20px/1.1 "Roboto", sans-serif;
         height: 22px;
         justify-content: flex-end;
         left: 0px;
@@ -1371,7 +1371,7 @@
       }
       .section3 .subtitle102 {
         color: rgb(255, 255, 255);
-        font: 500 20px/1.1 "Roboto", Helvetica, Arial, serif;
+        font: 500 20px/1.1 "Roboto", sans-serif;
         height: 44px;
         left: 401px;
         position: absolute;
@@ -1380,7 +1380,7 @@
       }
       .section3 .subtitle31 {
         color: rgb(255, 255, 255);
-        font: 700 20px/1.35 "Roboto", Helvetica, Arial, serif;
+        font: 700 20px/1.35 "Roboto", sans-serif;
         height: 54px;
         left: 188px;
         position: absolute;

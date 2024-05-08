@@ -169,7 +169,7 @@
 
 a {
     text-decoration: none;
-    font: 700 20px/1.35 "Roboto", Helvetica, Arial, serif;
+    font: 700 20px/1.35 "Roboto", sans-serif;
 
 }
 
@@ -241,7 +241,7 @@ a {
 .header .subtitle1 {
     bottom: 0px;
     color: white;
-    font: 700 20px/1.35 "Roboto", Helvetica, Arial, serif;
+    font: 700 20px/1.35 "Roboto", sans-serif;
     height: 54px;
     left: 66px;
     position: absolute;
@@ -253,7 +253,7 @@ a {
 .header .subtitle2 {
     bottom: 16px;
     color: white;
-    font: 500 20px/1.35 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.35 "Roboto", sans-serif;
     height: 27px;
     left: 501px;
     position: absolute;
@@ -265,7 +265,7 @@ a {
 .header .subtitle21 {
     bottom: 16px;
     color: white;
-    font: 500 20px/1.35 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.35 "Roboto", sans-serif;
     height: 27px;
     left: 389px;
     position: absolute;
@@ -373,7 +373,7 @@ a {
 
 .header .subtitle22 {
     color: white;
-    font: 500 20px/1.35 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.35 "Roboto", sans-serif;
     height: 27px;
     margin: 7px 14px 7px 0px;
     width: 50px;
@@ -457,7 +457,7 @@ a {
 .main .subtitle15 {
     color: black;
     display: flex;
-    font: 500 20px/1.35 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.35 "Roboto", sans-serif;
     height: 27px;
     justify-content: flex-end;
     left: 81px;
@@ -477,17 +477,17 @@ a {
 
 .main .medium_title2 {
     color: black;
-    font: 700 24px/1.66 "Roboto", Helvetica, Arial, serif;
+    font: 700 24px/1.66 "Roboto", sans-serif;
 }
 
 .main .medium_title2_span0 {
     color: #23424a;
-    font: 600 1em/1.66 "Avenir Next", Helvetica, Arial, serif;
+    font: 600 1em/1.66 "Avenir Next", sans-serif;
 }
 
 .main .medium_title2_span1 {
     color: #3b707d;
-    font: 500 0.8333333333em/2 "Avenir Next", Helvetica, Arial, serif;
+    font: 500 0.8333333333em/2 "Avenir Next", sans-serif;
 }
 
 .main .group2 {
@@ -522,7 +522,7 @@ a {
 .main .text2 {
     color: black;
     display: flex;
-    font: 500 14px/1.35 "Roboto", Helvetica, Arial, serif;
+    font: 500 14px/1.35 "Roboto", sans-serif;
     height: 19px;
     justify-content: flex-end;
     left: 146px;
@@ -535,7 +535,7 @@ a {
 .main .text21 {
     color: black;
     display: flex;
-    font: 500 14px/1.35 "Roboto", Helvetica, Arial, serif;
+    font: 500 14px/1.35 "Roboto", sans-serif;
     height: 19px;
     justify-content: flex-end;
     left: 0px;
@@ -573,7 +573,7 @@ a {
 .main .subtitle16 {
     color: black;
     display: flex;
-    font: 500 20px/2 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/2 "Roboto", sans-serif;
     height: 40px;
     justify-content: flex-end;
     left: 0px;
@@ -606,7 +606,7 @@ a {
 .main .subtitle17 {
     color: white;
     display: flex;
-    font: 500 20px/2 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/2 "Roboto", sans-serif;
     height: 40px;
     justify-content: flex-end;
     left: 0px;
@@ -635,7 +635,7 @@ a {
 .main .medium_title {
     bottom: 40px;
     color: black;
-    font: 500 24px/1.66 "Roboto", Helvetica, Arial, serif;
+    font: 500 24px/1.66 "Roboto", sans-serif;
     height: 40px;
     left: 560px;
     position: absolute;
@@ -669,7 +669,7 @@ a {
 .main .text {
     bottom: 18px;
     color: #555555;
-    font: 700 14px/2.85 "Roboto", Helvetica, Arial, serif;
+    font: 700 14px/2.85 "Roboto", sans-serif;
     height: 40px;
     left: 220px;
     position: absolute;
@@ -681,7 +681,7 @@ a {
 .main .subtitle3 {
     bottom: 47px;
     color: #333333;
-    font: 400 20px/2 "Roboto", Helvetica, Arial, serif;
+    font: 400 20px/2 "Roboto", sans-serif;
     height: 40px;
     left: 253px;
     position: absolute;
@@ -693,7 +693,7 @@ a {
 .main .text1 {
     bottom: 18px;
     color: #555555;
-    font: 700 14px/2.85 "Roboto", Helvetica, Arial, serif;
+    font: 700 14px/2.85 "Roboto", sans-serif;
     height: 40px;
     left: 19px;
     position: absolute;
@@ -705,7 +705,7 @@ a {
 .main .subtitle4 {
     bottom: 47px;
     color: black;
-    font: 400 20px/2 "Roboto", Helvetica, Arial, serif;
+    font: 400 20px/2 "Roboto", sans-serif;
     height: 40px;
     left: 19px;
     position: absolute;
@@ -757,12 +757,12 @@ a {
 
 .main .medium_title2_span2 {
     color: #64a9a6;
-    font: 500 0.8333333333em/2 "Avenir Next", Helvetica, Arial, serif;
+    font: 500 0.8333333333em/2 "Avenir Next", sans-serif;
 }
 
 .main .hero_title1 {
     color: #23424a;
-    font: 700 40px/1 "Roboto", Helvetica, Arial, serif;
+    font: 700 40px/1 "Roboto", sans-serif;
     height: 40px;
     left: 124px;
     position: absolute;
@@ -873,7 +873,7 @@ a {
 
 .main .hero_title {
     color: white;
-    font: 700 40px/1 "Roboto", Helvetica, Arial, serif;
+    font: 700 40px/1 "Roboto", sans-serif;
     height: 40px;
     left: 0px;
     position: absolute;
@@ -902,7 +902,7 @@ a {
 .main .hero_title2 {
     color: white;
     display: flex;
-    font: 700 40px/1 "Roboto", Helvetica, Arial, serif;
+    font: 700 40px/1 "Roboto", sans-serif;
     height: 40px;
     justify-content: flex-end;
     left: 316px;
@@ -934,7 +934,7 @@ a {
 
 .main .hero_title21 {
     color: black;
-    font: 700 40px/1 "Roboto", Helvetica, Arial, serif;
+    font: 700 40px/1 "Roboto", sans-serif;
     height: 40px;
     left: 0px;
     position: absolute;
@@ -944,7 +944,7 @@ a {
 
 .main .medium_title1 {
     color: white;
-    font: 500 24px/1.66 "Roboto", Helvetica, Arial, serif;
+    font: 500 24px/1.66 "Roboto", sans-serif;
     height: 120px;
     left: 124px;
     position: absolute;
@@ -994,12 +994,12 @@ a {
 
 .main .highlight {
     color: #f2f2f7;
-    font: 500 16px/2.5 "Roboto", Helvetica, Arial, serif;
+    font: 500 16px/2.5 "Roboto", sans-serif;
 }
 
 .main .hero_title3 {
     color: #23424a;
-    font: 700 60px/0.66 "Roboto", Helvetica, Arial, serif;
+    font: 700 60px/0.66 "Roboto", sans-serif;
     height: 40px;
     left: 455px;
     position: absolute;
@@ -1021,7 +1021,7 @@ a {
 
 .main .hero_title31 {
     color: #23424a;
-    font: 700 60px/0.66 "Roboto", Helvetica, Arial, serif;
+    font: 700 60px/0.66 "Roboto", sans-serif;
     width: 100%;
 }
 
@@ -1048,13 +1048,13 @@ a {
 
 .main .hero_title32 {
     color: #23424a;
-    font: 700 60px/0.66 "Roboto", Helvetica, Arial, serif;
+    font: 700 60px/0.66 "Roboto", sans-serif;
     width: 100%;
 }
 
 .main .hero_title33 {
     color: #23424a;
-    font: 700 60px/0.66 "Roboto", Helvetica, Arial, serif;
+    font: 700 60px/0.66 "Roboto", sans-serif;
     width: 100%;
 }
 
@@ -1161,7 +1161,7 @@ a {
 
 .main .hero_title4 {
     color: #ff8055;
-    font: 700 40px/1 "Roboto", Helvetica, Arial, serif;
+    font: 700 40px/1 "Roboto", sans-serif;
     height: 40px;
     left: 147px;
     position: absolute;
@@ -1272,7 +1272,7 @@ a {
     bottom: 119px;
     color: #23424a;
     display: flex;
-    font: 400 20px/1.4 "Roboto", Helvetica, Arial, serif;
+    font: 400 20px/1.4 "Roboto", sans-serif;
     height: 84px;
     justify-content: center;
     left: -17px;
@@ -1284,7 +1284,7 @@ a {
 .main .text11 {
     color: #23424a;
     display: flex;
-    font: 500 14px/1.71 "Roboto", Helvetica, Arial, serif;
+    font: 500 14px/1.71 "Roboto", sans-serif;
     height: 24px;
     justify-content: center;
     left: 572.5px;
@@ -1297,7 +1297,7 @@ a {
 .main .subtitle9 {
     color: #23424a;
     display: flex;
-    font: 500 20px/1.4 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.4 "Roboto", sans-serif;
     height: 28px;
     justify-content: center;
     left: 531px;
@@ -1326,7 +1326,7 @@ a {
 .main .hero_title5 {
     color: #23424a;
     display: flex;
-    font: 700 40px/1.25 "Roboto", Helvetica, Arial, serif;
+    font: 700 40px/1.25 "Roboto", sans-serif;
     height: 50px;
     justify-content: center;
     left: 441px;
@@ -1376,7 +1376,7 @@ a {
     bottom: 92px;
     color: #252a34;
     display: flex;
-    font: 500 20px/1.65 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.65 "Roboto", sans-serif;
     height: 33px;
     justify-content: flex-end;
     left: 474px;
@@ -1398,7 +1398,7 @@ a {
 .main .subtitle6 {
     color: black;
     display: flex;
-    font: 500 20px/1.65 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.65 "Roboto", sans-serif;
     height: 33px;
     justify-content: flex-end;
     left: 489px;
@@ -1429,7 +1429,7 @@ a {
 .main .subtitle71 {
     color: #252a34;
     display: flex;
-    font: 500 20px/1.65 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.65 "Roboto", sans-serif;
     height: 33px;
     justify-content: flex-end;
     left: 581px;
@@ -1462,7 +1462,7 @@ a {
 .main .subtitle61 {
     color: black;
     display: flex;
-    font: 500 20px/1.65 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.65 "Roboto", sans-serif;
     height: 33px;
     justify-content: flex-end;
     left: 587px;
@@ -1475,7 +1475,7 @@ a {
 .main .subtitle5 {
     color: white;
     display: flex;
-    font: 500 20px/1.65 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.65 "Roboto", sans-serif;
     height: 33px;
     justify-content: flex-end;
     left: 492px;
@@ -1525,7 +1525,7 @@ a {
 
 .main .paragraph {
     color: white;
-    font: 400 14px/1.92 "Roboto", Helvetica, Arial, serif;
+    font: 400 14px/1.92 "Roboto", sans-serif;
     height: 54px;
     left: 612px;
     position: absolute;
@@ -1551,7 +1551,7 @@ a {
     align-items: center;
     color: black;
     display: flex;
-    font: 500 20px/1.35 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.35 "Roboto", sans-serif;
     justify-content: center;
     margin: 198.5px 13.4% 36.5px auto;
     position: relative;
@@ -1571,7 +1571,7 @@ a {
 
 .main .medium_title21 {
     color: black;
-    font: 700 24px/1.66 "Roboto", Helvetica, Arial, serif;
+    font: 700 24px/1.66 "Roboto", sans-serif;
     height: 40px;
     left: 0px;
     position: absolute;
@@ -1595,7 +1595,7 @@ a {
 
 .main .subtitle {
     color: white;
-    font: 400 20px/1.5 "Roboto", Helvetica, Arial, serif;
+    font: 400 20px/1.5 "Roboto", sans-serif;
     margin: 541px 32.43% 7px auto;
     position: relative;
     width: 418px;
@@ -1632,7 +1632,7 @@ a {
 .main .subtitle10 {
     bottom: 1px;
     color: white;
-    font: 400 20px/1.5 "Roboto", Helvetica, Arial, serif;
+    font: 400 20px/1.5 "Roboto", sans-serif;
     height: 30px;
     left: 511px;
     position: absolute;
@@ -1672,7 +1672,7 @@ a {
 .main .subtitle13 {
     color: #3d3d3d;
     display: flex;
-    font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/0.8 "Roboto", sans-serif;
     height: 16px;
     justify-content: flex-end;
     left: 354px;
@@ -1744,7 +1744,7 @@ a {
 .main .desc {
     color: #acacac;
     display: flex;
-    font: 400 12px/1.33 "Roboto", Helvetica, Arial, serif;
+    font: 400 12px/1.33 "Roboto", sans-serif;
     height: 16px;
     justify-content: flex-end;
     left: 0px;
@@ -1757,7 +1757,7 @@ a {
 .main .subtitle11 {
     color: white;
     display: flex;
-    font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/0.8 "Roboto", sans-serif;
     height: 16px;
     justify-content: flex-end;
     left: -74px;
@@ -1833,7 +1833,7 @@ a {
 
 .main .paragraph1 {
     color: #3d3d3d;
-    font: 400 14px/2.14 "Roboto", Helvetica, Arial, serif;
+    font: 400 14px/2.14 "Roboto", sans-serif;
     height: 120px;
     left: 552px;
     position: absolute;
@@ -1843,7 +1843,7 @@ a {
 
 .main .paragraph11 {
     color: #3d3d3d;
-    font: 400 14px/2.14 "Roboto", Helvetica, Arial, serif;
+    font: 400 14px/2.14 "Roboto", sans-serif;
     height: 150px;
     left: 284px;
     position: absolute;
@@ -1863,7 +1863,7 @@ a {
 
 .main .subtitle12 {
     color: #3d3d3d;
-    font: 700 20px/0.8 "Roboto", Helvetica, Arial, serif;
+    font: 700 20px/0.8 "Roboto", sans-serif;
     height: 16px;
     left: 0px;
     position: absolute;
@@ -1894,7 +1894,7 @@ a {
 
 .main .subtitle131 {
     color: #3d3d3d;
-    font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/0.8 "Roboto", sans-serif;
     height: 16px;
     left: 0px;
     position: absolute;
@@ -1916,7 +1916,7 @@ a {
     bottom: -7px;
     color: #3d3d3d;
     display: flex;
-    font: 500 20px/1 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1 "Roboto", sans-serif;
     height: 20px;
     justify-content: flex-end;
     left: -373px;
@@ -1928,7 +1928,7 @@ a {
 .main .subtitle132 {
     color: #3d3d3d;
     display: flex;
-    font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/0.8 "Roboto", sans-serif;
     height: 16px;
     justify-content: flex-end;
     left: 0px;
@@ -1940,7 +1940,7 @@ a {
 
 .main .subtitle133 {
     color: #3d3d3d;
-    font: 500 20px/0.8 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/0.8 "Roboto", sans-serif;
     height: 16px;
     left: 261px;
     position: absolute;
@@ -1950,7 +1950,7 @@ a {
 
 .main .paragraph12 {
     color: #3d3d3d;
-    font: 400 14px/2.14 "Roboto", Helvetica, Arial, serif;
+    font: 400 14px/2.14 "Roboto", sans-serif;
     height: 150px;
     left: 16px;
     position: absolute;
@@ -1971,7 +1971,7 @@ a {
 .main .subtitle14 {
     color: white;
     display: flex;
-    font: 500 20px/1.1 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.1 "Roboto", sans-serif;
     height: 22px;
     justify-content: flex-end;
     left: 0px;
@@ -2012,7 +2012,7 @@ a {
 .main .subtitle141 {
     color: white;
     display: flex;
-    font: 500 20px/1.1 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.1 "Roboto", sans-serif;
     height: 22px;
     justify-content: flex-end;
     left: 0px;
@@ -2040,7 +2040,7 @@ a {
 
 .main .subtitle142 {
     color: white;
-    font: 500 20px/1.1 "Roboto", Helvetica, Arial, serif;
+    font: 500 20px/1.1 "Roboto", sans-serif;
     height: 44px;
     left: 407px;
     position: absolute;
@@ -2059,7 +2059,7 @@ a {
 
 .main .subtitle18 {
     color: white;
-    font: 700 20px/1.35 "Roboto", Helvetica, Arial, serif;
+    font: 700 20px/1.35 "Roboto", sans-serif;
     height: 54px;
     left: 194px;
     position: absolute;

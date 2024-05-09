@@ -59,8 +59,7 @@
                         <a th:href="@{'/project/'}" sec:authorize="hasAuthority('User')">Create Projects</a>
                         <a sec:authorize="hasAuthority('Investor')"
                            th:href="@{'/investor/my/investments'}">My Investments</a>
-                        <a href="JavaScript:void(0)" onclick="singOutForm.submit()"
-                           style="color: #000;">Log
+                        <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log
                             Out
                             <form th:action="@{'/logout'}" method="post" id="singOutForm"></form>
                         </a>

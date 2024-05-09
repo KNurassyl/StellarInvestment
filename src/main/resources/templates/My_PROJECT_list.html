@@ -65,7 +65,10 @@
         <div class="row align-items-start">
             <div class="col-lg-8 m-15px-tb">
                 <div class="row">
-                    <div class="col-sm-6" th:each="myProject : ${myProjects}">
+                    <div class="col-sm-12" th:if="${myProjects.isEmpty()}">
+                        <p>You don't have any created projects.</p>
+                    </div>
+                    <div class="col-sm-6" th:unless="${myProjects.isEmpty()}" th:each="myProject : ${myProjects}">
                         <div class="blog-grid">
                             <div class="blog-img">
                                 <div class="date" th:if="${myProject.percent >= 100}" style="background: green">
@@ -75,7 +78,7 @@
                                     <span th:text="${myProject.finishTime}"></span>
                                 </div>
                                 <a th:href="@{'/project/details/'+${myProject.id}}">
-                                    <img th:src="@{${myProject.getMainImagePath}}" title="" alt="">
+                                    <img th:src="@{${myProject.getMainImagePath}}" title="" alt="" style="height: 240px;">
                                 </a>
                             </div>
                             <div class="blog-info">

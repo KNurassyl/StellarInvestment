@@ -153,8 +153,8 @@ a {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  right: calc(100vw - 1490px);
-  top: calc(100% + 10px);
+  right: calc(92vw - 1490px);
+  top: calc(100% + 5px);
 }
 .dropdown.clicked .dropdown-content {
   display: block;

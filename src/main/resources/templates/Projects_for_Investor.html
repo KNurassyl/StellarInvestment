@@ -3,29 +3,30 @@
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+          integrity="sha512-fvVGrO69KYlz0tjRGrOpRsdZIb6HemjSzExD9qQCeTtF8Zq4p21F5V32vlQ+8bXC7ZZIgAEbaHOcyEg6UeVs8A=="
+          crossorigin="anonymous"/>
     <link rel="stylesheet" type="text/css"
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/aos@2.3.1/dist/aos.css"/>
     <link rel="stylesheet" type="text/css" href="/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="/css/fonts.css"/>
     <link rel="stylesheet" type="text/css" href="/css/Projects_for_Investor.css"/>
-    <script type="text/javascript" src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/sticky-js@1.3.0/dist/sticky.min.js"></script>
-    <script type="text/javascript" src="https://unpkg.com/headroom.js@0.12.0/dist/headroom.min.js"></script>
 
-
-    <title>All projects</title>
+    <title>Project Page Investor</title>
 
 </head>
 
-<body class="flex-column">
-<header class="header">
+<body>
+<header class="custom-header">
     <section class="section1" style="--src:url(/img/0502f0f63cc56790c6952133ae2b1481.png)">
         <div class="content_box">
 
@@ -35,15 +36,17 @@
                     <i class="fa fa-search"></i>
                 </button>
             </div>
+            <div class="rect1"></div>
             <a class="subtitle1" th:href="@{'/main/'}"><h3>STELLAR<br/>INVESTMENT</h3></a>
 
             <a class="subtitle2" th:href="@{'/investor/all/projects/'}"><h3>Projects</h3></a>
             <a class="subtitle21" th:href="@{'/main/'}"><h3>Home</h3></a>
-            <div class="rect1"></div>
+
             <img class="image4" src="/img/ace06293b0d4076285adfa86c63156ab.png" alt=""/>
-            <div class="dropdown">
-                <img class="box" th:src="@{${user.photosImagePath}}" alt="alt text" onclick="toggleDropdown()">
-                <div id="myDropdown" class="dropdown-content">
+            <div class="custom-dropdown">
+                <img class="custom-box" th:src="@{${user.photosImagePath}}" alt="alt text"
+                     onclick="toggleCustomDropdown()">
+                <div id="myCustomDropdown" class="custom-dropdown-content">
                     <a th:href="@{'/main/account_details'}">My Profile</a>
                     <a th:href="@{'/investor/my/investments'}">My Investments</a>
                     <a href="JavaScript:void(0)" onclick="singOutForm.submit()">Log Out
@@ -52,97 +55,171 @@
                 </div>
             </div>
 
-            <a th:href="@{'/investor/basket/'}"><div class="wrapper5" style="--src:url(/img/purchase.png)"></div></a>
+            <a th:href="@{'/investor/basket/'}">
+                <div class="wrapper5" style="--src:url(/img/purchase.png)"></div>
+            </a>
 
         </div>
     </section>
 </header>
-<main class="projects main">
-
-
-    <section class="container">
-        <h1 class="heading">All Projects</h1>
-
-        <div class="box-container" th:if="${allProjects.isEmpty()}">
-            <p>No active investment projects</p>
+<div class="allCards">
+    <h1 class="heading_style">List of Projects</h1>
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <form class="d-flex mb-3">
+                <input onkeyup="filterCards()" class="form-control me-2" type="search" placeholder="Search"
+                       aria-label="Search" id="searchBox"/>
+                <select onchange="filterCards()" class="form-select" aria-label="Filter by category" id="filterSelect"
+                        style="color:#23424A">
+                    <option value="">Filter by nothing</option>
+                    <option value="Popular">Popular</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Less">Less</option>
+                </select>
+            </form>
         </div>
+    </div>
 
+    <div class="row" id="cardRow" th:if="${allProjects.isEmpty()}">
+        <p>No active investment projects</p>
+    </div>
 
-        <div class="box-container" th:unless="${allProjects.isEmpty()}">
+    <div class="row" id="cardRow" th:unless="${allProjects.isEmpty()}">
+        <div class="col-md-3" th:each="project : ${allProjects}">
+            <a th:href="@{'/investor/details/'+${project.id}}" style="text-decoration: none">
+                <div class="card mb-3">
+                    <img th:src="@{${project.getMainImagePath}}" class="card-img-top" alt="..."/>
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${project.title}"></h5>
 
-            <div class="box" th:each="project : ${allProjects}">
-                <a th:href="@{'/investor/details/'+${project.id}}">
-                    <div>
-                        <img th:src="@{${project.getMainImagePath}}" alt="">
-                        <h3 th:text="${project.title}"></h3>
-                        <p th:text="${project.shortDescription}"></p>
-                        <div class="btn">
-                            <div class="skill-per" th:style="'max-width: ' + ${project.percent} + '%'">
-                                <div class="textP first" th:text="${project.percent} + '%'"></div>
+                        <p class="card-text" th:text="${project.shortDescription}"
+                           style="overflow: scroll; height: 150px; width: 292px;"></p>
 
-                            </div>
+                        <div class="progress"
+                             style="margin-top:10px; margin-bottom:10px; height: 25px; border-radius: 25px;">
+                            <div class="progress-bar" role="progressbar"
+                                 th:style="'width: ' + ${100} + '%; background-color: #ff7f50; font-size: 20px;'"
+                                 th:text="${project.percent} + '%'" th:if="${project.percent >= 100}"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar"
+                                 th:style="'width: ' + ${100} + '%; background-color: #23424A; font-size: 20px;'"
+                                 th:text="${project.percent} + '%'" th:if="${project.percent == 0}"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar"
+                                 th:style="'width: ' + ${project.percent} + '%; background-color: #ff7f50; font-size: 20px;'"
+                                 th:text="${project.percent} + '%'" th:if="${project.percent != 0 and project.percent < 100}"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar"
+                                 th:style="'width: ' + (100 - ${project.percent}) + '%; background-color: #23424A; font-size: 20px;'"
+                                 th:text="${100 - project.percent} + '%'" th:if="${project.percent != 0 and project.percent < 100}"
+                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <div class="content-container">
-                            <div class="content_box2">
 
-                                <div class="content_box3">
-                                    <h5 class="highlight" th:text="${'₸' + project.totalInvestment}"></h5>
-                                    <div class="info1">MONEY PLEDGED</div>
-
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="pink-figure">
+                                    <p class="mb-1" style="font-size: 15px; color:#000; font-weight:bold" th:text="${project.percent} + '%'"></p>
+                                    <p class="mb-0" style="font-size: 15px; color:#000">ACTIVE</p>
                                 </div>
-                                <div class="content_box11">
-                                    <h5 class="highlight11" th:text="${project.percent} + '%'"></h5>
-                                    <div class="info">ACTIVE</div>
-
+                            </div>
+                            <div class="col-md-6">
+                                <div class="pink-figure">
+                                    <p class="mb-1" style="font-size: 15px; color:#000; font-weight:bold; text-align: right; width: 120px;" th:text="${'₸' + project.totalInvestment}"></p>
+                                    <p class="mb-0" style="font-size: 15px; color:#000; text-align: right; width: 120px;">MONEY PLEDGED</p>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-                </a>
-            </div>
-
-
-        </div>
-
-    </section>
-
-    <footer class="footer">
-        <div class="container2">
-            <div class="footerNav">
-                <div class="logoFooter">
-                    <img src="/img/logo.svg" alt="#">
-                    <a href="#">STELLAR INVESTMENT</a>
                 </div>
-                <ul class="eachNav">
-                    <li>
-                        <img src="/img/geo.svg" alt="#">
-                        <p style="width: 300px;">microdistrict Daraboz, home 123, Almaty, Kazakhstan</p>
-                    </li>
-                    <li>
-                        <img src="/img/mail.svg" alt="#">
-                        <p>contact@almightypush.com</p>
-                    </li>
-                    <li>
-                        <img src="/img/phone.svg" alt="#">
-                        <p>+7 775 203 01 90</p>
-                    </li>
-                </ul>
-            </div>
-            <p class="year">© 2024 Stellar Investment. All Rights Reserved.</p>
+            </a>
         </div>
-    </footer>
+    </div>
+</div>
 
-</main>
+<footer class="footer">
+    <div class="container2">
+        <div class="footerNav">
+            <div class="logoFooter">
+                <img src="/img/logo.svg" alt="#">
+                <a href="#">STELLAR INVESTMENT</a>
+            </div>
+            <ul class="eachNav">
+                <li>
+                    <img src="/img/geo.svg" alt="#">
+                    <p style="width: 300px;">microdistrict Daraboz, home 123, Almaty, Kazakhstan</p>
+                </li>
+                <li>
+                    <img src="/img/mail.svg" alt="#">
+                    <p>contact@almightypush.com</p>
+                </li>
+                <li>
+                    <img src="/img/phone.svg" alt="#">
+                    <p>+7 775 203 01 90</p>
+                </li>
+            </ul>
+        </div>
+        <p class="year">© 2024 Stellar Investment. All Rights Reserved.</p>
+    </div>
+</footer>
+
 <script type="text/javascript">
 
 
-    const dropdown = document.querySelector('.dropdown');
-    const dropdownContent = document.querySelector('.dropdown-content');
+    const dropdown = document.querySelector('.custom-dropdown');
+    const dropdownContent = document.querySelector('.custom-dropdown-content');
 
     dropdown.addEventListener('click', function (event) {
         dropdownContent.classList.toggle('show');
     });
+
+    function filterCards() {
+        const searchBox = document.getElementById("searchBox");
+        const filterSelect = document.getElementById("filterSelect");
+        const cardRow = document.getElementById("cardRow");
+        const cards = cardRow.getElementsByClassName("col-md-3");
+
+        const searchKeyword = searchBox.value.toLowerCase();
+        const filterKeyword = filterSelect.value.toLowerCase();
+
+        for (let i = 0; i < cards.length; i++) {
+            const card = cards[i];
+            const title = card.querySelector(".card-title").textContent.toLowerCase();
+            const category = card.querySelector(".card-text").textContent.toLowerCase();
+            const progressBarWidth = parseFloat(card.querySelector(".progress-bar").style.width);
+
+            // Get all <p> elements within the .pink-figure div and check if any contain the search keyword
+            const pinkFigureParagraphs = card.querySelectorAll(".pink-figure p");
+            let specialtyMatch = false;
+            pinkFigureParagraphs.forEach(p => {
+                if (p.textContent.toLowerCase().includes(searchKeyword)) {
+                    specialtyMatch = true;
+                }
+            });
+
+            let categoryMatch = "";
+
+            // Determine category based on progress bar percentage
+            if (progressBarWidth > 50 && progressBarWidth <= 100) {
+                categoryMatch = "popular";
+            } else if (progressBarWidth > 20 && progressBarWidth <= 50) {
+                categoryMatch = "medium";
+            } else if (progressBarWidth >= 0 && progressBarWidth <= 20) {
+                categoryMatch = "less";
+            }
+
+            const categoryText = categoryMatch.toLowerCase();
+
+            // Check if card matches search keyword and category filter
+            const matchesSearch = title.includes(searchKeyword) || category.includes(searchKeyword) || specialtyMatch;
+            const matchesCategory = filterKeyword === "" || categoryText === filterKeyword;
+
+            if (matchesSearch && matchesCategory) {
+                card.style.display = "block";
+            } else {
+                card.style.display = "none";
+            }
+        }
+    }
 </script>
 </body>
 

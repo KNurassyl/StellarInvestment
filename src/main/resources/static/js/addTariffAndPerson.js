@@ -118,6 +118,12 @@ $(document).ready(function () {
     $("#myForm").submit(function (event) {
         event.preventDefault();
 
+        // Disable submit button to prevent multiple submissions
+        $("#submitTabButton").prop("disabled", true);
+
+        // Show loading indicator
+        $("#loadingIndicator").show();
+
         if (validateForm()) {
             var formData = new FormData(this); // 'this' refers to the form element
             formData.append('tariffsList', JSON.stringify(tariffsList));
@@ -135,13 +141,22 @@ $(document).ready(function () {
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
+                },
+                complete: function() {
+                    // Re-enable submit button and hide loading indicator
+                    $("#submitTabButton").prop("disabled", false);
+                    $("#loadingIndicator").hide();
                 }
             });
         } else {
+            // Re-enable submit button and hide loading indicator
+            $("#submitTabButton").prop("disabled", false);
+            $("#loadingIndicator").hide();
             return false;
         }
     });
 });
+
 
 function clearTableRows() {
     tariffsList = [];
